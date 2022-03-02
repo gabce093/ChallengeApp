@@ -1,14 +1,14 @@
-import styles from '../styles/Tab.style';
+import styles from '../styles/Page.style';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
-export default function TabTwoScreen() {
+export default function ChallengePageScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
+      <Text style={styles.title}>Challenge Page</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      <EditScreenInfo path="/screens/ChallengePage.tsx" />
     </View>
   );
 }

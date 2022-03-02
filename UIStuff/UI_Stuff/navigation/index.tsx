@@ -14,9 +14,11 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import TabThreeScreen from '../screens/TabThreeScreen';
+import StatPageScreen from '../screens/StatPage';
+import TabTwoScreen from '../screens/ShoppingPage';
+import MainPageScreen from '../screens/MainPage';
+import ChallengePageScreen from '../screens/ChallengePage';
+import FriendPageScreen from '../screens/FriendPage';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -59,15 +61,34 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="MainPage"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
+
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
+        name="StatPage"
+        component={StatPageScreen}
+        options={{
+          title: 'Stat Page',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+
+      <BottomTab.Screen
+        name="ShoppingPage"
+        component={TabTwoScreen}
+        options={{
+          title: 'Shopping Page',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+
+      <BottomTab.Screen
+        name="MainPage"
+        component={MainPageScreen}
+        options={({ navigation }: RootTabScreenProps<'MainPage'>) => ({
+          title: 'Main Page',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Pressable
@@ -85,19 +106,21 @@ function BottomTabNavigator() {
           ),
         })}
       />
+      
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="ChallengePage"
+        component={ChallengePageScreen}
         options={{
-          title: 'Tab Two',
+          title: 'Challenge Page',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
+
       <BottomTab.Screen
-        name="TabThree"
-        component={TabThreeScreen}
+        name="FriendPage"
+        component={FriendPageScreen}
         options={{
-          title: 'Tab Three',
+          title: 'Friend Page',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

@@ -6,6 +6,7 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { HeaderButtonProps } from '@react-navigation/native-stack/lib/typescript/src/types';
 
 declare global {
   namespace ReactNavigation {

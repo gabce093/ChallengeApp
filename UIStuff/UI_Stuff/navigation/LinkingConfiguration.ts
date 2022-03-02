@@ -30,6 +30,16 @@ const linking: LinkingOptions<RootStackParamList> = {
               ChallengePageScreen: 'three',
             },
           },
+          StatPage: {
+            screens: {
+              StatPageScreen: 'four',
+            },
+          },
+          FriendPage: {
+            screens: {
+              StatPageScreen: 'Five',
+            },
+          },
         },
       },
       Modal: 'modal',

@@ -4,18 +4,24 @@
  *
  */
 import { FontAwesome } from '@expo/vector-icons';
+import { Foundation } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons'; 
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
+import { Button } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import StatPageScreen from '../screens/StatPage';
-import TabTwoScreen from '../screens/ShoppingPage';
+import ShoppingPageScreen from '../screens/ShoppingPage';
 import MainPageScreen from '../screens/MainPage';
 import ChallengePageScreen from '../screens/ChallengePage';
 import FriendPageScreen from '../screens/FriendPage';
@@ -41,7 +47,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="Root" component={BottomTabNavigator}  options={{ headerShown: false}} />
+
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
@@ -64,6 +71,7 @@ function BottomTabNavigator() {
       initialRouteName="MainPage"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
+        
       }}>
 
       <BottomTab.Screen
@@ -71,16 +79,16 @@ function BottomTabNavigator() {
         component={StatPageScreen}
         options={{
           title: 'Stat Page',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons  name="medal" size={30} color={color} />,
         }}
       />
 
       <BottomTab.Screen
         name="ShoppingPage"
-        component={TabTwoScreen}
+        component={ShoppingPageScreen}
         options={{
           title: 'Shopping Page',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <Entypo name="shopping-cart" size={28} color={color} />,
         }}
       />
 
@@ -89,7 +97,8 @@ function BottomTabNavigator() {
         component={MainPageScreen}
         options={({ navigation }: RootTabScreenProps<'MainPage'>) => ({
           title: 'Main Page',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="sword-cross" size={30} color={color} />,
+          
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -104,6 +113,7 @@ function BottomTabNavigator() {
               />
             </Pressable>
           ),
+          
         })}
       />
       
@@ -112,7 +122,7 @@ function BottomTabNavigator() {
         component={ChallengePageScreen}
         options={{
           title: 'Challenge Page',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <Entypo name="mail" size={30} color={color} />,
         }}
       />
 
@@ -121,7 +131,7 @@ function BottomTabNavigator() {
         component={FriendPageScreen}
         options={{
           title: 'Friend Page',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesome5 name="user-friends" size={24} color={color} />,
         }}
       />
     </BottomTab.Navigator>

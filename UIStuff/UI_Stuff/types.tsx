@@ -34,8 +34,6 @@ export type RootTabParamList = {
   ChallengePage: undefined;
   FriendPage: undefined;
 
-  // Sub-Pages
-  CreateRunPage: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<

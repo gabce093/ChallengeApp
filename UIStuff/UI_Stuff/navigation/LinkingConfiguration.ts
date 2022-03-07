@@ -37,17 +37,13 @@ const linking: LinkingOptions<RootStackParamList> = {
           },
           FriendPage: {
             screens: {
-              FriendPageScreen: 'Five',
-            },
-          },
-          CreateRunPage: {
-            screens: {
-              CreateRunPageScreen: 'six',
+              FriendPageScreen: 'five',
             },
           },
         },
       },
       Modal: 'modal',
+      CreateRun: 'CreateRunPage',
       NotFound: '*',
     },
   },

@@ -6,6 +6,12 @@ export default StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    flipperContainer: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'row',
+    },
     title: {
       fontSize: 40,
       fontWeight: 'bold',

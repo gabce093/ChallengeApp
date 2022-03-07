@@ -2,10 +2,10 @@ import styles from '../styles/Page.style';
 
 import React from 'react';
 import { Button } from 'react-native';
+import {getLevel, getCurrentEXP, getMaxEXP, getCoins, getGems} from '../PlayerData';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View,} from '../components/Themed';
-import  TopBar  from '../components/TopBar';
 import { RootTabScreenProps, RootStackParamList, RootTabParamList } from '../types';
 
 
@@ -14,8 +14,8 @@ export default function MainPageScreen({ navigation }: RootTabScreenProps<'MainP
     <View style={styles.container}>
       <Text style={styles.title}>Main Page</Text>
       
-      {/*Än så länge gör de här bara en random text mitt på sidan*/ }
-      <TopBar></TopBar>
+      {/*Än så länge gör de här bara en random text mitt på sidan<TopBar></TopBar>*/ }
+      
 
 
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />

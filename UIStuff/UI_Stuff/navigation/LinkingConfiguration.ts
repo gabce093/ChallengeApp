@@ -45,6 +45,11 @@ const linking: LinkingOptions<RootStackParamList> = {
               CreateRunPageScreen: 'six',
             },
           },
+          GPSPage: {
+            screens: {
+              GPSPageScreen: 'six',
+            },
+          },
         },
       },
       Modal: 'modal',

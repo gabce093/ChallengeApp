@@ -6,10 +6,10 @@ import { Button } from 'react-native';
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View,} from '../components/Themed';
 import  TopBar  from '../components/TopBar';
-import { RootTabScreenProps, RootStackParamList, RootTabParamList } from '../types';
+import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 
 
-export default function MainPageScreen({ navigation }: RootTabScreenProps<'MainPage'>) {
+export default function MainPageScreen({ navigation }: RootStackScreenProps<'CreateRunPage'>) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Main Page</Text>
@@ -22,7 +22,7 @@ export default function MainPageScreen({ navigation }: RootTabScreenProps<'MainP
       
       {/*<EditScreenInfo path="/screens/MainPage.tsx" >*/}
       <Button
-      onPress={() => navigation.navigate('CreateRun')}
+      onPress={() => navigation.navigate('CreateRunPage')}
       title="Start"
       color="#ed5c0e"
       />

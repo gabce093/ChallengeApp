@@ -37,7 +37,12 @@ const linking: LinkingOptions<RootStackParamList> = {
           },
           FriendPage: {
             screens: {
-              StatPageScreen: 'Five',
+              FriendPageScreen: 'Five',
+            },
+          },
+          CreateRunPage: {
+            screens: {
+              CreateRunPageScreen: 'six',
             },
           },
         },

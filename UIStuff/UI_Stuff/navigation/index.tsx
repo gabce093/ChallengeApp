@@ -18,6 +18,8 @@ import { Button } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
+
+// Base Screens:
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import StatPageScreen from '../screens/StatPage';
@@ -25,8 +27,21 @@ import ShoppingPageScreen from '../screens/ShoppingPage';
 import MainPageScreen from '../screens/MainPage';
 import ChallengePageScreen from '../screens/ChallengePage';
 import FriendPageScreen from '../screens/FriendPage';
+
+// Sub-Screens:
+import CreateRunPage from '../screens/CreateRunPage';
+
+
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+
+// Datavalues (These values will be collected from the database):
+var level = 5;
+var coins = 345;
+var gems = 223;
+
+var currentEXP = 1000;
+var maxEXP = 25000;
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -47,12 +62,13 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator}  options={{ headerShown: false}} />
+      <Stack.Screen name="Root" component={BottomTabNavigator}  options={{ headerShown: true}} />
 
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
+        <Stack.Screen name="CreateRun" component={CreateRunPage} />
     </Stack.Navigator>
   );
 }
@@ -112,6 +128,7 @@ function BottomTabNavigator() {
                 style={{ marginRight: 15 }}
               />
             </Pressable>
+            
           ),
           
         })}

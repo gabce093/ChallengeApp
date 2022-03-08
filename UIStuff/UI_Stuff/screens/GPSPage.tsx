@@ -7,77 +7,62 @@ import React, { useState, useEffect } from 'react';
 import { render } from "react-dom";
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
+import { LocationSubscriber } from 'expo-location/build/LocationSubscribers';
+import { subscribeToPermissionUpdates } from 'react-native-location';
 
 export default function GPSPage() {
     
-    const [location, setLocation] = useState(null);
+    const [distance, setDistance] = useState(0);
+    const [position, setPosition] = useState([0,0]);
     const [errorMsg, setErrorMsg] = useState(null);
-
+    
+    const haversine = require('haversine')
     let subscriber = null;
-    const recordRun = async () => {
+
+    let challenge = {
+      distance: 1000,
+      completed: false
+    }
+
+    let run = {
+      distance: 0,
+      time: 0,
+      speed: 0,
+    }
+
+    useEffect(() => {
+      (async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== 'granted') {
             setErrorMsg('Permission to access location was denied');
             return;
         }
-
+        
         subscriber = await Location.watchPositionAsync(
-            {
-                accuracy: Location.Accuracy.BestForNavigation,
-            },
-            location => {
-                setLocation(location.coords)
-                console.log(JSON.stringify(location))
-            }
-        );    
-    }
+          {
+              accuracy: Location.Accuracy.BestForNavigation,
+              distanceInterval: 20,
+          },
+          (location) => {
+              setPosition([location.coords.longitude, location.coords.latitude])
+          }
+      ); 
+      })()
+    }, [])
 
-    const stopRecord = async () => {
-        console.log('Remove tracking')
-        await subscriber?.remove();
-    }
+    useEffect(() => {
+      setDistance(distance+20);
+      console.log(distance);
+    }, [position])
 
     return (
         <View style={styles.container}>
-            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-            <Button
-                title= "Start" onPress={recordRun}
-            />   
-            <Button
-                title= "Stop" onPress={stopRecord}
-            /> 
+            <View>
+            <Text>{position[0] + ", " + position[1]}</Text>
+                
+            </View>    
         </View>
-    );
-    
+    );    
 }
 
-const requestCameraPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: "SPRINTQUEST Location Permission",
-          message:
-            "SPRINTQUEST needs access to your location " +
-            "so you can record your run.",
-          buttonNeutral: "Ask Me Later",
-          buttonNegative: "Cancel",
-          buttonPositive: "OK"
-        }
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("You can use the location");
-      } else {
-        console.log("Location permission denied");
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
-
-  const recordRun = () => {
-    Geolocation.setRNConfiguration();a
-    Geolocation.getCurrentPosition(function(position) {
-        console.log(position)
-      });
-  };
+//<Button title='Start' onPress={}/>

@@ -2,11 +2,15 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     container: {
+      
+      backgroundColor: 'rgb(134, 164, 173)',
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
     },
     title: {
+      fontFamily: 'Qdbettercomicsans-jEEeG.ttf',
+      color:'white',
       fontSize: 40,
       fontWeight: 'bold',
     },
@@ -23,4 +27,7 @@ export default StyleSheet.create({
       fontSize: 14,
       color: '#2e78b7',
     },
+
+
+
   });

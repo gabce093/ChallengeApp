@@ -1,0 +1,4 @@
+{
+    "entryPoints": ["./components"],
+    "out": "docs"
+}

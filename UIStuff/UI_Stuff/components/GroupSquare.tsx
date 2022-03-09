@@ -1,7 +1,7 @@
 
 import friendPageStyles from '../styles/FriendPage.style';
-import {Modal,Alert, Button ,Image, TouchableOpacity, TextStyle, FlatList  } from 'react-native';
-import { Text, View} from '../components/Themed';
+import {TouchableWithoutFeedback, Button ,Image, TouchableOpacity, TextStyle, Text, View  } from 'react-native';
+
 
 /** 
 @param lvl The lvl of the group
@@ -11,9 +11,10 @@ import { Text, View} from '../components/Themed';
 export function GroupSquare(lvl:string) {
     const Item = ({ item, onPress, backgroundColor, textColor }
         :{item:any, backgroundColor:any, textColor:TextStyle, onPress:any}) => (
-
-        <TouchableOpacity onPress={onPress} style={[friendPageStyles.item, backgroundColor]}>
-            <View style={friendPageStyles.iconHolder}>
+       
+         <TouchableOpacity onPress={onPress} style={[friendPageStyles.item, backgroundColor]}> 
+            <View onStartShouldSetResponder={() => true} style={friendPageStyles.iconHolder}>
+              <View  style= {friendPageStyles.lvlBadge}><Text style= {friendPageStyles.lvlText}>lvl {lvl}</Text></View>
               <Image style={{ width: '25vw',
                 height: '25vw',
                 borderRadius: 100,
@@ -22,7 +23,7 @@ export function GroupSquare(lvl:string) {
                 borderColor: "#766449"}} 
                 source={require('../assets/images/emptyPlayerIcon.png')}
                  />
-              <Text style= {friendPageStyles.lvlBadge}>lvl {lvl}</Text>
+              
             </View>
             <View style={{marginTop: '4vw', backgroundColor: 'transparent', alignItems:'center'}}> 
               <Text style={[friendPageStyles.nameText, textColor]}>{item.title}</Text>
@@ -31,7 +32,9 @@ export function GroupSquare(lvl:string) {
                 color={'#ff5c00'}
                 />
            </View>
-        </TouchableOpacity>
+      
+      </TouchableOpacity>  
+  
       );
 
       return Item;

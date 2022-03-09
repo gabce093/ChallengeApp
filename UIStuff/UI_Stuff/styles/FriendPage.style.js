@@ -6,11 +6,10 @@ export default StyleSheet.create({
 
      // FRIEND PAGE STYLE
      groupContainer: {
-      backgroundColor: '#939393',
-      //flexDirection: "row",
-        height: '56vw',
-        width: '90vw',
-        alignItems: 'center',
+      
+        backgroundColor: '#939393',
+        height: '30%',
+        width: '90%',
         borderRadius:5,
      },
      backimg: {
@@ -20,12 +19,14 @@ export default StyleSheet.create({
       width: "100%",
 
     },
+
      item: {
-      width: '40vw',
-      height: '48vw',
-      marginVertical: '2vw',
-      marginHorizontal: '2vw',
+      width: '46%',
+      height: '97%',
+      marginVertical: '2%',
+      marginHorizontal: '2%',
       alignItems: 'center',
+      
     },
 
      nameText: {
@@ -39,21 +40,29 @@ export default StyleSheet.create({
       alignItems: 'center',
      },
      playerIcon: {
-      width: '25vw',
-      height: '25vw',
+      width: '40%',
+      height: '40%',
       borderRadius: 100,
       overflow: "hidden",
       borderWidth: 5,
-      borderColor: "#766449"
+      borderColor: "#766449",
     },
     lvlBadge: {
-      fontWeight: 'bold',
+      position: 'absolute',
+      alignItems: 'center',
+      flex: 1,
+      justifyContent: 'flex-end',
+      width: '50%',
+      height: '40%',
       backgroundColor: "#766449",
-      color: '#181818',
       borderBottomLeftRadius: 5,
       borderBottomRightRadius: 5,
-      position: 'absolute',
-      marginVertical: '24vw'
+      marginTop: '80%',
+    },
+    lvlText: {
+
+      fontWeight: 'bold',
+      color: '#181818',
     },
 
 

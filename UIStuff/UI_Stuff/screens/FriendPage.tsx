@@ -3,7 +3,7 @@ import styles from '../styles/Page.style';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
 
-import {  ImageBackground, Modal,Alert, Button ,Image, SectionList, ScrollView, SafeAreaView, FlatList, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
+import { ImageBackground, ScrollView, FlatList } from 'react-native';
 import { Text, View} from '../components/Themed';
 import { useState,  } from 'react';
 import { GroupSquare } from '../components/GroupSquare';
@@ -13,17 +13,17 @@ import { FriendSearchWindow } from '../components/FriendSearchWindow';
 const DATA = [
   {
     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "Rullstol",
+    title: "Jake",
     level: 43,
   },
   {
     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Dem bois",
+    title: "Bob",
     level: 25,
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Kandidat-grupp",
+    title: "Billy",
     level: 78,
   },
 ];
@@ -56,11 +56,12 @@ export default function FriendPageScreen() {
      <FriendSearchWindow/>
 
       {/*Group box*/}
-      <Text style={styles.title} > Groups</Text>
+      <Text style={styles.title} > Friends</Text>
       <View style={friendPageStyles.groupContainer}>
         
         <ScrollView showsVerticalScrollIndicator={false}>
           <FlatList 
+            
             nestedScrollEnabled
             data={DATA}
             renderItem={renderItem}

@@ -11,7 +11,7 @@ export default StyleSheet.create({
   buttonOpen: {
     backgroundColor: "#ff5c00",
   },
-  buttonClose: {
+  buttonSubmit: {
     backgroundColor: "#ff5c00",
     borderRadius: 5,
     color: 'white',
@@ -22,19 +22,19 @@ export default StyleSheet.create({
     textAlign: "center"
   },
   modalText: {
-    marginBottom: '5vw',
+
     textAlign: "center",
     color: 'white',
-    fontSize: 25,
+    fontSize: '100%',
     fontWeight: 'bold',
   },
+  
   centeredView: {
     backgroundColor: '#dedede',
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: '76vw',
-    marginHorizontal: '5vw',
+    marginVertical: '35vh',
     borderRadius: 5,
     shadowColor: "#000",
     shadowOffset: {
@@ -49,8 +49,8 @@ export default StyleSheet.create({
     justifyContent: 'space-evenly',
     backgroundColor: "#5c5c5c",
     borderRadius: 5,
-    width: '75vw',
-    height: '48vw',
+    width: '90%',
+    height: '90%',
   
     alignItems: "center",
     shadowColor: "#000",
@@ -67,7 +67,8 @@ export default StyleSheet.create({
     borderRadius: 5,
     borderColor: '#383838',
     borderWidth: 3,
-    height: '9vw',
+    height: '20%',
+    width: '70%',
   },
 
 })

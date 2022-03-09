@@ -1,14 +1,25 @@
-import { Text, View } from './Themed';
-import { Pressable,Alert, TextInput, Image } from 'react-native';
+
+import { Pressable, TextInput, Image, Text, View } from 'react-native';
 import SearchFriend from '../styles/SearchFriend.style.js';
 import { useState } from 'react';
-import SearchFriendStyle from '../styles/SearchFriend.style.js';
 import Modal from "react-native-modal";
+import useEffect from "../components/dbTest"
+import fetchData from "../components/dbTest"
+import GetUserlist from "../components/dbTest"
+import fetchTableData from "../components/dbTest"
 
-export function FriendSearchWindow() {
+
+
+export function FriendSearchWindow()  {
+    
+  
+
     const [modalVisible, setModalVisible] = useState(false);
-    const [friendSearch, setFriendSearch] = useState("g");
-
+    const [friendSearch, setFriendSearch] = useState("");
+   //const users =  fetchTableData();
+    //console.log(users);
+   
+ 
     
     
     return <View style={{backgroundColor: 'rgba(0,0,0,0)'}}>
@@ -34,11 +45,11 @@ export function FriendSearchWindow() {
                         />
                         </Pressable>
                         <Text style={SearchFriend.modalText}>Search for friend!</Text>
-
-                       <TextInput style={SearchFriendStyle.textWindow} onChangeText={setFriendSearch} value={friendSearch} placeholder='Type name...'/>
+                        
+                       <TextInput style={SearchFriend.textWindow} onChangeText={setFriendSearch} value={friendSearch} placeholder='Type name...'/>
                         <Pressable
-                            style={[SearchFriend.button, SearchFriend.buttonClose]}
-                            onPress={() => console.log(friendSearch)}
+                            style={[SearchFriend.button, SearchFriend.buttonSubmit]}
+                            onPress={(user) => console.log('Challenge button pressed')}
                         ><Text style={{ color: 'white'}}>Submit</Text>
                         </Pressable>
                         

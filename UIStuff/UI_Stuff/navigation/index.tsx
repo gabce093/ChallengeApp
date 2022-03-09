@@ -59,10 +59,10 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
  */
  const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
-
 function RootNavigator() {
   return (
     <Stack.Navigator>
+              
       <Stack.Screen name="Root" component={BottomTabNavigator}  options=
       {({navigation}) => ({
         headerShown: true,
@@ -90,7 +90,7 @@ function BottomTabNavigator() {
         tabBarActiveTintColor: Colors[colorScheme].tint,
         
       }}>
-
+        
       <BottomTab.Screen
         name="StatPage"
         component={StatPageScreen}
@@ -157,6 +157,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <FontAwesome5 name="user-friends" size={24} color={color} />,
         }}
       />
+      
     </BottomTab.Navigator>
   );
 }

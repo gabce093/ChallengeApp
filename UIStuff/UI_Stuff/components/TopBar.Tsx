@@ -2,6 +2,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import styles from '../styles/TopBar.style';
+import styles2 from '../styles/Page.style';
 
 import * as React from 'react';
 import { Pressable, Image } from 'react-native';
@@ -10,11 +11,11 @@ import { Text, TextProps, View } from './Themed';
 import { RootStackScreenProps } from '../types';
 import {getLevel, getCurrentEXP, getMaxEXP, getCoins, getGems} from '../PlayerData';
 
+
 export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
     const colorScheme = useColorScheme();
     return (
         <View style={styles.TopBarHolder}>
-            
             {/* Profile pic and LVL indicator:*/}
             <View style={styles.ProfileHolder}>
                     <Image style={styles.image}
@@ -54,7 +55,6 @@ export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
               />
                 </Pressable>
             </View>
-            
         </View>
     );
 }

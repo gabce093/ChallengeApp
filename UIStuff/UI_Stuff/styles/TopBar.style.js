@@ -5,11 +5,12 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'top',
-        
+        position: "relative",
+        backgroundColor: 'rgba(52, 52, 52, 0)',
       },
       ProfileHolder: {
         alignItems: 'center',
-        
+        backgroundColor: 'rgba(52, 52, 52, 0)',
         
       },
       CurrencyAndEXPHolder: {
@@ -24,7 +25,7 @@ export default StyleSheet.create({
         marginLeft: '1%',
         alignItems: 'top',
         flexDirection: 'row',
-        
+        backgroundColor: 'rgba(52, 52, 52, 0)',
       },
       EXPBarHolder: {
         flex: 1,
@@ -38,12 +39,13 @@ export default StyleSheet.create({
         marginLeft: '4%',
         marginTop: '1%',
         alignItems: 'center',
-        
+        backgroundColor: 'rgba(52, 52, 52, 0)',
       },
       title: {
         fontSize: 20,
         fontWeight: 'bold',
         alignItems: 'center',
+        backgroundColor: 'rgba(52, 52, 52, 0)',
       },
       image: {
         width: 80,

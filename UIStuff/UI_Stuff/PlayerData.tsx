@@ -7,6 +7,13 @@ var gems = 0;
 var currentEXP = 0;
 var maxEXP = 10;
 
+// Will be a value between 0 and 1:
+var handicap = 0.5;
+
+// Weekly challenge:
+var weeklyChallengeMax = 10000;
+var CurrentweeklyChallenge = 1000;
+
 
 
 export default function getPlayer(){

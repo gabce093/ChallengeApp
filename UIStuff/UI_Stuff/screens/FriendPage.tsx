@@ -3,10 +3,12 @@ import styles from '../styles/Page.style';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
 
-import { Pressable, Modal,Alert, Button ,Image, SectionList, ScrollView, SafeAreaView, FlatList, StatusBar, StyleSheet, TouchableOpacity  } from 'react-native';
+import {  ImageBackground, Modal,Alert, Button ,Image, SectionList, ScrollView, SafeAreaView, FlatList, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, View} from '../components/Themed';
-import { useState } from 'react';
+import { useState,  } from 'react';
 import { GroupSquare } from '../components/GroupSquare';
+import { FriendSearchWindow } from '../components/FriendSearchWindow';
+
 
 const DATA = [
   {
@@ -31,7 +33,7 @@ const Item = GroupSquare('45');
 
 export default function FriendPageScreen() {
   const [selectedId, setSelectedId] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
+  
 
   const renderItem = ({ item }:{item:any}) => {
     const backgroundColor = "#383838";
@@ -50,33 +52,8 @@ export default function FriendPageScreen() {
   return (
 
     <View style={styles.container}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={friendPageStyles.centeredView}>
-          <View style={friendPageStyles.modalView}>
-            <Text style={friendPageStyles.modalText}>Search after friend!</Text>
-            <Pressable
-              style={[friendPageStyles.button, friendPageStyles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            ></Pressable>
-         </View>
-        </View>
-      </Modal>
-      <Pressable
-        style={[friendPageStyles.button, friendPageStyles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={friendPageStyles.textStyle}>Add friend!</Text>
-      </Pressable>
-    
-     
+    <ImageBackground resizeMode="cover" style={friendPageStyles.backimg} source={require('../assets/images/forest.png')}>
+     <FriendSearchWindow/>
 
       {/*Group box*/}
       <Text style={styles.title} > Groups</Text>
@@ -95,6 +72,7 @@ export default function FriendPageScreen() {
       </View> 
    
       {/*<EditScreenInfo path="/screens/FriendPage.tsx" >*/}
+      </ImageBackground>
     </View>
   );
 }

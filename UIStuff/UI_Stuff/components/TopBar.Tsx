@@ -1,13 +1,13 @@
 import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons'; 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import styles from '../styles/TopBar.style';
-import styles2 from '../styles/Page.style';
 
 import * as React from 'react';
-import { Pressable, Image } from 'react-native';
+import { Pressable, Image, View } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
-import { Text, TextProps, View } from './Themed';
+import { Text, TextProps} from './Themed';
 import { RootStackScreenProps } from '../types';
 import {getLevel, getCurrentEXP, getMaxEXP, getCoins, getGems} from '../PlayerData';
 
@@ -35,8 +35,10 @@ export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
                     </Text>
                 </View>
                 <View style={styles.EXPBarHolder}>
-                <Text style={styles.title}>Här är din exp:</Text>
-                <ProgressBar progress={getCurrentEXP() / getMaxEXP()}/>
+                <ProgressBar color="#FF5C00"progress={getCurrentEXP() / getMaxEXP()} style={{
+                    height: 15,
+                     backgroundColor: "#151515",
+                     }}/>
                 </View>
             </View>
 
@@ -47,10 +49,10 @@ export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
+              <Ionicons
+                name="settings"
+                size={28}
+                color={Colors[colorScheme].background}
                 style={{ marginRight: 15 }}
               />
                 </Pressable>

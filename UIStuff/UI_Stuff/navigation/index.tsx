@@ -66,6 +66,7 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator}  options=
       {({navigation}) => ({
         headerShown: true,
+        headerTransparent: true,
         header: () => <TopBar {...navigation}/>
          
       })} />

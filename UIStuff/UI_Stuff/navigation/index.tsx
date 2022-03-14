@@ -59,6 +59,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
  */
  const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
+// Root navigator is on all 5 main tabs, it includes the topbar
 function RootNavigator() {
   return (
     <Stack.Navigator>
@@ -80,7 +81,7 @@ function RootNavigator() {
   );
 }
 
-
+// BottomTabNavigator contains the 5 buttons at the bottom of the screen
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 

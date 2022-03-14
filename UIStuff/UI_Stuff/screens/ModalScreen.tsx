@@ -5,6 +5,7 @@ import styles from '../styles/Page.style';
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
+// This should be the settings screen
 export default function ModalScreen() {
   return (
     <View style={styles.container}>

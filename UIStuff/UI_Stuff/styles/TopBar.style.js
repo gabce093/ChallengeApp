@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-
+{/*This is the stylesheet used by the top bar of the screen*/}
 export default StyleSheet.create({
       TopBarHolder: {
         flex: 1,

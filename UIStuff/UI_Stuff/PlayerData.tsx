@@ -15,7 +15,7 @@ var weeklyChallengeMax = 10000;
 var CurrentweeklyChallenge = 1000;
 
 
-
+// Helper functions, may be replaced at some point:
 export default function getPlayer(){
 
     return[level];

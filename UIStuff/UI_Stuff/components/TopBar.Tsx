@@ -11,7 +11,7 @@ import { Text, TextProps} from './Themed';
 import { RootStackScreenProps } from '../types';
 import {getLevel, getCurrentEXP, getMaxEXP, getCoins, getGems} from '../PlayerData';
 
-
+{/*Topbar has alot of components, the errors are false; it works*/}
 export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
     const colorScheme = useColorScheme();
     return (

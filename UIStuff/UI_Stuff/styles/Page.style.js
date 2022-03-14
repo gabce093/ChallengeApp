@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 
+{/*StyleSheet for the base of the pages*/}
 export default StyleSheet.create({
     absolute: {
       position: 'absolute',

@@ -5,7 +5,7 @@ import styles2 from '../styles/Page.style';
 import { Text, TextProps} from './Themed';
 import { RadialGradient } from 'react-native-svg';
 
-
+{/*Helper function*/}
 const propStyle = (percent: number, base_degrees: number) => {
     const rotateBy = base_degrees + (percent * 3.6);
     return {
@@ -13,6 +13,7 @@ const propStyle = (percent: number, base_degrees: number) => {
     };
 }
 
+{/*Helper function*/}
 const renderThirdLayer = (percent: number) => {
     if(percent > 50){
       /**
@@ -26,6 +27,7 @@ const renderThirdLayer = (percent: number) => {
     }
 }
 
+{/*The orb element containing the bar and text. Ignore the error on percent; it works*/}
 const WeeklyChallengeOrb = ({percent}) => {
     let firstProgressLayerStyle;
 
@@ -58,6 +60,7 @@ const WeeklyChallengeOrb = ({percent}) => {
 
     );
 }
+{/*This is the stylesheet used by the weekly challenge orb*/}
 const styles = StyleSheet.create({
     orbContainer: {
       shadowRadius: 20,

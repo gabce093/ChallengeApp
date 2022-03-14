@@ -19,7 +19,6 @@ export default function GetUserlist()
         setData(data);
         setLoading(false);
     
-        return data;
       };
     
       

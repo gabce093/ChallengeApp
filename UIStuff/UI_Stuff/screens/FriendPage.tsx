@@ -3,11 +3,11 @@ import styles from '../styles/Page.style';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
 
-import { ImageBackground, ScrollView, FlatList } from 'react-native';
+import { ImageBackground, ScrollView, FlatList, TouchableOpacity, Image, Button} from 'react-native';
 import { Text, View} from '../components/Themed';
 import { useState,  } from 'react';
-import { GroupSquare } from '../components/GroupSquare';
-import { FriendSearchWindow } from '../components/FriendSearchWindow';
+import  GroupSquare  from "../components/GroupSquare";
+import { FriendSearchWindow } from './FriendSearchWindow';
 
 
 const DATA = [
@@ -26,26 +26,37 @@ const DATA = [
     title: "Billy",
     level: 78,
   },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Billy",
+    level: 78,
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Billy",
+    level: 78,
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Billy",
+    level: 78,
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Billy",
+    level: 78,
+  },
+  
+  
 ];
-
-
-const Item = GroupSquare('45');
 
 export default function FriendPageScreen() {
   const [selectedId, setSelectedId] = useState(null);
   
-
+  //Function that gets fed into the flatlist nad render the friend squares.
   const renderItem = ({ item }:{item:any}) => {
-    const backgroundColor = "#383838";
-    const color = 'white';
-
     return (
-      <Item
-        item={item}
-        onPress={() => setSelectedId(item.id)}
-        backgroundColor={{ backgroundColor }}
-        textColor={{ color }}
-      />
+       GroupSquare(item.level, item.title)
     );
   };
 
@@ -53,26 +64,27 @@ export default function FriendPageScreen() {
 
     <View style={styles.container}>
     <ImageBackground resizeMode="cover" style={friendPageStyles.backimg} source={require('../assets/images/forest.png')}>
+     
+     {/* Modal for adding friends */}
      <FriendSearchWindow/>
 
       {/*Group box*/}
       <Text style={styles.title} > Friends</Text>
       <View style={friendPageStyles.groupContainer}>
         
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView style= {{paddingBottom: '2%'}} showsVerticalScrollIndicator={false}>
+          {/* List of all the friends */}
           <FlatList 
-            
             nestedScrollEnabled
             data={DATA}
             renderItem={renderItem}
-            numColumns = {2}
+            numColumns = {3}
             keyExtractor={(item) => item.id}
             extraData={selectedId}
           />
       </ScrollView>
       </View> 
    
-      {/*<EditScreenInfo path="/screens/FriendPage.tsx" >*/}
       </ImageBackground>
     </View>
   );

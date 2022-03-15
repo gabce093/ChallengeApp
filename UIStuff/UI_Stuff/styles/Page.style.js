@@ -31,6 +31,8 @@ export default StyleSheet.create({
       zIndex: -1,
     },
     container: {
+      
+      backgroundColor: 'rgb(134, 164, 173)',
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
@@ -62,8 +64,12 @@ export default StyleSheet.create({
       backgroundColor: 'rgba(52, 52, 52, 0)',
       right: 0,
       left: 0,
+    
     },
+    
     title: {
+      fontFamily: 'Qdbettercomicsans-jEEeG.ttf',
+      color:'white',
       fontSize: 40,
       fontWeight: 'bold',
       
@@ -111,4 +117,7 @@ export default StyleSheet.create({
       fontSize: 14,
       color: '#C4C4C4',
     },
+
+
+
   });

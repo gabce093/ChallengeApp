@@ -10,7 +10,7 @@ export default StyleSheet.create({
       left: 0,
       right: 0,
       bottom: 0,
-      zIndex: -1,
+      zIndex: 0,
     },
     banan: {
       position: 'absolute',
@@ -21,14 +21,14 @@ export default StyleSheet.create({
       left: 0,
       right: 0,
       bottom: 0,
-      zIndex: -1,
+      zIndex: 1,
     },
     playerImage: {
       height: 250,
       width: 250,
       marginTop: '30%',
-      scaleX: "-1",
-      zIndex: -1,
+      transform: [{ scaleX: -1 }],
+      zIndex: 2,
     },
     container: {
       
@@ -68,7 +68,7 @@ export default StyleSheet.create({
     },
     
     title: {
-      fontFamily: 'Qdbettercomicsans-jEEeG.ttf',
+      
       color:'white',
       fontSize: 40,
       fontWeight: 'bold',
@@ -107,7 +107,7 @@ export default StyleSheet.create({
       alignContent: 'center', 
       fontSize: 50, 
       fontWeight: 'bold',
-      fontFamily: 'Helvetica',
+      
     },
     link: {
       marginTop: 15,

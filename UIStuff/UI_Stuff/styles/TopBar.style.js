@@ -4,7 +4,7 @@ export default StyleSheet.create({
       TopBarHolder: {
         flex: 1,
         flexDirection: 'row',
-        alignItems: 'top',
+        alignItems: 'flex-start',
         position: "relative",
         backgroundColor: 'transparent',
 
@@ -16,7 +16,7 @@ export default StyleSheet.create({
       },
       CurrencyAndEXPHolder: {
         flex: 8,
-        alignItems: 'left',
+        alignItems: 'flex-start',
         height: '50%',
         flexDirection: 'column',
         backgroundColor: '#333333',
@@ -24,13 +24,13 @@ export default StyleSheet.create({
       CurrencyHolder: {
         flex: 1,
         marginLeft: '1%',
-        alignItems: 'top',
+        alignItems: 'flex-start',
         flexDirection: 'row',
         backgroundColor: 'transparent',
       },
       EXPBarHolder: {
         flex: 1,
-        alignItems: 'top',
+        alignItems: 'flex-start',
         marginLeft: '1%',
         height: '2%',
         backgroundColor: '#333333',

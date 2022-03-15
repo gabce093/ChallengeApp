@@ -21,8 +21,8 @@ export default function GroupSquare(level:string, name:string) {
                 <Text style= {friendPageStyles.lvlText}>{level}</Text></View>
               
                 {/* user icon for the friend */}
-                <Image style={{ width: '20vw',
-                  height: '20vw',
+                <Image style={{ width: 20,
+                  height: 20,
                   borderRadius: 100,
                   overflow: "hidden",
                   borderWidth: 4,
@@ -31,7 +31,7 @@ export default function GroupSquare(level:string, name:string) {
                 />
               
             </View>
-            <View style={{marginTop: '4vw', backgroundColor: 'transparent', alignItems:'center'}}> 
+            <View style={{marginTop: 4, backgroundColor: 'transparent', alignItems:'center'}}> 
               {/* Show name of your friend */}
               <Text style={[friendPageStyles.nameText]}>{name}</Text>
               

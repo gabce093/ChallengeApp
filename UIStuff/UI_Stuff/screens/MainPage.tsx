@@ -32,13 +32,8 @@ export default function MainPageScreen({ navigation }: RootStackScreenProps<'Cre
           <ImageBackground source={require('../Graphics/wut2w_kepps.png')} style={styles.playerImage} resizeMode="cover"></ImageBackground>
         </View>
       </View>
-      
 
       {/*<Image source={require('../Graphics/forest.png')} style={styles.absolute} resizeMode="cover"></Image>*/}
-    
-      
-      
-
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       
       {/*<EditScreenInfo path="/screens/MainPage.tsx" >*/}

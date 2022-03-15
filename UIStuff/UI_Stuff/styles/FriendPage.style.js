@@ -26,7 +26,7 @@ export default StyleSheet.create({
       marginVertical: '2%',
       marginHorizontal: '2%',
       alignItems: 'center',
-      marginBottom: '1px',
+      marginBottom: 1,
       backgroundColor: '#383838',
       borderRadius: 3,
       
@@ -35,14 +35,12 @@ export default StyleSheet.create({
      nameText: {
       color: 'white',
       fontWeight: 'bold',
-      fontSize: '4vw',
+      fontSize: 4,
      },
 
      iconHolder:{
       backgroundColor: '#383838',
       alignItems: 'center',
-   
-      
      },
      playerIcon: {
       width: '30%',
@@ -73,8 +71,8 @@ export default StyleSheet.create({
     challengeButton: {
       textAlign: 'center',
       backgroundColor:"#ff5c00",
-      width: '24vw',
-      heigt: '30%',
+      width: 24,
+      height: '30%',
       borderRadius: 5,
       elevation: 2
 
@@ -83,8 +81,4 @@ export default StyleSheet.create({
       color: 'white',
       fontWeight: 'bold',
     }
-
-
-   
-
   });

@@ -28,7 +28,7 @@ const renderThirdLayer = (percent: number) => {
 }
 
 {/*The orb element containing the bar and text. Ignore the error on percent; it works*/}
-const WeeklyChallengeOrb = ({percent}) => {
+const WeeklyChallengeOrb = ({percent}:{percent:any}) => {
     let firstProgressLayerStyle;
 
     if(percent > 50)

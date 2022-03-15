@@ -6,8 +6,7 @@
   "typedocOptions": {
     "entryPoints": ["./components/GroupSquare.tsx"],
     "out": "docs"
-}
-
+  },
 }
 
 

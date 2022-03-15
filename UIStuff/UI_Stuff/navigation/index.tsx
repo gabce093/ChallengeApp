@@ -29,6 +29,8 @@ import FriendPageScreen from '../screens/FriendPage';
 
 // Sub-Screens:
 import CreateRunPage from '../screens/CreateRunPage';
+import GPSPage from '../screens/GPSPage';
+
 
 
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
@@ -76,7 +78,8 @@ function RootNavigator() {
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
-        <Stack.Screen name="CreateRun" component={CreateRunPage} />
+        <Stack.Screen name="CreateRunPage" component={CreateRunPage} />
+        <Stack.Screen name="GPSPage" component={GPSPage} />
     </Stack.Navigator>
   );
 }

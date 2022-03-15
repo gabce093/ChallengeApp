@@ -1,11 +1,13 @@
 import styles from '../styles/Page.style';
-import { Button } from 'react-native';
 import {addCoin, addGem, addEXP} from '../PlayerData';
+import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import React from 'react';
+import { Button } from 'react-native';
 
-export default function CreateRunPage() {
+export default function CreateRunPage({ navigation }: RootStackScreenProps<'GPSPage'>) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>FuskSidan</Text>
@@ -28,6 +30,12 @@ export default function CreateRunPage() {
       color="#fcba03"
       />
       </View>
+
+      <Button
+        title= "Challenge"
+        onPress={() => navigation.navigate('GPSPage')}
+      />   
+
     </View>
   );
 }

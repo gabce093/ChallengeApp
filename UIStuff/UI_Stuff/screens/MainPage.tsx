@@ -10,10 +10,11 @@ import WeeklyChallengeOrb from '../components/WeeklyChallengeOrb';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { View,Text} from '../components/Themed';
-import { RootTabScreenProps, RootStackParamList, RootTabParamList } from '../types';
+import  TopBar  from '../components/TopBar';
+import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 
 
-export default function MainPageScreen({ navigation }: RootTabScreenProps<'MainPage'>) {
+export default function MainPageScreen({ navigation }: RootStackScreenProps<'CreateRunPage'>) {
   return (
     <View style={styles.topContainer}>
       <ImageBackground source={require('../Graphics/forest.png')} style={styles.absolute} resizeMode="cover">
@@ -43,7 +44,7 @@ export default function MainPageScreen({ navigation }: RootTabScreenProps<'MainP
       {/*<EditScreenInfo path="/screens/MainPage.tsx" >*/}
 
       <Pressable style={styles.challengeButton}
-        onPress={() => navigation.navigate('CreateRun')}>
+        onPress={() => navigation.navigate('CreateRunPage')}>
       <Text style={styles.challengeText}>Challenge!</Text>
       </Pressable>
       </ImageBackground>

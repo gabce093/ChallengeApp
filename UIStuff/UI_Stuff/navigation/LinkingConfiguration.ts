@@ -40,6 +40,11 @@ const linking: LinkingOptions<RootStackParamList> = {
               FriendPageScreen: 'five',
             },
           },
+          GPSPage: {
+            screens: {
+              GPSPageScreen: 'six',
+            },
+          },
         },
       },
       Modal: 'modal',

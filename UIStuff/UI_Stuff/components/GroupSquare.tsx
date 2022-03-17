@@ -21,27 +21,27 @@ export default function GroupSquare(level:string, name:string) {
                 <Text style= {friendPageStyles.lvlText}>{level}</Text></View>
               
                 {/* user icon for the friend */}
-                <Image style={{ width: 20,
-                  height: 20,
+                <Image style={{ width: 90,
+                  height: 90,
                   borderRadius: 100,
-                  overflow: "hidden",
+                  //overflow: "hidden",
                   borderWidth: 4,
                   borderColor: "#766449"}} 
                   source={require('../assets/images/emptyPlayerIcon.png')}
                 />
-              
-            </View>
-            <View style={{marginTop: 4, backgroundColor: 'transparent', alignItems:'center'}}> 
-              {/* Show name of your friend */}
-              <Text style={[friendPageStyles.nameText]}>{name}</Text>
-              
-              {/* Button to challenge your friend */}
-              <Pressable style = {friendPageStyles.challengeButton} onPress={() => console.log('Pressed Challenge button')}>
-                <Text style = {friendPageStyles.challengeTxt}>Challenge!</Text>
-              </Pressable>
-           </View>
+                  
+                </View>
+                <View style={{marginTop: 4, backgroundColor: 'transparent', alignItems:'center'}}> 
+                  {/* Show name of your friend */}
+                  <Text style={[friendPageStyles.nameText]}>{name}</Text>
+                  
+                  {/* Button to challenge your friend */}
+                  <Pressable style = {friendPageStyles.challengeButton} onPress={() => console.log('Pressed Challenge button')}>
+                    <Text style = {friendPageStyles.challengeTxt}>Challenge!</Text>
+                  </Pressable>
+              </View>
       
-      </TouchableOpacity>  
+            </TouchableOpacity>  
   
     );
 

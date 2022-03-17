@@ -22,10 +22,8 @@ export default StyleSheet.create({
     textAlign: "center"
   },
   modalText: {
-
-    textAlign: "center",
     color: 'white',
-    fontSize: 12,
+    fontSize: 25,
     fontWeight: 'bold',
   },
   
@@ -34,7 +32,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: '35vh',
+    marginVertical: '35%',
     borderRadius: 5,
     shadowColor: "#000",
     shadowOffset: {
@@ -46,7 +44,6 @@ export default StyleSheet.create({
     elevation: 5
   },
   modalView: {
-    justifyContent: 'space-evenly',
     backgroundColor: "#5c5c5c",
     borderRadius: 5,
     width: '90%',
@@ -62,12 +59,12 @@ export default StyleSheet.create({
     shadowRadius: 4,
     elevation: 5
   },
-  textWindow: {
+  textWindow: { 
     backgroundColor: 'white',
     borderRadius: 5,
     borderColor: '#383838',
     borderWidth: 3,
-    height: '20%',
+    height: '10%',
     width: '70%',
   },
 

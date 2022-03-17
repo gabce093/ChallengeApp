@@ -72,19 +72,17 @@ export default function FriendPageScreen() {
       <Text style={styles.title} > Friends</Text>
       <View style={friendPageStyles.groupContainer}>
         
-        <ScrollView style= {{paddingBottom: '2%'}} showsVerticalScrollIndicator={false}>
-          {/* List of all the friends */}
-          <FlatList 
-            nestedScrollEnabled
-            data={DATA}
-            renderItem={renderItem}
-            numColumns = {3}
-            keyExtractor={(item) => item.id}
-            extraData={selectedId}
-          />
-      </ScrollView>
-      </View> 
-   
+            {/* List of all the friends */}
+            <FlatList 
+              nestedScrollEnabled
+              data={DATA}
+              renderItem={renderItem}
+              numColumns = {3}
+              keyExtractor={(item) => item.id}
+              extraData={selectedId}
+            />
+      
+        </View> 
       </ImageBackground>
     </View>
   );

@@ -21,14 +21,14 @@ export default function getPlayer(){
     return[level];
 }
 
-export const getMaxEXP = () => {
+export const getMaxEXP = ():number => {
 
-    return[maxEXP];
+    return maxEXP;
 }
 
-export const getCurrentEXP = () => {
+export const getCurrentEXP = ():number => {
 
-    return[currentEXP];
+    return currentEXP;
 }
 
 export const getLevel = () => {

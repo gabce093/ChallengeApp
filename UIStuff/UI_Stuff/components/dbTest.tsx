@@ -1,11 +1,20 @@
 import React, { useState, useEffect, } from "react";
 import Modal from "react-native-modal";
-import { Box, FlatList, Center, NativeBaseProvider,  View } from "native-base";
-import {TouchableOpacity, Text, Button} from 'react-native';
+import { Box, FlatList, Center, NativeBaseProvider} from "native-base";
+import {
+  SafeAreaView,
+  Switch,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import Accordion from 'react-native-collapsible/Accordion';
 import * as Animatable from 'react-native-animatable';
 
+import styles from '../styles/SearchFriend.style.js';
 
 const DATA = [
   {
@@ -54,7 +63,7 @@ const DATA = [
   
 ];
 
-const DATA2 = [
+const CONTENT = [
   {
    
     title: "Jake",
@@ -77,7 +86,7 @@ const DATA2 = [
 ];
 
 
-export default function GetUserlist(searchWord:string)
+const GetUserlist = (searchWord:string) =>
 {
 
     const [data, setData] = useState(null);
@@ -85,6 +94,7 @@ export default function GetUserlist(searchWord:string)
 
     const [activeSections, setActiveSections] = useState([]);
     const [collapsed, setCollapsed] = useState(true);
+    const [multipleSelect, setMultipleSelect] = useState(false);
 
     const toggleExpanded = () => {
       //Toggling the state of single Collapsible
@@ -106,29 +116,34 @@ export default function GetUserlist(searchWord:string)
       };
 
    
-const renderUser = ({ section, _, isActive}:{section:any}) => {
+const renderHeader = ( section:any, _:any, isActive:any) => {
    
     return (
-      <Animatable.View  duration={400} transition="backgroundColor" style={[styles.header, isActive ? styles.active : styles.inactive]}>       
+      <Animatable.View  
+        duration={400} 
+        transition="backgroundColor" 
+        style={[styles.header, isActive ? styles.active : styles.inactive]}
+      >       
           {/* <Box px={5} py={2} rounded="md" bg="primary.300" my={2}>
           {section.title}{section.title}
           </Box>  */}
-           <Text style={styles.headerText}>{section.title}</Text>
-          </Animatable.View>
+           <Animatable.Text style={styles.headerText}>{section.title}</Animatable.Text>
+      </Animatable.View>
     );
   };
  
- const renderButton = ({ section, _, isActive}:{section:any}) => {
+ const renderContent = ( section:any, _:any, isActive:any) => {
    
     return (
-      <Animatable.View  duration={400}
-      style={[styles.content]}
-      transition="backgroundColor">     
+      <Animatable.View  
+        duration={400}
+        style={[styles.content]}
+        transition="backgroundColor">     
               {/* <Button 
                 onPress={() =>console.log('collapse button')}
                 title='Send Request'/> */}
                  
-                 <Animatable.Text
+          <Animatable.Text
           animation={isActive ? 'bounceIn' : undefined}
           style={{ textAlign: 'center' }}>
           {section.content}
@@ -163,103 +178,55 @@ const renderUser = ({ section, _, isActive}:{section:any}) => {
   // };
   
   return (
-    <NativeBaseProvider>
+    // <NativeBaseProvider>
       
-      <Center flex={1}>
+    //   <Center 
+    //   flex={1}
+    //   >
 
-        {/* {<Button onPress={() => fetchData()}>Submit</Button>} 
-        {DATA && (
-          <FlatList
-            data={DATA}
-            renderItem={renderUser}
-            keyExtractor={(item) => item.id.toString()}
-          />
-        )}     */}
+        // {/* {<Button onPress={() => fetchData()}>Submit</Button>} 
+        // {DATA && (
+        //   <FlatList
+        //     data={DATA}
+        //     renderItem={renderUser}
+        //     keyExtractor={(item) => item.id.toString()}
+        //   />
+        // )}     */}
+        <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <ScrollView>
+          
+          {/*Code for Selector ends here*/}
 
-            <Accordion
-             activeSections={activeSections}
+          {/*Code for Accordion/Expandable List starts here*/}
+          <Accordion
+            activeSections={activeSections}
             //for any default active section
-            sections={DATA2}
+            sections={CONTENT}
             //title and content of accordion
             touchableComponent={TouchableOpacity}
             //which type of touchable component you want
             //It can be the following Touchables
             //TouchableHighlight, TouchableNativeFeedback
             //TouchableOpacity , TouchableWithoutFeedback
-            expandMultiple={false}
+            expandMultiple={multipleSelect}
             //Do you want to expand mutiple at a time or single at a time
-            renderHeader={renderUser}
+            renderHeader={renderHeader}
             //Header Component(View) to render
-            renderContent={renderButton}
+            renderContent={renderContent}
             //Content Component(View) to render
             duration={400}
             //Duration for Collapse and expand
             onChange={setSections}
             //setting the state of active sections
           />
-           
-      </Center>
-    </NativeBaseProvider>
+          {/*Code for Accordion/Expandable List ends here*/}
+        </ScrollView>
+      </View>
+    </SafeAreaView>
+    //   </Center>
+    // </NativeBaseProvider>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
-    paddingTop: 30,
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: 18,
-    fontWeight: '300',
-    marginBottom: 20,
-  },
-  header: {
-    backgroundColor: '#F5FCFF',
-    padding: 10,
-  },
-  headerText: {
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  content: {
-    padding: 20,
-    backgroundColor: '#fff',
-  },
-  active: {
-    backgroundColor: 'rgba(255,255,255,1)',
-  },
-  inactive: {
-    backgroundColor: 'rgba(245,252,255,1)',
-  },
-  selectors: {
-    marginBottom: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  selector: {
-    backgroundColor: '#F5FCFF',
-    padding: 10,
-  },
-  activeSelector: {
-    fontWeight: 'bold',
-  },
-  selectTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    padding: 10,
-    textAlign: 'center',
-  },
-  multipleToggle: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 30,
-    alignItems: 'center',
-  },
-  multipleToggle__title: {
-    fontSize: 16,
-    marginRight: 8,
-  },
-});
+export default GetUserlist;
 

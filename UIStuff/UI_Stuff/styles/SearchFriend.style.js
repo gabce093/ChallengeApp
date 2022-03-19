@@ -26,7 +26,6 @@ export default StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
   },
-  
   centeredView: {
     backgroundColor: '#dedede',
     flex: 1,

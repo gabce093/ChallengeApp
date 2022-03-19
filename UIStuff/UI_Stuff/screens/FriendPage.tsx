@@ -6,6 +6,7 @@ import styles from '../styles/Page.style';
 import { ImageBackground, ScrollView, FlatList, TouchableOpacity, Image, Button} from 'react-native';
 import { Text, View} from '../components/Themed';
 import { useState,  } from 'react';
+import  FriendSquare  from "../components/FriendSquare";
 import  GroupSquare  from "../components/GroupSquare";
 import { FriendSearchWindow } from './FriendSearchWindow';
 
@@ -54,7 +55,13 @@ export default function FriendPageScreen() {
   const [selectedId, setSelectedId] = useState(null);
   
   //Function that gets fed into the flatlist nad render the friend squares.
-  const renderItem = ({ item }:{item:any}) => {
+  const renderFriendSquare = ({ item }:{item:any}) => {
+    return (
+       FriendSquare(item.level, item.title)
+    );
+  };
+
+  const renderGroupSquare = ({ item }:{item:any}) => {
     return (
        GroupSquare(item.level, item.title)
     );
@@ -65,23 +72,51 @@ export default function FriendPageScreen() {
     <View style={styles.container}>
     <ImageBackground resizeMode="cover" style={friendPageStyles.backimg} source={require('../assets/images/forest.png')}>
      
+  { /*Group box*/}
+    <Text style={styles.title} > Groups</Text>
+      <View style={friendPageStyles.groupContainer}>
+        {console.log(Math.ceil(DATA.length/3))}
+            {/* List of all the friends */}
+            <FlatList
+              nestedScrollEnabled
+              data={DATA}
+              renderItem={renderGroupSquare}
+              horizontal={false}
+              columnWrapperStyle = {{height: 220,}}
+              numColumns = {2}
+              //keyExtractor={(item) => item.id}
+              extraData={selectedId}
+              ListEmptyComponent= {<Text>You currently haven't added any friends</Text>}
+              getItemLayout={(data, index) => (
+                {length: 200, offset: 100 * index, index}
+              )}
+              
+            /> 
+        </View> 
+
      {/* Modal for adding friends */}
      <FriendSearchWindow/>
 
-      {/*Group box*/}
+     
       <Text style={styles.title} > Friends</Text>
-      <View style={friendPageStyles.groupContainer}>
+      <View style={friendPageStyles.friendContainer}>
         
             {/* List of all the friends */}
-            <FlatList 
+            <FlatList
               nestedScrollEnabled
               data={DATA}
-              renderItem={renderItem}
+              renderItem={renderFriendSquare}
+              horizontal={false}
+              columnWrapperStyle = {{height: 190,}}
               numColumns = {3}
-              keyExtractor={(item) => item.id}
+              //keyExtractor={(item) => item.id}
               extraData={selectedId}
-            />
-      
+              ListEmptyComponent= {<Text>You currently haven't added any friends</Text>}
+              getItemLayout={(data, index) => (
+                {length: 200, offset: 100 * index, index}
+              )}
+              
+            /> 
         </View> 
       </ImageBackground>
     </View>

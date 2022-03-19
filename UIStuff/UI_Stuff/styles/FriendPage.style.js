@@ -4,33 +4,33 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
  
 
+    backimg: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      width: "100%",
+    },
+
      // FRIEND PAGE STYLE
-     groupContainer: {
+     //friend-part
+     friendContainer: {
         backgroundColor: '#939393', 
-        height: '50%',
+        height: '40%',
         width: '90%',
         borderRadius:5,
-        marginBottom: '5%',
-     
+        marginBottom: '7%'
+       
      },
-     backimg: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: 'center',
-      width: "100%",
-
-    },
-     item: {
-      width: '29.5%',
-      height: '85%',
+     
+    friendHolder: {
+      flex: 1/3,
+      flexDirection: 'column',
       marginVertical: '2%',
       marginHorizontal: '2%',
-      alignItems: 'center',
       marginBottom: 1,
-      backgroundColor: '#383838',
-      borderRadius: 3,
+      backgroundColor: 'rgba(30, 54, 88,0.5)',
+      borderRadius: 15,
     },
-
      nameText: {
       color: 'white',
       fontWeight: 'bold',
@@ -38,8 +38,8 @@ export default StyleSheet.create({
       marginTop: '8%'
      },
 
-     iconHolder:{
-      backgroundColor: '#383838',
+     friendIconHolder:{
+      backgroundColor: 'rgba(0,0,0,0)',
       alignItems: 'center',
       width: '100%',
       marginTop: '2%',
@@ -71,9 +71,8 @@ export default StyleSheet.create({
       color: '#181818',
     },
 
-    challengeButton: {
-      
-      backgroundColor:"#ff5c00",
+    friendChallengeButton: {
+      backgroundColor:"#2076F6",
       width: 100,
       height: '30%',
       borderRadius: 5,
@@ -85,5 +84,61 @@ export default StyleSheet.create({
       color: 'white',
       fontWeight: 'bold',
       fontSize: 15,
-    }
+    },
+    
+     //*****Group-part******//
+     groupHolder: {
+      flex: 1/2,
+      flexDirection: 'column',
+      marginVertical: '2%',
+      marginHorizontal: '2%',
+      marginBottom: 1,
+      backgroundColor: '#383838',
+      borderRadius: 3,
+    },
+    
+    groupLvlBadge: {
+      position: 'absolute',
+      alignItems: 'center',
+      flex: 1,
+      justifyContent: 'flex-end',
+      width: '40%',
+      height: '35%',
+      backgroundColor: "#766449",
+      borderBottomLeftRadius: 5,
+      borderBottomRightRadius: 5,
+      marginTop: '23%',
+    },
+    groupIcon: {
+
+      width: 110,
+      height: 110,
+      borderRadius: 100,
+      borderWidth: 4,
+      borderColor: "#766449", 
+    },
+    groupContainer: {
+      backgroundColor: '#939393', 
+      height: '30%',
+      width: '90%',
+      borderRadius:5,
+      marginBottom: '2%'
+     
+   },
+   groupChallengeButton: {
+    backgroundColor:"#ff5c00",
+    width: 100,
+    height: '30%',
+    borderRadius: 5,
+    elevation: 2
+
+  },
+  groupIconHolder:{
+    backgroundColor: '#383838',
+    alignItems: 'center',
+    width: '100%',
+    marginTop: '2%',
+
+   },
+
   });

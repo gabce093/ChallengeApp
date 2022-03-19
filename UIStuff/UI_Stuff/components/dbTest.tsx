@@ -9,6 +9,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Button
 } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import Accordion from 'react-native-collapsible/Accordion';
@@ -68,18 +69,21 @@ const CONTENT = [
    
     title: "Jake",
     content: "Carlsson",
+    level: 34,
   
   },
   {
    
     title: "Bob",
     content: "Carlsson",
+    level: 14,
    
   },
   {
     
     title: "Billy",
     content: "Carlsson",
+    level: 89,
    
   },
 
@@ -124,58 +128,31 @@ const renderHeader = ( section:any, _:any, isActive:any) => {
         transition="backgroundColor" 
         style={[styles.header, isActive ? styles.active : styles.inactive]}
       >       
-          {/* <Box px={5} py={2} rounded="md" bg="primary.300" my={2}>
-          {section.title}{section.title}
-          </Box>  */}
-           <Animatable.Text style={styles.headerText}>{section.title}</Animatable.Text>
+           <Animatable.Text style={styles.headerText}>{section.title} {section.content} Level {section.level}</Animatable.Text>
       </Animatable.View>
     );
   };
  
- const renderContent = ( section:any, _:any, isActive:any) => {
+ const renderContent = (section:any, _:any, isActive:any) => {
    
     return (
       <Animatable.View  
         duration={400}
         style={[styles.content]}
         transition="backgroundColor">     
-              {/* <Button 
+              <Button 
                 onPress={() =>console.log('collapse button')}
-                title='Send Request'/> */}
+                title='Send Request'/>
                  
-          <Animatable.Text
+          {/* <Animatable.Text
           animation={isActive ? 'bounceIn' : undefined}
           style={{ textAlign: 'center' }}>
           {section.content}
-        </Animatable.Text>
+        </Animatable.Text> */}
     </Animatable.View>
     )
   };
 
-  // const renderItem = ({ item}:{item:any}) => {
-   
-  //   return (
-  //     <View>
-  //       <TouchableOpacity  onPress={()=> toggleExpanded()}>
-  //         <Box px={5} py={2} rounded="md" bg="primary.300" my={2}>
-  //         {item.firstName}{item.lastName}
-  //         </Box> 
-  //       </TouchableOpacity>
-
-  //       <Collapsible collapsed={collapsed} align="center">
-  //           <View >
-  //             <Button 
-  //               onPress={console.log('collapse button')}
-  //               title='Send Request'
-  //             />
-              
-  //           </View>
-
-  //         </Collapsible>
-
-  //       </View>
-  //   );
-  // };
   
   return (
     // <NativeBaseProvider>
@@ -192,12 +169,9 @@ const renderHeader = ( section:any, _:any, isActive:any) => {
         //     keyExtractor={(item) => item.id.toString()}
         //   />
         // )}     */}
-        <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
+      
+    
         <ScrollView>
-          
-          {/*Code for Selector ends here*/}
-
           {/*Code for Accordion/Expandable List starts here*/}
           <Accordion
             activeSections={activeSections}
@@ -222,8 +196,8 @@ const renderHeader = ( section:any, _:any, isActive:any) => {
           />
           {/*Code for Accordion/Expandable List ends here*/}
         </ScrollView>
-      </View>
-    </SafeAreaView>
+      
+  
     //   </Center>
     // </NativeBaseProvider>
   );

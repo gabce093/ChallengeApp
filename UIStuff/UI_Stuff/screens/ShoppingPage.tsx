@@ -3,7 +3,11 @@ import shopStyles from '../styles/shop.style';
 //import EditScreenInfo from '../components/EditScreenInfo';
 import React, { useState } from 'react';
 import { Text, View } from '../components/Themed';
-import { Image, ImageBackground, Pressable} from "react-native";
+import { ImageBackground, Pressable} from "react-native";
+
+
+import {buyItem} from '../ShopData';
+
 
 
 export default function ShoppingPageScreen() {
@@ -77,6 +81,12 @@ export default function ShoppingPageScreen() {
            onPress={() => setShirtImg(require('../Graphics/character/empty.png'))}
            style={shopStyles.shopButton}>
            <Text>Set original shirt</Text>
+         </Pressable>
+
+         <Pressable
+           onPress={() => buyItem(2)}
+           style={shopStyles.shopButton}>
+           <Text>Try to buy this 2 coin thing</Text>
          </Pressable>
          
        </View>

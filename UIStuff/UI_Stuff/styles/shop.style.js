@@ -21,7 +21,7 @@ export default StyleSheet.create({
       height: 250,
       width: 250,
       position: 'absolute',
-      scaleX: "-1",
+      scaleX: -1,
       zIndex: -1,
     },
 

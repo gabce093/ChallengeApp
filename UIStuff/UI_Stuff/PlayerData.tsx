@@ -64,3 +64,10 @@ export var addEXP = () => {
     }
     console.log(gems);
 };
+
+//Function that removes a given number of coins (used to buy items)
+export var removeCoins = (numbCoins : number) =>{
+    coins = coins - numbCoins;
+    console.log('You removed ' + numbCoins +' coins'+ 
+    ', now you have '+ coins + ' coins');
+};

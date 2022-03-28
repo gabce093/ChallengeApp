@@ -9,7 +9,7 @@ import Recorder from '../components/Recorder';
 export default function GPSPage() {
     
     const [position, setPosition] = useState([0,0]);
-    const [pace, setPace] = useState("00:00");
+    const [pace, setPace] = useState(0.0);
     const [errorMsg, setErrorMsg] = useState("null");
     
     let subscriber = null;   
@@ -32,18 +32,9 @@ export default function GPSPage() {
           },
           (location) => {
               setPosition([location.coords.longitude, location.coords.latitude]);
+              
               if (location.coords.speed != null) {
-                var min_per_m = location.coords.speed*60;
-                var min_per_km = 1000/min_per_m;
-                var minutes = Math.floor(min_per_km)
-                var seconds = Math.round((min_per_km-minutes) * 60);
-                
-                if(10>seconds){
-                    setPace(minutes + ":" + '0' + seconds);
-                }
-                else {
-                    setPace(minutes + ":" + seconds);
-                }
+                setPace(location.coords.speed);
               }   
           }
       ); 
@@ -54,7 +45,6 @@ export default function GPSPage() {
       <View style={styles.container}>
         <ImageBackground source={require('../Graphics/forest.png')} style={styles.absolute} resizeMode="cover"></ImageBackground>
         <Recorder position={position} pace={pace}></Recorder>  
-        <Text>{pace}</Text>
       </View>
     );
 }

@@ -4,7 +4,7 @@ export default StyleSheet.create({
 
     container: {
         backgroundColor: '#333333',
-        height: '50%',
+        height: '60%',
         width: '88%',
         padding: '5%',
         borderRadius: 5,
@@ -14,6 +14,10 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',  
+    },
+    progressContainer: {
+        backgroundColor: '#333333',
+        paddingTop: '5%' 
     },
     distanceContainer: {
         borderRadius: 5,

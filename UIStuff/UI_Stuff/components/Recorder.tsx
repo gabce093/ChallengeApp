@@ -1,19 +1,18 @@
 
 import styles from '../styles/GPSPage.style';
-import { Button } from "react-native";
 import React, { useState, useEffect } from 'react';
 import { Text, View } from '../components/Themed';
-import { Stopwatch, Timer } from 'react-native-stopwatch-timer';
+import { Stopwatch} from 'react-native-stopwatch-timer';
 import {getType, getTime, getDistanceGoal, checkCompleted, setElapsedDistance, setTime, CompleteChallenge} from '../ChallengeData';
 import {
     SafeAreaView,
     TouchableHighlight,
     Modal,
   } from 'react-native';
-import { background } from 'native-base/lib/typescript/theme/styled-system';
+import { ProgressBar } from 'react-native-paper';
 
 
-export default function Recorder( {position}: any, {pace}: any) {
+export default function Recorder(props: any) {
     
     const [distance, setDistance] = useState(0);
     const [startposition, setStartPosition] = useState([0,0]);
@@ -32,20 +31,36 @@ export default function Recorder( {position}: any, {pace}: any) {
         //If recording, calculates distance moved from last point and add it
         //to the total distance.
         if (recording == true) {
-            let distance_since_last = haversine(startposition, position, {unit: 'meter', format: '[lon,lat]' });
+            let distance_since_last = haversine(startposition, props.position, {unit: 'meter', format: '[lon,lat]' });
             setDistance(distance + distance_since_last);
-            setStartPosition(position);
+            setStartPosition(props.position);
         }
-    }, [position])
+    }, [props.position])
     
-    
+    useEffect(() => {
+        //If recording, calculates distance moved from last point and add it
+        //to the total distance.
+        if (recording == true) {
+            var min_per_m = props.pace*60;
+            var min_per_km = 1000/min_per_m;
+            var minutes = Math.floor(min_per_km)
+            var seconds = Math.round((min_per_km-minutes) * 60);
+                
+            if(10>seconds){
+                setSpeed(minutes + ":" + '0' + seconds);
+            }
+            else {
+                setSpeed(minutes + ":" + seconds);
+            }
+        }
+    }, [props.pace])
     
     //Switch between start and stop,
     const handleStartStop = () => {
         setIsStopwatchStart(!isStopwatchStart);
         setResetStopwatch(false);
         setRecording(!recording);
-        setStartPosition(position);  
+        setStartPosition(props.position);  
         if (isStopwatchStart==true){
             setButtonColor('#00FF47');
         }
@@ -74,7 +89,7 @@ export default function Recorder( {position}: any, {pace}: any) {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <Stopwatch
                 start={isStopwatchStart}
                 reset={resetStopwatch}
@@ -91,7 +106,7 @@ export default function Recorder( {position}: any, {pace}: any) {
                     <Text style={styles.smallText}>Distance (km)</Text>
                 </View>
                 <View style={styles.paceContainer}>
-                    <Text style={styles.text}>{pace}</Text>
+                    <Text style={styles.text}>{speed}</Text>
                     <Text style={styles.smallText}>Pace (min/km)</Text>
                 </View>   
             </View>
@@ -121,8 +136,15 @@ export default function Recorder( {position}: any, {pace}: any) {
                     <Text style={styles.buttonText}>FINISH</Text>
                 </TouchableHighlight>
             </View>
-        </SafeAreaView>   
-    );
+            <View style={styles.progressContainer}>
+                <ProgressBar color="#FF5C00"progress={distance / goal} style={{
+                height: 20,
+                    backgroundColor: "#151515",
+                    }}/>
+            </View>
+        </View>
+    ) 
+       
 }  
 
 const options = {

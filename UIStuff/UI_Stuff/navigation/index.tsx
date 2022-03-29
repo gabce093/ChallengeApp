@@ -12,7 +12,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, ImageBackground, Pressable, StatusBar  } from 'react-native';
 import TopBar from '../components/TopBar'
 
 import Colors from '../constants/Colors';
@@ -37,15 +37,17 @@ import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../typ
 import { RootStackScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
-
+import pageStyles from '../styles/Page.style';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
+    
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <RootNavigator />
     </NavigationContainer>
+
   );
 }
 
@@ -63,14 +65,17 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 // Root navigator is on all 5 main tabs, it includes the topbar
 function RootNavigator() {
+  const colorScheme = useColorScheme();
   return (
-    <Stack.Navigator>
-              
+    <ImageBackground source={require('../Graphics/forest.png')} style={pageStyles.forestHeader} resizeMode="cover">
+    <Stack.Navigator> 
       <Stack.Screen name="Root" component={BottomTabNavigator}  options=
       {({navigation}) => ({
-        headerShown: true,
+        //headerShown: true,
+        //headerMode: "screen",
+        headerBackTitleVisible: false,
         headerTransparent: true,
-        header: () => <TopBar {...navigation}/>
+        header: () => <TopBar  {...navigation}/>
          
       })} />
 
@@ -80,20 +85,22 @@ function RootNavigator() {
       </Stack.Group>
         <Stack.Screen name="CreateRunPage" component={CreateRunPage} />
         <Stack.Screen name="GPSPage" component={GPSPage} />
+
     </Stack.Navigator>
+    </ImageBackground>
   );
 }
 
 // BottomTabNavigator contains the 5 buttons at the bottom of the screen
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-
+  StatusBar.setHidden(true);
   return (
+
     <BottomTab.Navigator
       initialRouteName="MainPage"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-        
+        tabBarActiveTintColor: "#ff5C00",
       }}>
         
       <BottomTab.Screen
@@ -123,26 +130,9 @@ function BottomTabNavigator() {
           title: 'Main Page',
           headerShown: false,
           tabBarIcon: ({ color }) => <MaterialCommunityIcons name="sword-cross" size={30} color={color} />,
-          /*
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}>
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-            
-          ),
-          */
         })}
       />
-      
+
       <BottomTab.Screen
         name="ChallengePage"
         component={ChallengePageScreen}
@@ -162,7 +152,6 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <FontAwesome5 name="user-friends" size={24} color={color} />,
         }}
       />
-      
     </BottomTab.Navigator>
   );
 }

@@ -3,9 +3,11 @@ import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import styles from '../styles/TopBar.style';
+import styles2 from '../styles/Page.style';
+import { StyleSheet, ImageBackground} from 'react-native';
 
 import * as React from 'react';
-import { Pressable, Image, View } from 'react-native';
+import { Pressable, Image, View, SafeAreaView  } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import { Text, TextProps} from './Themed';
 import { RootStackScreenProps } from '../types';
@@ -15,48 +17,61 @@ import {getLevel, getCurrentEXP, getMaxEXP, getCoins, getGems} from '../PlayerDa
 export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
     const colorScheme = useColorScheme();
     return (
-        <View style={styles.TopBarHolder}>
+        <SafeAreaView  style={headerStyle.wholeHeader}>
+            
             {/* Profile pic and LVL indicator:*/}
-            <View style={styles.ProfileHolder}>
-                    <Image style={styles.image}
-                    source = {require('../Graphics/TempProfilePic.png')}/>
-                    <Text style={styles.title}>LVL: {getLevel()}</Text>
+            <View style={styles.TopBarHolder}> 
+                <View style={styles.ProfileHolder}>
                     
-                
-                </View>
-                
-                
 
-            {/* spreading along the entire top*/}
-            <View style={styles.CurrencyAndEXPHolder}>
-                <View style={styles.CurrencyHolder}>
-                    <Text style={styles.title}>
-                        Coins: {getCoins()}   Gems: {getGems()}
-                    </Text>
+                        <Image style={styles.image}
+                        source = {require('../Graphics/TempProfilePic.png')}/>
+                        <Text style={styles.lvl}>LVL: { getLevel() }</Text>
+                    </View>
+                    
+                    
+
+                {/* spreading along the entire top*/}
+                <ImageBackground source={require('../Graphics/ExpMask.png')} style={styles.CurrencyAndEXPHolder} imageStyle={{tintColor:"#333333"}} resizeMode="stretch">
+                <View style={styles.CurrencyAndEXPHolder}>
+                    <View style={styles.CurrencyHolder}>
+                        <Text style={styles.title}>
+                            Coins: {getCoins()}   Gems: {getGems()}
+                        </Text>
+                    </View>
+                    <View style={styles.EXPBarHolder}>
+                    <ProgressBar color="#FF5C00"progress={getCurrentEXP() / getMaxEXP()} style={{
+                        height: "100%",
+                        backgroundColor: "#151515",
+                        }}/>
+                    </View>
                 </View>
-                <View style={styles.EXPBarHolder}>
-                <ProgressBar color="#FF5C00"progress={getCurrentEXP() / getMaxEXP()} style={{
-                    height: 15,
-                     backgroundColor: "#151515",
-                     }}/>
+                </ImageBackground>
+
+                {/* Setting on the edge of the screen*/}
+                <View style={styles.SettingsHolder}>  
+                    <Pressable
+                onPress={() => navigation.replace('Root')}
+                hitSlop={{bottom:200, top:200}}
+                style={({ pressed }) => ({
+                    opacity: pressed ? 0.5 : 1,
+                })}>
+                <Ionicons
+                    name="settings"
+                    size={36}
+                    color={Colors[colorScheme].background}
+                />
+                    </Pressable>
                 </View>
             </View>
-
-            {/* Setting on the edge of the screen*/}
-            <View style={styles.SettingsHolder}>  
-                <Pressable
-              onPress={() => navigation.replace('Root')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}>
-              <Ionicons
-                name="settings"
-                size={28}
-                color={Colors[colorScheme].background}
-                style={{ marginRight: 15 }}
-              />
-                </Pressable>
-            </View>
-        </View>
+            
+        </SafeAreaView >
     );
 }
+
+const headerStyle = StyleSheet.create({
+    wholeHeader: {
+        height: "10%", 
+        backgroundColor: "transparent",
+        },
+});

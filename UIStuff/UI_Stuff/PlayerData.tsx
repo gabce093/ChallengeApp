@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import { sqrt } from "react-native-reanimated";
 // Datavalues (These values will be collected from the database):
 var level = 5;
 var coins = 0;
 var gems = 0;
+var username = "VeryLongNameTe";
 
+// This should be an exponetial curve to lvl 20 when it caps and becomes constant.
 var currentEXP = 0;
 var maxEXP = 10;
-
+var totalEXP = 2000;
 // Will be a value between 0 and 1:
 var handicap = 0.5;
 
@@ -18,32 +21,39 @@ var CurrentweeklyChallenge = 1000;
 // Helper functions, may be replaced at some point:
 export default function getPlayer(){
 
-    return[level];
+    return[username];
 }
 
-export const getMaxEXP = () => {
+export const getUsername = ():string => {
 
-    return[maxEXP];
+    return username;
 }
 
-export const getCurrentEXP = () => {
 
-    return[currentEXP];
+export const getMaxEXP = ():number => {
+
+    return maxEXP;
+}
+
+export const getCurrentEXP = ():number => {
+
+    return currentEXP;
 }
 
 export const getLevel = () => {
-
+    const temp = 0.1 * Math.sqrt(totalEXP);
+    const temp2 = temp % 2;
     return[level];
 }
 
-export const getCoins = () => {
+export const getCoins = ():number => {
 
-    return[coins];
+    return coins;
 }
 
-export const getGems = () => {
+export const getGems = ():number => {
 
-    return[gems];
+    return gems;
 }
 
 export var addCoin = () => {
@@ -62,5 +72,5 @@ export var addEXP = () => {
         currentEXP -= maxEXP;
         level += 1;
     }
-    console.log(gems);
+    console.log(currentEXP);
 };

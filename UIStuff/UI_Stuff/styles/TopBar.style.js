@@ -1,57 +1,71 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 {/*This is the stylesheet used by the top bar of the screen*/}
 export default StyleSheet.create({
       TopBarHolder: {
         flex: 1,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        position: "relative",
+        position: "absolute",
+        flexDirection: "row",
         backgroundColor: 'transparent',
-
+        marginRight: 0,
+        zIndex: 10,
       },
       ProfileHolder: {
-        alignItems: 'center',
+        flex: 3,
+        flexDirection: "column",
         backgroundColor: 'transparent',
-        
       },
       CurrencyAndEXPHolder: {
-        flex: 8,
-        alignItems: 'flex-start',
-        height: '50%',
-        flexDirection: 'column',
-        backgroundColor: '#333333',
+        flex: 11,
+        backgroundColor: 'transparent',
       },
       CurrencyHolder: {
         flex: 1,
-        marginLeft: '1%',
         alignItems: 'flex-start',
-        flexDirection: 'row',
+        flexDirection: 'row', 
         backgroundColor: 'transparent',
       },
       EXPBarHolder: {
         flex: 1,
-        alignItems: 'flex-start',
-        marginLeft: '1%',
-        height: '2%',
-        backgroundColor: '#333333',
+        top: "11%",
+        paddingRight: "12.5%",
+        bottom: 0,
+        backgroundColor: 'transparent',
       },
       SettingsHolder: {
-        flex: 1,
-        marginLeft: '4%',
-        marginTop: '1%',
-        alignItems: 'center',
-        backgroundColor: 'rgba(52, 52, 52, 0)',
+        flex: 2,
+        position: "relative",
+        marginTop: "2%",
+        paddingRight: "4%",
+        marginRight: "2%",
+        alignItems: 'flex-end',
+        backgroundColor: 'transparent',
+        zIndex: 15,
       },
       title: {
-        fontSize: 15,
+        flex:1,
+        paddingLeft: "5%",
+        height: "100%",
+        fontSize: 20,
         fontWeight: 'bold',
         color: "#C4C4C4",
         alignItems: 'center',
+        backgroundColor: 'transparent',
+      },
+      lvl: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: "#C4C4C4",
+        alignSelf: "center",
+        paddingLeft: "10%",
+        paddingRight: "10%",
+        paddingBottom: "2%",
         backgroundColor: '#333333',
+        marginBottom: "-40%",
       },
       image: {
-        width: 80,
-        height: 80,
-        resizeMode: 'stretch',
+
+        flex: 1,
+        height: undefined,
+        width: undefined
       },
 });

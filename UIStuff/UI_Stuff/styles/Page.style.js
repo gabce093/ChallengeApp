@@ -1,26 +1,40 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+var screenWidth = Dimensions.get('window').width;
+var screenHeight = Dimensions.get('window').height;
 
 {/*StyleSheet for the base of the pages*/}
 export default StyleSheet.create({
-    absolute: {
+  forestHeader: {
       position: 'absolute',
-      alignItems: 'center',
       color: 'rgba(52, 52, 52, 0)',
       top: 0,
       left: 0,
       right: 0,
       bottom: 0,
-      zIndex: 0,
+      zIndex: -20,
+    },
+    forestBackground: {
+      position: 'absolute',
+      color: 'rgba(52, 52, 52, 0)',
+      top: "-11.5%",
+      left: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: -20,
+    },
+
+    screen: {
+      flex:1,
+      flexDirection: "column",
     },
     banan: {
       position: 'absolute',
-      top: '45%',
-      height: '105%',
-      alignItems: 'center',
 
       left: 0,
       right: 0,
       bottom: 0,
+      top: "50%",
       zIndex: 1,
     },
     playerImage: {
@@ -31,8 +45,6 @@ export default StyleSheet.create({
       zIndex: 2,
     },
     container: {
-      
-      backgroundColor: 'rgb(134, 164, 173)',
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
@@ -40,9 +52,13 @@ export default StyleSheet.create({
     },
     topContainer: {
       flex: 1,
+      backgroundColor: 'transparent',
+      
+    },
+    bottomContainer: {
+      flex: 1,
+      backgroundColor: 'transparent',
       alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: 'rgba(52, 52, 52, 0)',
     },
     subContainer: {
       flex: 1,
@@ -59,12 +75,11 @@ export default StyleSheet.create({
     },
     playerContainer: {
       alignItems: 'center',
-      top: '-35%',
       flexDirection: 'row',
-      backgroundColor: 'rgba(52, 52, 52, 0)',
+      backgroundColor: 'transparent',
       right: 0,
       left: 0,
-    
+      top: "-50%",
     },
     
     title: {
@@ -77,12 +92,17 @@ export default StyleSheet.create({
       backgroundColor: 'rgba(52, 52, 52, 0)',
     },
     username: {
-      fontSize: 30,
-      width: '75%',
+      flex: 1,
+      fontSize: 0.06*screenWidth,
+      justifyContent: 'center',
       alignItems: 'center',
       fontWeight: 'bold',
-      color: "#C4C4C4",
-      backgroundColor: 'rgba(52, 52, 52, 0)',
+      color: "white",
+      borderRadius: 5,
+      paddingLeft: "2%",
+      paddingRight: "2%",
+      backgroundColor: 'rgba(0, 0, 0, 0)',
+      
     },
     separator: {
       marginVertical: 30,
@@ -95,15 +115,17 @@ export default StyleSheet.create({
       shadowOpacity: 0.5,
       alignItems: 'center',
       fontSize: 30,
-      top: '-25%',
       justifyContent: 'center',
+      top: "-30%",
       color: 'red',
       width: '80%',
-      height: '20%',
+      height: '80%',
       backgroundColor: '#FF5C00',
       borderRadius: 5,
+      zIndex: 5,
     },
     challengeText: {
+      color:'white',
       alignContent: 'center', 
       fontSize: 50, 
       fontWeight: 'bold',
@@ -117,7 +139,4 @@ export default StyleSheet.create({
       fontSize: 14,
       color: '#C4C4C4',
     },
-
-
-
   });

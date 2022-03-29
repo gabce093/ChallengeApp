@@ -22,6 +22,7 @@ export type RootStackParamList = {
   // Sub-Pages
   CreateRunPage: undefined;
   GPSPage: undefined;
+  ResultPage: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

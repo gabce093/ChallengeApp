@@ -11,8 +11,7 @@ import {
   } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 
-
-export default function Recorder(props: any) {
+export default function Recorder(props: any, ){
     
     const [distance, setDistance] = useState(0);
     const [startposition, setStartPosition] = useState([0,0]);
@@ -22,6 +21,7 @@ export default function Recorder(props: any) {
     const haversine = require('haversine');
     const [buttonColor, setButtonColor] = useState('#00FF47');
     const [speed, setSpeed] = useState('00:00');
+    const [modalVisible, setModalVisible] = useState(false);
 
 
     var goal = getDistanceGoal();
@@ -77,19 +77,62 @@ export default function Recorder(props: any) {
         setResetStopwatch(true);
     }
 
-    //Finish button
+    //Finish button, navigate to resultpage.
     const handleFinish = () => {
         setElapsedDistance(distance);
-        if (checkCompleted()) {
+        if (distance > goal) {
             CompleteChallenge();
+            props.navigation.navigate('ResultPage');
         }
         else {
+            setModalVisible(!modalVisible)
+        }
+    }
 
+    //Display reset and finshish if run is paused
+    function StartAndResetButtons() {
+        if (isStopwatchStart==false){
+            return (
+                <View style={styles.subContainer}>
+                    <TouchableHighlight 
+                        style={styles.button}
+                        onPress={handleReset}>
+                        <Text style={styles.buttonText}>RESET</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight
+                        style={styles.button}
+                        onPress={handleFinish}>
+                        <Text style={styles.buttonText}>FINISH</Text>
+                    </TouchableHighlight>
+                </View>
+            )
+        }
+        else {
+            return (<View></View>)
         }
     }
 
     return (
         <View style={styles.container}>
+           <Modal
+           animationType="slide"
+           visible={modalVisible}
+           onRequestClose={() => {
+             setModalVisible(!modalVisible);
+           }}>
+               <View>
+                    <Text>Challenge not completed. Are you sure you want to finish run?</Text>
+                    <TouchableHighlight 
+                        onPress={() => props.navigation.navigate('ResultPage')}>
+                            <Text>Finish now</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight
+                        onPress={() => {
+                            setModalVisible(!modalVisible)}}>
+                       <Text>Cancel</Text>
+                    </TouchableHighlight>
+               </View>
+            </Modal>
             <Stopwatch
                 start={isStopwatchStart}
                 reset={resetStopwatch}
@@ -124,18 +167,7 @@ export default function Recorder(props: any) {
                 onPress={handleStartStop}>
                 <Text style={styles.buttonText}>{!isStopwatchStart ? 'START' : 'STOP'}</Text>
             </TouchableHighlight>
-            <View style={styles.subContainer}>
-                <TouchableHighlight 
-                    style={styles.button}
-                    onPress={handleReset}>
-                    <Text style={styles.buttonText}>RESET</Text>
-                </TouchableHighlight>
-                <TouchableHighlight
-                    style={styles.button}
-                    onPress={handleFinish}>
-                    <Text style={styles.buttonText}>FINISH</Text>
-                </TouchableHighlight>
-            </View>
+            <StartAndResetButtons />
             <View style={styles.progressContainer}>
                 <ProgressBar color="#FF5C00"progress={distance / goal} style={{
                 height: 20,

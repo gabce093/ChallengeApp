@@ -30,8 +30,7 @@ import FriendPageScreen from '../screens/FriendPage';
 // Sub-Screens:
 import CreateRunPage from '../screens/CreateRunPage';
 import GPSPage from '../screens/GPSPage';
-
-
+import ResultPage from '../screens/ResultPage';
 
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import { RootStackScreenProps } from '../types';
@@ -80,6 +79,7 @@ function RootNavigator() {
       </Stack.Group>
         <Stack.Screen name="CreateRunPage" component={CreateRunPage} />
         <Stack.Screen name="GPSPage" component={GPSPage} />
+        <Stack.Screen name="ResultPage" component={ResultPage} />
     </Stack.Navigator>
   );
 }

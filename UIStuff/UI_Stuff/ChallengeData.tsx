@@ -26,6 +26,11 @@ export function checkCompleted(){
     return completed;
 }
 
+export function getElapsedDistance(){
+
+    return elapsed_distance;
+}
+
 export function setDistanceGoal(goal: any){
     distance_goal = goal;
 }

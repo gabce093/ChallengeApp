@@ -37,7 +37,6 @@ export default function MainPageScreen({ navigation }: RootStackScreenProps<'Cre
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       
       {/*<EditScreenInfo path="/screens/MainPage.tsx" >*/}
-
       <Pressable style={styles.challengeButton}
         onPress={() => navigation.navigate('CreateRunPage')}>
       <Text style={styles.challengeText}>Challenge!</Text>

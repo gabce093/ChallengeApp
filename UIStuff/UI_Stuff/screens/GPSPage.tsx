@@ -5,8 +5,9 @@ import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import { Text, View } from '../components/Themed';
 import Recorder from '../components/Recorder';
+import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 
-export default function GPSPage() {
+export default function GPSPage({ navigation }: RootStackScreenProps<'ResultPage'>) {
     
     const [position, setPosition] = useState([0,0]);
     const [pace, setPace] = useState(0.0);
@@ -44,7 +45,7 @@ export default function GPSPage() {
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../Graphics/forest.png')} style={styles.absolute} resizeMode="cover"></ImageBackground>
-        <Recorder position={position} pace={pace}></Recorder>  
+        <Recorder position={position} pace={pace} navigation={navigation}></Recorder>  
       </View>
     );
 }

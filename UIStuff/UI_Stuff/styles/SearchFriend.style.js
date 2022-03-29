@@ -9,7 +9,14 @@ export default StyleSheet.create({
     elevation: 2
   },
   buttonOpen: {
-    backgroundColor: "#ff5c00",
+    backgroundColor: "rgba(32, 118, 246, 0.9)",
+    flexDirection: 'row',
+    borderRadius: 100,
+    height: 70,
+    width: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    
   },
   buttonSubmit: {
     backgroundColor: "#ff5c00",
@@ -19,7 +26,8 @@ export default StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    fontSize: 20
   },
   modalText: {
     color: 'white',
@@ -45,8 +53,8 @@ export default StyleSheet.create({
   modalView: {
     backgroundColor: "#5c5c5c",
     borderRadius: 5,
-    width: '90%',
-    height: '90%',
+    width: '94%',
+    height: '96%',
   
     alignItems: "center",
     shadowColor: "#000",
@@ -67,8 +75,7 @@ export default StyleSheet.create({
     width: '70%',
   },
 
-
-  //TEMPORARY
+  //Search List
   container: {
     flex: 1,
     backgroundColor: '#F5FCFF',
@@ -81,11 +88,15 @@ export default StyleSheet.create({
     marginBottom: 20,
   },
   header: {
+    
+    flexDirection: 'row',
+    width: 280,
     backgroundColor: '#F5FCFF',
     padding: 10,
   },
   headerText: {
     textAlign: 'center',
+    color: 'white',
     fontSize: 16,
     fontWeight: '500',
   },

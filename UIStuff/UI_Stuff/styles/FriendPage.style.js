@@ -70,12 +70,11 @@ export default StyleSheet.create({
       fontWeight: 'bold',
       color: '#181818',
     },
-
     friendChallengeButton: {
       backgroundColor:"#2076F6",
       width: 100,
       height: '30%',
-      borderRadius: 5,
+      borderRadius: 10,
       elevation: 2
 
     },
@@ -87,16 +86,37 @@ export default StyleSheet.create({
     },
     
      //*****Group-part******//
-     groupHolder: {
-      flex: 1/2,
-      flexDirection: 'column',
-      marginVertical: '2%',
-      marginHorizontal: '2%',
-      marginBottom: 1,
-      backgroundColor: '#383838',
-      borderRadius: 3,
+   
+    groupContainer: {
+      backgroundColor: '#939393', 
+      height: '25%',
+      width: '90%',
+      borderRadius:5,
+      marginBottom: '2%'
+     
+   },
+   groupHolder: {
+    flex: 1/2,
+    flexDirection: 'column',
+    marginVertical: '2%',
+    marginHorizontal: '2%',
+    marginBottom: 1,
+    backgroundColor: '#383838',
+    borderRadius: 9,
+  },
+   groupIconHolder:{
+    backgroundColor: '#383838',
+    alignItems: 'center',
+    width: '100%',
+    marginTop: '2%',
+   },
+    groupIcon: {
+      width: 110,
+      height: 110,
+      borderRadius: 100,
+      borderWidth: 4,
+      borderColor: "#766449", 
     },
-    
     groupLvlBadge: {
       position: 'absolute',
       alignItems: 'center',
@@ -107,24 +127,8 @@ export default StyleSheet.create({
       backgroundColor: "#766449",
       borderBottomLeftRadius: 5,
       borderBottomRightRadius: 5,
-      marginTop: '23%',
+      marginTop: '26%',
     },
-    groupIcon: {
-
-      width: 110,
-      height: 110,
-      borderRadius: 100,
-      borderWidth: 4,
-      borderColor: "#766449", 
-    },
-    groupContainer: {
-      backgroundColor: '#939393', 
-      height: '30%',
-      width: '90%',
-      borderRadius:5,
-      marginBottom: '2%'
-     
-   },
    groupChallengeButton: {
     backgroundColor:"#ff5c00",
     width: 100,
@@ -133,12 +137,10 @@ export default StyleSheet.create({
     elevation: 2
 
   },
-  groupIconHolder:{
-    backgroundColor: '#383838',
-    alignItems: 'center',
-    width: '100%',
-    marginTop: '2%',
+  createGroupButton: {
+    backgroundColor: 'grey',
+    fontSize: 20,
+  },
 
-   },
 
   });

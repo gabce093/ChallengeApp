@@ -3,7 +3,7 @@ import styles from '../styles/GPSPage.style';
 import React, { useState, useEffect } from 'react';
 import { Text, View } from '../components/Themed';
 import { Stopwatch} from 'react-native-stopwatch-timer';
-import {getType, getTime, getDistanceGoal, checkCompleted, setElapsedDistance, setTime, CompleteChallenge} from '../ChallengeData';
+import {getType, getDistanceGoal, checkCompleted, setElapsedDistance, setTotalTime, setChallengeTime, CompleteChallenge} from '../ChallengeData';
 import {
     SafeAreaView,
     TouchableHighlight,
@@ -139,8 +139,11 @@ export default function Recorder(props: any, ){
                 options={options}
                 getTime={(time: any) => {
                     if (isStopwatchStart == false) {
-                        setTime(time); 
-                    }   
+                        setTotalTime(time); 
+                    }
+                    if(goal <= distance && distance <= (goal+10)) {
+                        setChallengeTime(time);
+                    }
                 }}
             />
             <View style={styles.subContainer}>

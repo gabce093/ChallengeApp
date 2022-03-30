@@ -19,6 +19,12 @@ export default StyleSheet.create({
         backgroundColor: '#333333',
         paddingTop: '5%' 
     },
+    progressContainer2: {
+        height: '10%',
+        width: '80%',
+        backgroundColor: 'transparent',
+        paddingTop: '5%', 
+    },
     distanceContainer: {
         borderRadius: 5,
         backgroundColor: '#282828',

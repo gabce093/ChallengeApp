@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ProgressBar } from 'react-native-paper';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import styles2 from '../styles/Page.style';
 import { Text, TextProps} from './Themed';
 import { RadialGradient } from 'react-native-svg';
@@ -87,13 +87,14 @@ const styles = StyleSheet.create({
         borderWidth: 10,
         borderRadius: 100,
         position: 'absolute',
-        borderLeftColor: 'transparent',
+        borderLeftColor: 'rgba(0,0,0,0)',
+        borderStartColor: "transparent",
         borderBottomColor: 'transparent',
         borderRightColor: '#43FF25',
         borderTopColor: '#43FF25',
         transform:[{rotateZ: '135deg'}],
-        backgroundColor: "yellow",
-        zIndex: 3,
+        //135 standard
+        zIndex: 4,
       },
       secondProgressLayer:{
         width: 200-50,
@@ -106,8 +107,7 @@ const styles = StyleSheet.create({
         borderRightColor: '#43FF25',
         borderTopColor: '#43FF25',
         transform: [{rotateZ: '45deg'}],
-        backgroundColor: "red",
-        zIndex: 3,
+        zIndex: 6,
       },
       offsetLayer: {
         width: 202-50,
@@ -120,8 +120,8 @@ const styles = StyleSheet.create({
         borderRightColor: '#151515',
         borderTopColor: '#151515',
         transform:[{rotateZ: '-135deg'}], 
-        backgroundColor: "blue",
-        zIndex: 4,
+        //-135, standard
+        zIndex: 5,
       },
       text: {
         fontSize: 40,

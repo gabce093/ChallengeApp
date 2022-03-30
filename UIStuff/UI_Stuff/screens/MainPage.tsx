@@ -24,7 +24,7 @@ export default function MainPageScreen({ navigation }: RootStackScreenProps<'Cre
         {/*Player image and weekly challenge orb*/}
         <View style={styles.playerContainer}>
         <View style={styles.subContainer}>
-          <WeeklyChallengeOrb percent={45}/>
+          {/*<WeeklyChallengeOrb percent={45}/>*/}
             <Text style={styles.username}>{getUsername()}</Text>
           </View>
           

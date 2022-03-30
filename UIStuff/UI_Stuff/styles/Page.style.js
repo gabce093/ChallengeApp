@@ -30,7 +30,6 @@ export default StyleSheet.create({
     },
     banan: {
       position: 'absolute',
-
       left: 0,
       right: 0,
       bottom: 0,
@@ -40,7 +39,6 @@ export default StyleSheet.create({
     playerImage: {
       height: 250,
       width: 250,
-      marginTop: '30%',
       transform: [{ scaleX: -1 }],
       zIndex: 2,
     },
@@ -52,13 +50,19 @@ export default StyleSheet.create({
     },
     topContainer: {
       flex: 1,
+      top: "-55%",
       backgroundColor: 'transparent',
-      
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     bottomContainer: {
       flex: 1,
       backgroundColor: 'transparent',
       alignItems: 'center',
+      justifyContent: 'center',
+      width: "100%",
+      left: 0,
+      right: 0,
     },
     subContainer: {
       flex: 1,
@@ -79,7 +83,6 @@ export default StyleSheet.create({
       backgroundColor: 'transparent',
       right: 0,
       left: 0,
-      top: "-50%",
     },
     
     title: {
@@ -91,17 +94,44 @@ export default StyleSheet.create({
       color: "#C4C4C4",
       backgroundColor: 'rgba(52, 52, 52, 0)',
     },
-    username: {
-      flex: 1,
+    WeeklyChaText: {
+      fontSize: 0.07*screenWidth,
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontWeight: 'bold',
+      color: "white",
+      borderRadius: 5,
+      opacity: 0.5,
+      top: "-25%",
+      paddingLeft: "2%",
+      paddingRight: "2%",
+      zIndex: 2,
+    },
+    CurrentWeeklyChaText: {
       fontSize: 0.06*screenWidth,
       justifyContent: 'center',
       alignItems: 'center',
       fontWeight: 'bold',
       color: "white",
       borderRadius: 5,
+      opacity: 0.5,
+      top: "-45%",
       paddingLeft: "2%",
       paddingRight: "2%",
-      backgroundColor: 'rgba(0, 0, 0, 0)',
+      zIndex: 2,
+    },
+    username: {
+      fontSize: 0.09*screenWidth,
+      justifyContent: 'center',
+      top: "-30%",
+      backgroundColor: "rgba(0,0,0,0.3)",
+      alignItems: 'center',
+      fontWeight: 'bold',
+      color: "white",
+      borderRadius: 5,
+      paddingLeft: "2%",
+      paddingRight: "2%",
+      zIndex: 2,
       
     },
     separator: {

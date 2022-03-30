@@ -26,7 +26,9 @@ export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
 
                         <Image style={styles.image}
                         source = {require('../Graphics/TempProfilePic.png')}/>
+                        <ImageBackground source={require('../Graphics/ExpMask.png')} style={styles.lvlHolder} imageStyle={{tintColor:"#333333"}} resizeMode="stretch">
                         <Text style={styles.lvl}>LVL: { getLevel() }</Text>
+                        </ImageBackground>
                     </View>
                     
                     

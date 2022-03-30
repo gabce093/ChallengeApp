@@ -48,24 +48,26 @@ export default StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: "#C4C4C4",
-        alignItems: 'center',
         backgroundColor: 'transparent',
       },
       lvl: {
         fontSize: 15,
         fontWeight: 'bold',
         color: "#C4C4C4",
-        alignSelf: "center",
-        paddingLeft: "10%",
-        paddingRight: "10%",
+      },
+      lvlHolder: {
+        flex: 1,
+        color: "#C4C4C4",
+        alignSelf: "flex-start",
+        top: "160%",
+        height: "30%",
+        paddingRight: "35%",
         paddingBottom: "2%",
-        backgroundColor: '#333333',
-        marginBottom: "-40%",
       },
       image: {
-
         flex: 1,
         height: undefined,
-        width: undefined
+        width: undefined,
+        marginBottom: "-120%"
       },
 });

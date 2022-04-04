@@ -4,15 +4,16 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import styles from '../styles/TopBar.style';
 
-import * as React from 'react';
 import { Pressable, Image, View } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import { Text, TextProps} from './Themed';
 import { RootStackScreenProps } from '../types';
-import {getLevel, getCurrentEXP, getMaxEXP, getCoins, getGems} from '../PlayerData';
+import {getLevel, getCurrentEXP, getMaxEXP, getCoins, getGems, getPlayer} from '../PlayerData';
+import React, { Component, useState, useEffect } from 'react';
 
 {/*Topbar has alot of components, the errors are false; it works*/}
 export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
+  
     const colorScheme = useColorScheme();
     return (
         <View style={styles.TopBarHolder}>
@@ -31,7 +32,7 @@ export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
             <View style={styles.CurrencyAndEXPHolder}>
                 <View style={styles.CurrencyHolder}>
                     <Text style={styles.title}>
-                        Coins: {getCoins()}   Gems: {getGems()}
+                        Coins: {getCoins()}   Gems: {getGems()} User: {getPlayer()}
                     </Text>
                 </View>
                 <View style={styles.EXPBarHolder}>

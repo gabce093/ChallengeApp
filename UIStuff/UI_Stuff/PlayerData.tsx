@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from './types';
+//import {GetUserInfo} from './screens/Login';
+
 // Datavalues (These values will be collected from the database):
 var level = 5;
+var playerName ="";
 var coins = 0;
 var gems = 0;
-
+var playerId = "";
 var currentEXP = 0;
 var maxEXP = 10;
+var totalDistance = 0; 
+
+
+
+
 
 // Will be a value between 0 and 1:
 var handicap = 0.5;
@@ -15,10 +25,49 @@ var weeklyChallengeMax = 10000;
 var CurrentweeklyChallenge = 1000;
 
 
-// Helper functions, may be replaced at some point:
-export default function getPlayer(){
+export function updateValues() {
 
-    return[level];
+    fetch(`http://213.188.152.167:5000/users/${playerId}`,
+
+    {
+        method: 'PATCH',
+        headers: {
+            Accept:
+                'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            goldAmount: coins,
+            expAmount: currentEXP,
+            totalDistance: totalDistance
+        })
+
+    })
+    .then(response => "")
+   
+
+}
+export function setValues(value:string) {
+    
+    playerName = JSON.parse(value).firstName;
+    currentEXP = JSON.parse(value).expAmount;
+    coins = JSON.parse(value).goldAmount;
+    playerId = JSON.parse(value).id
+    console.log(coins)
+}
+export function getTotalDistance() {
+
+return totalDistance;
+}
+// Helper functions, may be replaced at some point:
+export function getPlayerId() {
+
+    return playerId;
+}
+
+export  function getPlayer(){
+
+    return playerName;
 }
 
 export const getMaxEXP = () => {
@@ -33,13 +82,16 @@ export const getCurrentEXP = () => {
 
 export const getLevel = () => {
 
-    return[level];
+    
+    return level;
 }
 
-export const getCoins = () => {
-
-    return[coins];
+export function getCoins() {
+        console.log("getCoins")
+      return coins;
 }
+
+
 
 export const getGems = () => {
 
@@ -48,6 +100,7 @@ export const getGems = () => {
 
 export var addCoin = () => {
     coins += 1;
+    updateValues()
     console.log(coins);
 };
 

@@ -17,8 +17,6 @@ export default function LoginPage() {
         getData();  
       }, []);
 
-
-
     const getData = async () => {
     try {
     const value = await AsyncStorage.getItem('@user_Key')
@@ -142,13 +140,13 @@ export default function LoginPage() {
                         onPress={() => setModalVisible(false)}
                         style={{
                             alignSelf: 'flex-end',
-                            marginRight: '3vw',
+                            marginRight: '5%',
                         }}
                     >
                         <Image source={require('../assets/images/letter-x.png')}
                             style={{
-                                width: '4vw',
-                                height: '4vw',
+                                width: '5%',
+                                height: '5%',
                             }}
                         />
                     </Pressable>

@@ -35,12 +35,12 @@ return <View style={{backgroundColor: 'rgba(0,0,0,0)'}}>
                             onPress={() => setModalVisible(!modalVisible)}
                             style={{ 
                         alignSelf: 'flex-end',
-                        marginRight: '3vw',
+                        marginRight: '5%',
                          }}
                       >
                     <Image source={require('../assets/images/letter-x.png')}
-                          style={{ width: '4vw',
-                         height: '4vw',
+                          style={{ width: '5%',
+                         height: '5%',
                          }}
                     />
                     </Pressable>

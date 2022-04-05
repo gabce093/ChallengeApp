@@ -150,7 +150,8 @@ export var addEXP = () => {
 
 //Function that removes a given number of coins (used to buy items)
 export var removeCoins = (numbCoins : number) =>{
-    coins = coins - numbCoins;
+    coins = getCoins() - numbCoins;
     console.log('You removed ' + numbCoins +' coins'+ 
     ', now you have '+ coins + ' coins');
+    updateValues();
 };

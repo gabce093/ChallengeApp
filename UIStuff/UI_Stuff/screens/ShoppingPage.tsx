@@ -133,7 +133,7 @@ export default function ShoppingPageScreen() {
 
    return (
      <View style={styles.container}>
-       <ImageBackground source={require('../Graphics/forest.png')} style={styles.absolute} resizeMode="cover">
+       <ImageBackground source={require('../Graphics/forest.png')} style={styles.forestBackground} resizeMode="cover">
        <ImageBackground source={require('../Graphics/banan.png')} style={styles.banan} resizeMode="stretch">
        
        

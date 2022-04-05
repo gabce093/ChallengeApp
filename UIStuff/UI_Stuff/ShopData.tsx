@@ -8,7 +8,7 @@ import {removeCoins, getCoins} from './PlayerData';
 export const buyItem = (numberCoins: number) => {
 
     //Makes sure that you have the coins for the purchase
-    if(getCoins()[0] >= numberCoins){
+    if(getCoins() >= numberCoins){
         //Calls function in PlayerData that removes the coins
         removeCoins(numberCoins);
         console.log('item bought');

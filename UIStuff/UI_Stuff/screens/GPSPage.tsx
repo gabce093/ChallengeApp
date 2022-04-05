@@ -46,7 +46,6 @@ export default function GPSPage({ navigation }: RootStackScreenProps<'ResultPage
       <View style={styles.container}>
         <ImageBackground source={require('../Graphics/forest.png')} style={styles.forestBackground} resizeMode="cover"></ImageBackground>
         <Recorder position={position} pace={pace} navigation={navigation}></Recorder>  
-        <Text>{pace}</Text>
       </View>
     );
 }

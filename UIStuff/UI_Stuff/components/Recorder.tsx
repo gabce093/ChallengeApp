@@ -11,7 +11,7 @@ import {
   } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 
-export default function Recorder(props: any, ){
+export default function Recorder(props: any){
     
     const [distance, setDistance] = useState(0);
     const [startposition, setStartPosition] = useState([0,0]);

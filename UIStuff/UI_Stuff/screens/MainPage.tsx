@@ -24,14 +24,7 @@ export default function MainPageScreen({ navigation }: RootStackScreenProps<'Cre
 
     </View>
         <View style={styles.bottomContainer}>
-          <TouchableOpacity style={styles.challengeButton}
-              onPress={() => navigation.navigate('CreateRunPage')}>
-              <Text style={styles.challengeText}>Challenge!</Text>
-            </TouchableOpacity>
-          <LoginPage/>  
-
-            <Text style={styles.WeeklyChaText}>Weekly Challenge Progress:</Text>
-
+        <Text style={styles.WeeklyChaText}>Weekly Challenge Progress:</Text>
             <ProgressBar color="#43FF25" progress={0.7} style={{
                           height: "40%",
                           top: "-60%",
@@ -41,7 +34,11 @@ export default function MainPageScreen({ navigation }: RootStackScreenProps<'Cre
                           zIndex: 10,
                           }}/>
 
-            <Text style={styles.CurrentWeeklyChaText}>Current KMs / MaxKms</Text>
+            <Text style={styles.CurrentWeeklyChaText}>Current KMs / MaxKms</Text>  
+          <Pressable style={styles.challengeButton} onPress={() => navigation.navigate('CreateRunPage')}>
+              <Text style={styles.challengeText}>Challenge!</Text>
+              </Pressable>         
+          <LoginPage/>         
         </View>
         </ImageBackground>
     </View>

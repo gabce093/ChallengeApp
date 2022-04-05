@@ -141,19 +141,17 @@ export default StyleSheet.create({
       backgroundColor: 'rgba(52, 52, 52, 0)',
     },
     challengeButton: {
-      position: 'relative',
+      
       shadowRadius: 100,
       shadowOpacity: 0.5,
       alignItems: 'center',
-      fontSize: 30,
       justifyContent: 'center',
       top: "-30%",
-      color: 'red',
       width: '80%',
       height: '80%',
       backgroundColor: '#FF5C00',
       borderRadius: 5,
-      zIndex: 0.5,
+      
     },
     challengeText: {
       color:'white',

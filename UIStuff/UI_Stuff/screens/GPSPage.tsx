@@ -1,14 +1,15 @@
 import styles from '../styles/Page.style';
 import React, { useState, useEffect } from 'react';
-import { Image, ImageBackground, Pressable} from "react-native";
+import { Image, ImageBackground, Pressable, StatusBar} from "react-native";
 import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
 import { Text, View } from '../components/Themed';
 import Recorder from '../components/Recorder';
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 
+
 export default function GPSPage({ navigation }: RootStackScreenProps<'ResultPage'>) {
-    
+  StatusBar.setHidden(false);
+
     const [position, setPosition] = useState([0,0]);
     const [pace, setPace] = useState(0.0);
     const [errorMsg, setErrorMsg] = useState("null");
@@ -33,9 +34,10 @@ export default function GPSPage({ navigation }: RootStackScreenProps<'ResultPage
           },
           (location) => {
               setPosition([location.coords.longitude, location.coords.latitude]);
-              
+              console.log(location.coords.longitude + " " + location.coords.latitude)
               if (location.coords.speed != null) {
                 setPace(location.coords.speed);
+                console.log(location.coords.speed)
               }   
           }
       ); 

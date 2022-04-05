@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ProgressBar } from 'react-native-paper';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import styles2 from '../styles/Page.style';
 import { Text, TextProps} from './Themed';
 import { RadialGradient } from 'react-native-svg';
@@ -63,8 +63,8 @@ const WeeklyChallengeOrb = ({percent}:{percent:any}) => {
 {/*This is the stylesheet used by the weekly challenge orb*/}
 const styles = StyleSheet.create({
     orbContainer: {
-      shadowRadius: 20,
-      shadowOpacity: 1,
+        shadowRadius: 20,
+        shadowOpacity: 1,
         width: 202-50,
         height: 202-50,
         borderWidth: 12,
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: "#333333",
+        zIndex: -1,
       },
       textHolder: {
         flex: 1,
@@ -86,11 +87,14 @@ const styles = StyleSheet.create({
         borderWidth: 10,
         borderRadius: 100,
         position: 'absolute',
-        borderLeftColor: 'transparent',
+        borderLeftColor: 'rgba(0,0,0,0)',
+        borderStartColor: "transparent",
         borderBottomColor: 'transparent',
         borderRightColor: '#43FF25',
         borderTopColor: '#43FF25',
-        transform:[{rotateZ: '-135deg'}]
+        transform:[{rotateZ: '135deg'}],
+        //135 standard
+        zIndex: 4,
       },
       secondProgressLayer:{
         width: 200-50,
@@ -102,7 +106,8 @@ const styles = StyleSheet.create({
         borderBottomColor: 'transparent',
         borderRightColor: '#43FF25',
         borderTopColor: '#43FF25',
-        transform: [{rotateZ: '45deg'}]
+        transform: [{rotateZ: '45deg'}],
+        zIndex: 6,
       },
       offsetLayer: {
         width: 202-50,
@@ -115,6 +120,8 @@ const styles = StyleSheet.create({
         borderRightColor: '#151515',
         borderTopColor: '#151515',
         transform:[{rotateZ: '-135deg'}], 
+        //-135, standard
+        zIndex: 5,
       },
       text: {
         fontSize: 40,

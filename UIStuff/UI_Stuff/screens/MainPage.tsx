@@ -28,14 +28,16 @@ export default function MainPageScreen({ navigation }: RootStackScreenProps<'Cre
      
       
       {/*<Image source={require('../Graphics/forest.png')} style={styles.absolute} resizeMode="cover"></Image>*/}
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      {/*<View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />}
       
       {/*<EditScreenInfo path="/screens/MainPage.tsx" >*/}
       <Pressable style={styles.challengeButton}
         onPress={() => navigation.navigate('CreateRunPage')}>
-      <Text style={styles.challengeText}>Challenge!</Text>
+        <Text style={styles.challengeText}>Challenge!</Text>
       </Pressable> 
+
       <LoginPage/>
+      
       </ImageBackground>
       </ImageBackground>
     </View>

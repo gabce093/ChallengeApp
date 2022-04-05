@@ -21,13 +21,13 @@ export default function LoginPage() {
     try {
     const value = await AsyncStorage.getItem('@user_Key')
 
-    if(value != "") {
+    if(value != null) {
         console.log(`User:${value}  already logged in. `)
         setModalVisible(false);
         
        if(value) GetUserInfo(JSON.parse(value))
 
-    } else if(value == "") {
+    } else if(value == null) {
         setModalVisible(true);
 
     }

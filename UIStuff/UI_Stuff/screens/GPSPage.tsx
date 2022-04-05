@@ -34,10 +34,8 @@ export default function GPSPage({ navigation }: RootStackScreenProps<'ResultPage
           },
           (location) => {
               setPosition([location.coords.longitude, location.coords.latitude]);
-              console.log(location.coords.longitude + " " + location.coords.latitude)
               if (location.coords.speed != null) {
                 setPace(location.coords.speed);
-                console.log(location.coords.speed)
               }   
           }
       ); 
@@ -48,6 +46,7 @@ export default function GPSPage({ navigation }: RootStackScreenProps<'ResultPage
       <View style={styles.container}>
         <ImageBackground source={require('../Graphics/forest.png')} style={styles.forestBackground} resizeMode="cover"></ImageBackground>
         <Recorder position={position} pace={pace} navigation={navigation}></Recorder>  
+        <Text>{pace}</Text>
       </View>
     );
 }

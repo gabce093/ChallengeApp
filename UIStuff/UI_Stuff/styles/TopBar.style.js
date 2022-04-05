@@ -7,7 +7,7 @@ export default StyleSheet.create({
         flexDirection: "row",
         backgroundColor: 'transparent',
         marginRight: 0,
-        zIndex: 10,
+        
       },
       ProfileHolder: {
         flex: 3,
@@ -39,7 +39,7 @@ export default StyleSheet.create({
         marginRight: "2%",
         alignItems: 'flex-end',
         backgroundColor: 'transparent',
-        zIndex: 15,
+        
       },
       title: {
         flex:1,

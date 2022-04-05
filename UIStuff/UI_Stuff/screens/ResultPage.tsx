@@ -13,7 +13,7 @@ export default function ResultPage({navigation}: RootTabScreenProps<'MainPage'>)
 
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../Graphics/forest.png')} style={styles.absolute} resizeMode="cover">
+        <ImageBackground source={require('../Graphics/forest.png')} style={styles.forestBackground} resizeMode="cover">
             <Text>{getElapsedDistance() }</Text>
             <Text>{getTotalTime() }</Text>
             <Text>{getChallengeTime() }</Text>

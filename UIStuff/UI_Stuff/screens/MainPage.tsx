@@ -1,10 +1,9 @@
 import styles from '../styles/Page.style';
-import { Image, ImageBackground, Pressable, View, Text, Dimensions} from "react-native";
+import { Image, ImageBackground, Pressable, View, Text, Dimensions, TouchableOpacity} from "react-native";
 import LoginPage from './Login';
 
 import React, { useEffect } from 'react';
 import { FriendSearchWindow } from './FriendSearchWindow';
-import { Button } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import {getUsername, getLevel, getCurrentEXP, getMaxEXP, getCoins, getGems} from '../PlayerData';
 
@@ -25,10 +24,11 @@ export default function MainPageScreen({ navigation }: RootStackScreenProps<'Cre
 
     </View>
         <View style={styles.bottomContainer}>
-          <Pressable style={styles.challengeButton}
+          <TouchableOpacity style={styles.challengeButton}
               onPress={() => navigation.navigate('CreateRunPage')}>
               <Text style={styles.challengeText}>Challenge!</Text>
-            </Pressable>
+            </TouchableOpacity>
+          <LoginPage/>  
 
             <Text style={styles.WeeklyChaText}>Weekly Challenge Progress:</Text>
 

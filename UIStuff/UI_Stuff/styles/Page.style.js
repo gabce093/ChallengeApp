@@ -12,7 +12,7 @@ export default StyleSheet.create({
       left: 0,
       right: 0,
       bottom: 0,
-      zIndex: -20,
+      
     },
     forestBackground: {
       position: 'absolute',
@@ -21,7 +21,7 @@ export default StyleSheet.create({
       left: 0,
       right: 0,
       bottom: 0,
-      zIndex: -20,
+      
     },
 
     screen: {
@@ -34,13 +34,13 @@ export default StyleSheet.create({
       right: 0,
       bottom: 0,
       top: "50%",
-      zIndex: 1,
+      
     },
     playerImage: {
       height: 250,
       width: 250,
       transform: [{ scaleX: -1 }],
-      zIndex: 2,
+      
     },
     container: {
       flex: 1,
@@ -105,7 +105,7 @@ export default StyleSheet.create({
       top: "-25%",
       paddingLeft: "2%",
       paddingRight: "2%",
-      zIndex: 2,
+      
     },
     CurrentWeeklyChaText: {
       fontSize: 0.06*screenWidth,
@@ -118,7 +118,7 @@ export default StyleSheet.create({
       top: "-45%",
       paddingLeft: "2%",
       paddingRight: "2%",
-      zIndex: 2,
+      
     },
     username: {
       fontSize: 0.09*screenWidth,
@@ -141,6 +141,7 @@ export default StyleSheet.create({
       backgroundColor: 'rgba(52, 52, 52, 0)',
     },
     challengeButton: {
+      position: 'relative',
       shadowRadius: 100,
       shadowOpacity: 0.5,
       alignItems: 'center',
@@ -152,7 +153,7 @@ export default StyleSheet.create({
       height: '80%',
       backgroundColor: '#FF5C00',
       borderRadius: 5,
-      zIndex: 5,
+      zIndex: 0.5,
     },
     challengeText: {
       color:'white',

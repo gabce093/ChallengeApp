@@ -13,7 +13,7 @@ var username = "VeryLongNameTe";
 
 // This should be an exponetial curve to lvl 20 when it caps and becomes constant.
 var maxEXP = 10;
-var totalEXP = 2000;
+var totalEXP = 34500;
 var lvlProgress = 0.0;
 // Will be a value between 0 and 1:
 var handicap = 0.5;

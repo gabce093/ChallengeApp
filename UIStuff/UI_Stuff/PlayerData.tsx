@@ -22,7 +22,7 @@ var handicap = 0.5;
 var weeklyChallengeMax = 10000;
 var CurrentweeklyChallenge = 1000;
 
-
+// Updates database values with the local ones
 export function updateValues() {
 
     fetch(`http://213.188.152.167:5000/users/${playerId}`,
@@ -45,6 +45,8 @@ export function updateValues() {
    
 
 }
+
+// Sets local values with the database ones
 export function setValues(value:string) {
     
     playerName = JSON.parse(value).firstName;
@@ -57,6 +59,7 @@ export function getTotalDistance() {
 
 return totalDistance;
 }
+
 // Helper functions, may be replaced at some point:
 export function getPlayerId() {
 

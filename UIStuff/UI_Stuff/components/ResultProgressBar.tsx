@@ -19,25 +19,26 @@ export default function ResultProgressBar(props: any){
         if(distance <= props.elapsedDistance - 1) {
             const interval = setTimeout(() => {
                     setDistance(prevDist => prevDist+1)  
-            }, 100);
+            }, 10);
             return () => clearInterval(interval);
         }
     }, [distance])
 
     return (
         <View style={styles.progressContainer}>
-            <Text>{distance + "/"+ props.goal}</Text>
+            <Text style={styles.text}>{distance + "m / "+ props.goal + "m"}</Text>
             <ProgressBar color="#FF5C00" progress={distance/props.goal} style={{
                 height: 20,
                 width: 340,
+                borderRadius: 20,
                 backgroundColor: "#151515",
                 
                 }}/>
-            <ProgressBar color="green" progress={(distance-props.goal) / props.goal} style={{
+            <ProgressBar color="#43FF25" progress={(distance-props.goal) / props.goal} style={{
                 height: 20,
                 width: 340,
                 backgroundColor: "transparent",
-                
+                borderRadius: 20,
                 marginTop: -20,
                 }}/>
                 

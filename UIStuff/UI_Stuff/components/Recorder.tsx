@@ -141,7 +141,7 @@ export default function Recorder(props: any){
                     if (isStopwatchStart == false) {
                         setTotalTime(time); 
                     }
-                    if(goal <= distance && distance <= (goal+10)) {
+                    if(goal <= distance && distance <= (goal+15)) {
                         setChallengeTime(time);
                     }
                 }}

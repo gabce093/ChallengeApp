@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 var type = "distance";
 var distance_goal = 100;
-var elapsed_distance = 0;
+var elapsed_distance = 150;
 var total_time = "null";
 var challenge_time = "null";
 var completed = false;

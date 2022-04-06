@@ -1,4 +1,4 @@
-import styles from '../styles/GPSPage.style';
+import styles from '../styles/ResultPage.style';
 import React, { useState, useEffect } from 'react';
 import { Text, View } from '../components/Themed';
 import { Stopwatch} from 'react-native-stopwatch-timer';
@@ -10,16 +10,15 @@ import {
   } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 
-export default function ResultProgressBar(){ 
+export default function ResultProgressBar(props: any){ 
 
-    var goal = getDistanceGoal();
-    var elapsed_distance = getElapsedDistance();
+    
     const [distance, setDistance] = useState(0);
 
    
 
     useEffect(() => {
-        if(distance <= elapsed_distance - 1) {
+        if(distance <= props.elapsedDistance - 1) {
             const interval = setTimeout(() => {
                     setDistance(prevDist => prevDist+1)  
             }, 100);
@@ -29,15 +28,20 @@ export default function ResultProgressBar(){
 
     
     return (
-        <View style={styles.progressContainer2}>
-            <Text>{distance + "/"+ goal}</Text>
-            <ProgressBar color="#FF5C00" progress={distance / goal} style={{
+        <View style={styles.progressContainer}>
+            <Text>{distance + "/"+ props.goal}</Text>
+            <ProgressBar color="#FF5C00" progress={distance/props.goal} style={{
                 height: 20,
+                width: 340,
                 backgroundColor: "#151515",
+                
                 }}/>
-            <ProgressBar color="green" progress={(distance- goal) / goal} style={{
+            <ProgressBar color="green" progress={(distance-props.goal) / props.goal} style={{
                 height: 20,
+                width: 340,
                 backgroundColor: "transparent",
+                
+                marginTop: -20,
                 }}/>
                 
         </View>

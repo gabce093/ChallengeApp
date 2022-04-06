@@ -15,8 +15,6 @@ export default function ResultProgressBar(props: any){
     
     const [distance, setDistance] = useState(0);
 
-   
-
     useEffect(() => {
         if(distance <= props.elapsedDistance - 1) {
             const interval = setTimeout(() => {
@@ -26,7 +24,6 @@ export default function ResultProgressBar(props: any){
         }
     }, [distance])
 
-    
     return (
         <View style={styles.progressContainer}>
             <Text>{distance + "/"+ props.goal}</Text>

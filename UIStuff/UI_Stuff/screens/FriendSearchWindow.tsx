@@ -8,6 +8,13 @@ import renderUserList from "../components/friendSearchList";
 
 import conn from '../constants/databaseAPI';
 
+/** 
+* @remarks This fucntion opens a modal in which a the searchlist is displayed
+* 
+*@param user Object that contains information about the group
+*@returns A modal with a search list
+*@category Friendpage
+*/
 export function FriendSearchWindow(user: string) {
 
     const [data, setData] = useState([]);
@@ -30,6 +37,7 @@ export function FriendSearchWindow(user: string) {
             animationIn="slideInUp"
             isVisible={modalVisible}
             onBackdropPress={() => setModalVisible(false)}
+            onModalHide={() => setData([])}
         >
             <View style={SearchFriend.centeredView}>
                 <View style={SearchFriend.modalView}>

@@ -2,21 +2,17 @@ import friendPageStyles from '../styles/FriendPage.style';
 import { Image, TouchableOpacity, Text, View, Pressable } from 'react-native';
 import Modal from "react-native-modal";
 import { useState, useContext } from 'react';
-
 /** 
 * @remarks This function returnsa a Square displaying a certain group.
 * It it is used with a flatlist to render a list of groups.
 * It was created to be on the friendpage.
 * 
-*@param lvl The lvl of the group
-*@param name The name of the group
+*@param item Object that contains information about the group
+*@param onLongPress Function that gets triggered by pressing the square
 *@returns The groupsquare with the name of the group, icon and the challengebutton
 *@category Friendpage
 */
-
-
 const GroupSquare = ({ item, onLongPress }: { item: any, onLongPress: any }) => (
-
     <>
         <TouchableOpacity style={friendPageStyles.groupHolder} onLongPress={onLongPress} >
             <View style={friendPageStyles.groupIconHolder}>
@@ -48,6 +44,4 @@ const GroupSquare = ({ item, onLongPress }: { item: any, onLongPress: any }) => 
 
     </>
 )
-
-
 export default GroupSquare;

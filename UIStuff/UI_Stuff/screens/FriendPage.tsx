@@ -1,8 +1,8 @@
 import friendPageStyles from '../styles/FriendPage.style';
 import styles from '../styles/Page.style';
 
-import { ImageBackground, FlatList, Text, View, TextInput, Button, Pressable } from 'react-native';
-import { useState, useEffect, Component } from 'react';
+import { ImageBackground, FlatList, Text, View, TextInput, Button, Pressable, RefreshControl } from 'react-native';
+import { useState, useEffect, useCallback, Component } from 'react';
 import FriendSquare from "../components/FriendSquare";
 import GroupSquare from "../components/GroupSquare";
 import { FriendSearchWindow } from './FriendSearchWindow';
@@ -37,8 +37,10 @@ export default function FriendPageScreen() {
   const [friends, setFriends] = useState([]);
   const [error, setIsError] = useState(false);
 
+  //Address of the API that connect to the database
   const APIaddress = conn.API.adress + conn.API.port;
 
+  //Changes the user in the AsyncStorage
   const storeData = async (value: string) => {
     try {
       await AsyncStorage.setItem('@user_Key', value)
@@ -46,7 +48,7 @@ export default function FriendPageScreen() {
       // saving error
     }
   }
-
+  //Removes a friend-relation form the database
   const removeFriend = (relationId: string) => {
     console.log(APIaddress + `/relation/remove/${relationId}`)
     Axios.delete(APIaddress + `/relation/remove/${relationId}`).then((response) => {
@@ -54,6 +56,7 @@ export default function FriendPageScreen() {
     })
   }
 
+  //finds the friends of the user
   const searchFriends = (id: string) => {
     console.log("Logged in as: " + id)
     Axios.get(APIaddress + '/relations/' + id).then((response) => {
@@ -61,41 +64,69 @@ export default function FriendPageScreen() {
     });
   };
 
-  //Function that gets fed into the flatlist and render the friend squares.
+
   const [removeFriendVisible, setRemoveFriendVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
-
+  //Function that gets fed into the flatlist and render the friend squares.
+  /** 
+  *@remarks Function that gets used in the flatlist to render the friend-list
+  *@param item Object that contains information about a user
+  *@param onLongPress Function that gets triggered by pressing the square
+  *@returns The friendsquare with the name of the friend, icon and the challengebutton
+  *@category Friendpage
+  */
   const renderFriendSquare = ({ item }: { item: any }) => {
+
+    //sets the id to be removed and enables the modal
     const enableRemove = (id: string) => {
       setSelectedId(id);
       setRemoveFriendVisible(true);
     }
 
-    const clickRemove = (id: string) => {
-      removeFriend(id);
+    //Rmoves a user from the database and disables the modal
+    const clickRemove = (removeId: string,) => {
+      removeFriend(removeId);
       setRemoveFriendVisible(false);
     }
+
+    //changes the color of the button in the modal-menu
+    const colorOnPress = ({ pressed }: { pressed: boolean }) => [
+      {
+        backgroundColor: pressed
+          ? 'rgb(255, 169, 99)'
+          : 'white'
+      }]
+
     return (
       <>
+        {/*Renders the friendSquare, see: ../Components/FriendSquare */}
         <FriendSquare
           item={item}
           onLongPress={() => enableRemove(item.relation_id)}
         />
+        {/* A modal with options for a specific friend. Triggered by a longpress on the friendsquare */}
         <Modal
-          style={{ marginBottom: 0 }}
+          style={{
+            margin: 0,
+
+            justifyContent: 'flex-end',
+          }}
+          // customBackdrop={<View style={{ height: '100%' }} />}
+          onModalHide={() => searchFriends(user)}
           animationIn="slideInUp"
           isVisible={removeFriendVisible}
           onBackdropPress={() => setRemoveFriendVisible(false)}
         >
-          <View style={friendPageStyles.groupModal}>
-            <Pressable onPress={() => clickRemove(selectedId)} style={{ backgroundColor: 'white' }}>
-              <Text>Remove friend</Text>
+          {/* The optins in the modal */}
+          <View style={friendPageStyles.friendModal}>
+            <Pressable onPress={() => clickRemove(selectedId)} style={({ pressed }) => [colorOnPress({ pressed }), friendPageStyles.modalMenuButton]}>
+              <Text style={friendPageStyles.modalMenuText}>Remove from friends</Text>
             </Pressable>
-            <Pressable style={{ backgroundColor: 'white' }}>
-              <Text>View profile!</Text>
+            <Pressable style={({ pressed }) => [colorOnPress({ pressed }), friendPageStyles.modalMenuButton]}>
+              <Text style={friendPageStyles.modalMenuText}>View profile</Text>
             </Pressable>
-            <Pressable style={{ backgroundColor: 'white' }}>
-              <Text>Send challenge</Text>
+            <Pressable style={({ pressed }) => [colorOnPress({ pressed }), friendPageStyles.modalMenuButton]}>
+              <Text style={friendPageStyles.modalMenuText}>Send challenge</Text>
             </Pressable>
           </View>
         </Modal>
@@ -108,15 +139,18 @@ export default function FriendPageScreen() {
   const renderGroupSquare = ({ item }: { item: any }) => {
     return (
       <>
+        {/*Renders the GroupSquare, see: ../Components/GroupSquare */}
         <GroupSquare
           item={item}
           onLongPress={() => setRemoveGroupVisible(true)} />
+        {/* A modal with options for a specific group. Triggered by a longpress on the GroupSquare */}
         <Modal
-          style={{ marginBottom: 0 }}
+          style={{ flex: 1 }}
           animationIn="slideInUp"
           isVisible={removeGroupVisible}
           onBackdropPress={() => setRemoveGroupVisible(false)}
         >
+          {/* The optins in the modal */}
           <View style={friendPageStyles.groupModal}>
             <Pressable style={{ backgroundColor: 'white' }}>
               <Text>Leave Group</Text>
@@ -133,9 +167,21 @@ export default function FriendPageScreen() {
     )
   };
 
-  //Function for retrieving the current user on load, needed for displaying the users friends
+  //Code to refresh the page
+  const wait = (timeout: any) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    asyncAction();
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
+
+  //Function for retrieving the current user on load, needed for displaying the users friends. Used for refresh
   const asyncAction = async () => {
     try {
+      //Retrievs user form AsyncStorage
       const value = await AsyncStorage.getItem('@user_Key')
       if (value !== null) {
         setUser(value);
@@ -144,9 +190,11 @@ export default function FriendPageScreen() {
       }
     } catch (e) {
       setIsError(true);
+      console.log(e)
     }
   }
 
+  //Calls on load
   useEffect(() => {
     asyncAction();
   }, []);
@@ -177,17 +225,20 @@ export default function FriendPageScreen() {
           />
         </View>
 
-        {/* Modal for adding friends */}
+        {/* Modal for searching for and adding friends */}
         {FriendSearchWindow(user)}
-        <TextInput placeholder='Name of user...' onChangeText={(text) => setUser(text)} onSubmitEditing={() => storeData(user)} />
-        <Button title='Refresh' onPress={() => searchFriends(user)} />
 
+        {/* Textinput used in development to change user */}
+        <TextInput placeholder='Id of user...' onChangeText={(text) => setUser(text)} onSubmitEditing={() => storeData(user)} />
 
         <Text style={styles.title} > Friends</Text>
         <View style={friendPageStyles.friendContainer}>
-
           {/* List of all the friends */}
           <FlatList
+            refreshControl={<RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+            />}
             nestedScrollEnabled
             data={friends}
             renderItem={renderFriendSquare}
@@ -202,8 +253,10 @@ export default function FriendPageScreen() {
             )}
 
           />
+
         </View>
       </ImageBackground>
     </View>
+
   );
 }

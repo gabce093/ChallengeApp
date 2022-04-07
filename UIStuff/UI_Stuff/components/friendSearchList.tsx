@@ -18,7 +18,7 @@ import conn from '../constants/databaseAPI';
 import Axios from 'axios';
 
 export default function renderUserList(data: any, user: string) {
-
+  const APIaddress = conn.API.adress + conn.API.port;
   const [activeSections, setActiveSections] = useState([]);
   const [showButton, setShowButton] = useState(true);
 
@@ -31,7 +31,7 @@ export default function renderUserList(data: any, user: string) {
     console.log(user + ' added ' + toUser);
 
     setShowButton(false);
-    var APIaddress = conn.API.adress + conn.API.port;
+
     Axios.post(APIaddress + '/createrelation', {
       from: user,
       to: toUser,
@@ -85,7 +85,7 @@ export default function renderUserList(data: any, user: string) {
       var status = <Text>Request pending...</Text>
     else {
       var status = showButton === true ?
-        <Button onPress={() => addFriend(section.user_id)} title='Send Request' /> : <Text>Request pending...</Text>
+        <Button onPress={() => addFriend(section.user_id)} title='Send Request' /> : <Text>Request Sent!</Text>
     }
 
     return (
@@ -106,12 +106,8 @@ export default function renderUserList(data: any, user: string) {
       </Animatable.View>
     )
   };
-
-
   return (
-
     <ScrollView>
-      {/* <Button title= "press" onPress={()=> searchUser()}/> */}
       {/*Code for Accordion/Expandable List starts here*/}
       <Accordion
         activeSections={activeSections}

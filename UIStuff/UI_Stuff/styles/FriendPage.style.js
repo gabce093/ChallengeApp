@@ -79,6 +79,26 @@ export default StyleSheet.create({
     fontSize: 15,
   },
 
+  friendModal: {
+    backgroundColor: "white",
+    width: "100%",
+    flexDirection: "column",
+    flex: 1 / 6,
+  },
+
+  modalMenuButton: {
+    flex: 1 / 3,
+    justifyContent: "center",
+    borderBottomColor: "lightgrey",
+    borderBottomWidth: 1,
+  },
+
+  modalMenuText: {
+    marginLeft: 20,
+    fontSize: 16,
+    color: "rgb(66, 66, 66)",
+  },
+
   //*****Group-part******//
 
   groupContainer: {
@@ -136,6 +156,7 @@ export default StyleSheet.create({
 
   groupModal: {
     backgroundColor: "white",
-    height: "50%",
+    height: "90%",
+    width: "100%",
   },
 });

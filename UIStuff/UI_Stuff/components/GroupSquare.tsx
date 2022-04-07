@@ -1,21 +1,29 @@
 import friendPageStyles from '../styles/FriendPage.style';
 import { Image, TouchableOpacity, Text, View, Pressable } from 'react-native';
+import Modal from "react-native-modal";
+import { useState, useContext } from 'react';
 
 /** 
-@param lvl The lvl of the group
-@returns The groupsquate name of the group, icon and the challengebutton
-@category Friendpage
+* @remarks This function returnsa a Square displaying a certain group.
+* It it is used with a flatlist to render a list of groups.
+* It was created to be on the friendpage.
+* 
+*@param lvl The lvl of the group
+*@param name The name of the group
+*@returns The groupsquare with the name of the group, icon and the challengebutton
+*@category Friendpage
 */
-export default function GroupSquare(level: string, name: string) {
 
-    //Pressable friend square that makes the modal pop up
-    return (
-        <TouchableOpacity style={friendPageStyles.groupHolder} onPress={() => console.log('icon square pressed')} >
+
+const GroupSquare = ({ item, onLongPress }: { item: any, onLongPress: any }) => (
+
+    <>
+        <TouchableOpacity style={friendPageStyles.groupHolder} onLongPress={onLongPress} >
             <View style={friendPageStyles.groupIconHolder}>
                 <View style={friendPageStyles.groupLvlBadge}>
 
                     {/* Text dispalying the level */}
-                    <Text style={friendPageStyles.lvlText}>{level}</Text></View>
+                    <Text style={friendPageStyles.lvlText}>{item.level}</Text></View>
 
                 {/* user icon for the friend */}
                 <Image source={require('../assets/images/emptyPlayerIcon.png')} style={{
@@ -29,7 +37,7 @@ export default function GroupSquare(level: string, name: string) {
             </View>
             <View style={{ marginTop: 4, backgroundColor: 'transparent', alignItems: 'center' }}>
                 {/* Show name of your friend */}
-                <Text style={[friendPageStyles.nameText]}>{name}</Text>
+                <Text style={[friendPageStyles.nameText]}>{item.title}</Text>
 
                 {/* Button to challenge your friend */}
                 <Pressable style={friendPageStyles.groupChallengeButton} onPress={() => console.log('Pressed Challenge button')}>
@@ -37,5 +45,9 @@ export default function GroupSquare(level: string, name: string) {
                 </Pressable>
             </View>
         </TouchableOpacity>
-    );
-}
+
+    </>
+)
+
+
+export default GroupSquare;

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-{/*StyleSheet for the base of the pages*/}
+{/*StyleSheet for friend-page*/}
 export default StyleSheet.create({
     absolute: {
       position: 'absolute',

@@ -13,13 +13,31 @@ import * as Animatable from 'react-native-animatable';
 import styles from '../styles/SearchFriend.style.js';
 import friendPageStyles from '../styles/FriendPage.style';
 
-export default function renderUserList(data: any) {
+import conn from '../constants/databaseAPI';
+
+import Axios from 'axios';
+
+export default function renderUserList(data: any, user: string) {
 
   const [activeSections, setActiveSections] = useState([]);
+  const [showButton, setShowButton] = useState(true);
 
   const setSections = (sections: any) => {
     //setting up a active section state
     setActiveSections(sections.includes(undefined) ? [] : sections);
+  };
+
+  const addFriend = (toUser: string) => {
+    console.log(user + ' added ' + toUser);
+
+    setShowButton(false);
+    var APIaddress = conn.API.adress + conn.API.port;
+    Axios.post(APIaddress + '/createrelation', {
+      from: user,
+      to: toUser,
+    }).then(() => {
+      console.log('Success');
+    });
   };
 
   const renderHeader = (section: any, _: any, isActive: any) => {
@@ -61,15 +79,26 @@ export default function renderUserList(data: any) {
 
   const renderContent = (section: any, _: any, isActive: any) => {
 
+    if (section.status == 1)
+      var status = <Text>You are already friends</Text>
+    else if (section.status == 2)
+      var status = <Text>Request pending...</Text>
+    else {
+      var status = showButton === true ?
+        <Button onPress={() => addFriend(section.user_id)} title='Send Request' /> : <Text>Request pending...</Text>
+    }
+
     return (
       <Animatable.View
         duration={400}
         style={[styles.content]}
         transition="backgroundColor">
-        <Button
+
+        {status}
+        {/* <Button
           onPress={() => console.log('collapse button')}
           title='Send Request' />
-        {/* <Animatable.Text
+        <Animatable.Text
           animation={isActive ? 'bounceIn' : undefined}
           style={{ textAlign: 'center' }}>
           {section.content}

@@ -1,26 +1,30 @@
 
 import { Pressable, TextInput, Image, Text, View, FlatList, } from 'react-native';
 import SearchFriend from '../styles/SearchFriend.style.js';
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import Modal from "react-native-modal";
-import { Box, Center, NativeBaseProvider, Button } from "native-base";
 import Axios from 'axios';
 import renderUserList from "../components/friendSearchList";
 
+import conn from '../constants/databaseAPI';
 
-export function FriendSearchWindow() {
+export function FriendSearchWindow(user: string) {
 
     const [data, setData] = useState([]);
+
     const [modalVisible, setModalVisible] = useState(false);
     const [friendSearch, setFriendSearch] = useState('');
 
+    const searchUser = (text: string) => {
+        var APIaddress = conn.API.adress + conn.API.port;
+        const request = APIaddress + '/users/' + `${user}` + '/' + `${text}`;
+        Axios.get(request).then((response) => {
+            setData(response.data);
+        });
+    };
+
     // Fetches the users from the database based on the parameter "text"
-    const searchUser = (text:string) => {
-       Axios.get('http://192.168.1.93:3001/users/'+ text).then((response)=> {
-         setData(response.data);
-       });
-     };
-  
+
     return <View style={{ backgroundColor: 'rgba(0,0,0,0)' }}>
         <Modal
             animationIn="slideInUp"
@@ -49,12 +53,12 @@ export function FriendSearchWindow() {
                     <Text style={SearchFriend.modalText}>Search for friend!</Text>
 
                     {/* Input to write tha name of the friend */}
-                    <TextInput style={SearchFriend.textWindow} 
-                    onChangeText={(text) => searchUser(text)}
-                     placeholder='Type name...' />
-                   
+                    <TextInput style={SearchFriend.textWindow}
+                        onChangeText={(text) => searchUser(text)}
+                        placeholder={'Type name...'} />
+
                     {/* Sends in data from the fectch and renders it as a list(accordion) */}
-                    {renderUserList(data)}
+                    {renderUserList(data, user)}
 
                 </View>
             </View>

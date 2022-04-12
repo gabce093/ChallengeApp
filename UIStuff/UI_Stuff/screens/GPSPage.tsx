@@ -23,6 +23,7 @@ export default function GPSPage({ navigation }: RootStackScreenProps<'ResultPage
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== 'granted') {
             setErrorMsg('Permission to access location was denied');
+            console.log("permission denied")
             return;
         }
         

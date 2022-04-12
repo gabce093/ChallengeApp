@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 var type = "distance";
 var distance_goal = 100;
-var elapsed_distance = 0;
+var elapsed_distance = 150;
 var total_time = "null";
 var challenge_time = "null";
 var completed = false;
@@ -25,6 +25,28 @@ export function getChallengeTime() {
 export function getDistanceGoal() {
 
     return distance_goal;
+}
+
+export function getPace(distance: any, time: string) {
+
+    var temp = time.split(':');
+    
+    var total_seconds = parseInt(temp[0])*3600 + parseInt(temp[1])*60 + parseInt(temp[2]);
+
+    var seconds_per_km = total_seconds / (distance/1000);
+
+    var minutes = Math.floor(seconds_per_km / 60);
+
+    var seconds = Math.floor((seconds_per_km - minutes*60));
+
+    if(10>seconds){
+        var pace = minutes + ":" + '0' + seconds;
+    }
+    else {
+        var pace = minutes + ":" + seconds;
+    }
+    
+    return pace;
 }
 
 export function checkCompleted(){

@@ -20,6 +20,7 @@ export default StyleSheet.create({
         paddingTop: '5%' 
     },
     progressContainer2: {
+        justifyContent: 'center',
         height: '10%',
         width: '80%',
         backgroundColor: 'transparent',

@@ -6,6 +6,7 @@ import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScre
 var playerName ="";
 var coins = 0;
 var gems = 0;
+var rank = 0;
 var playerId = "";
 var totalDistance = 0; 
 var username = "VeryLongNameTe";
@@ -40,8 +41,7 @@ export function updateValues() {
 
     })
     .then(response => "")
-   
-
+    
 }
 
 // Updates local values on with the database ones

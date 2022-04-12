@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getPlayerId } from "./PlayerData";
 
 var type = "distance";
 var distance_goal = 100;
@@ -79,3 +80,28 @@ export function CompleteChallenge(){
     completed = true;
 }
 
+export function calculateXP(){
+
+    
+}
+
+export function getMinPerK(){
+    var temp = challenge_time.split(':');
+    var total_seconds = parseInt(temp[0])*3600 + parseInt(temp[1])*60 + parseInt(temp[2]);
+    var seconds_per_km = total_seconds / (distance_goal/1000);
+    return seconds_per_km/60;
+}
+
+
+export function calculateCoins(){
+    
+
+    if ( < ) {
+        return 
+    }
+    else {
+        return
+    }
+
+    return ;
+}

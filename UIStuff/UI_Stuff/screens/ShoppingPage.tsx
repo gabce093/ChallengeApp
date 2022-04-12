@@ -2,7 +2,7 @@ import styles from '../styles/Page.style';
 import shopStyles from '../styles/shop.style';
 import React, { useState } from 'react';
 import { Text, View } from '../components/Themed';
-import { ImageBackground, TouchableOpacity, ScrollView,FlatList} from "react-native";
+import { ImageBackground, TouchableOpacity,FlatList} from "react-native";
 
 
 import {buyItem} from '../ShopData';
@@ -165,7 +165,7 @@ export default function ShoppingPageScreen() {
         <Text style={shopStyles.titleText}>The Shop</Text>
       
         <View style ={shopStyles.shopMenu}>
-          <ScrollView style= {{paddingBottom: '2%'}} showsVerticalScrollIndicator={false}>
+          
               {/* List of all the friends */}
               <FlatList 
                 nestedScrollEnabled
@@ -175,7 +175,7 @@ export default function ShoppingPageScreen() {
                 keyExtractor={(item) => item.id}
                 extraData={selectedId}
               />
-          </ScrollView>        
+        
 
         </View>
         

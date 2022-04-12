@@ -1,3 +1,4 @@
+import { Center } from 'native-base';
 import { StyleSheet } from 'react-native';
 
 {/*StyleSheet for the base of the pages*/}
@@ -8,38 +9,39 @@ export default StyleSheet.create({
 
     //Container that holds every item on the character
     characterContainer:{
-      justifyContent: 'center',
-      position:'relative',
+      top:'-40%',
       alignItems: 'center',
-      backgroundColor: 'rgba(52, 52, 52, 0)',
-      top: '-18%',
+      justifyContent: 'center',
+      backgroundColor: 'transparent',
+      flex: 1,
+    
     },
 
     //Used by every character item
     character:{
-      flex: 1,
-      height: 250,
-      width: 250,
       position: 'absolute',
-      scaleX: -1,
-      zIndex: -1,
+      height: 270,
+      width: 250,
+      transform: [{ scaleX: -1 }],
+    
     },
 
     titleText:{
-      alignContent: 'center', 
+      textAlign: 'center', 
       fontSize: 45, 
       fontWeight: 'bold',
-      marginBottom: 10,
-      marginTop:30,
+     
     },
 
+    //nu ändrar du inte mer
     // Holds the shop information
     shopMenu:{
       height: 200,
       width: 350,
       backgroundColor: 'rgba(52, 52, 52, 0)',
-      justifyContent: 'center',
       alignItems:'center',
+      alignSelf: 'center',
+      paddingBottom: 40,
     
     },
     
@@ -47,7 +49,6 @@ export default StyleSheet.create({
     shopButton:{
       backgroundColor: '#939393',
       margin: 10,
-      textAlign:'center',
       borderRadius: 5,
     },
 
@@ -60,6 +61,7 @@ export default StyleSheet.create({
     itemText:{
       borderRadius: 5,
       backgroundColor: '#FF5C00',
+      textAlign:'center',
     },
 
   

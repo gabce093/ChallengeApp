@@ -9,7 +9,7 @@ import { Pressable, Image, View, SafeAreaView  } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import { Text, TextProps} from './Themed';
 import { RootStackScreenProps } from '../types';
-import {getLevel, getCurrentEXP, getMaxEXP, getCoins, getGems, getPlayer} from '../PlayerData';
+import {getLevel, getLevelProgress, getCoins, getGems, getPlayer} from '../PlayerData';
 import React, { Component, useState, useEffect } from 'react';
 
 {/*Topbar has alot of components, the errors are false; it works*/}
@@ -27,7 +27,7 @@ export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
                         <Image style={styles.image}
                         source = {require('../Graphics/TempProfilePic.png')}/>
                         <ImageBackground source={require('../Graphics/ExpMask.png')} style={styles.lvlHolder} imageStyle={{tintColor:"#333333"}} resizeMode="stretch">
-                        <Text style={styles.lvl}>LVL: { getLevel() }</Text>
+                        <Text style={styles.lvl}>{ getLevel() }</Text>
                         </ImageBackground>
                     </View>
                     
@@ -42,7 +42,7 @@ export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
                         </Text>
                     </View>
                     <View style={styles.EXPBarHolder}>
-                    <ProgressBar color="#FF5C00"progress={getCurrentEXP() / getMaxEXP()} style={{
+                    <ProgressBar color="#FF5C00"progress={getLevelProgress()} style={{
                         height: "100%",
                         backgroundColor: "#151515",
                         }}/>

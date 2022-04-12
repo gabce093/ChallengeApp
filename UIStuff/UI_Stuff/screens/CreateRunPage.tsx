@@ -15,17 +15,17 @@ export default function CreateRunPage({ navigation }: RootStackScreenProps<'GPSP
       {/*<EditScreenInfo path="/screens/CreateRunPage.tsx" >*/}
       <View style={styles.flipperContainer}>
       <Button
-      onPress={() => addCoin()}
+      onPress={() => addCoin(30)}
       title="Adda Coin"
       color="#ab309f"
       />
       <Button
-      onPress={() => addGem()}
+      onPress={() => addGem(2)}
       title="Adda Gem"
       color="#ed5e0e"
       />
       <Button
-      onPress={() => addEXP()}
+      onPress={() => addEXP(500)}
       title="Adda EXP"
       color="#fcba03"
       />

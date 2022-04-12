@@ -5,7 +5,7 @@ import LoginPage from './Login';
 import React, { useEffect } from 'react';
 import { FriendSearchWindow } from './FriendSearchWindow';
 import { ProgressBar } from 'react-native-paper';
-import {getUsername, getLevel, getCurrentEXP, getMaxEXP, getCoins, getGems} from '../PlayerData';
+import {getUsername, getLevel, getCoins, getGems} from '../PlayerData';
 
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 

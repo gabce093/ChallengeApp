@@ -1,4 +1,5 @@
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, Dimensions } from 'react-native';
+var screenWidth = Dimensions.get('window').width;
 {/*This is the stylesheet used by the top bar of the screen*/}
 export default StyleSheet.create({
       TopBarHolder: {
@@ -51,23 +52,28 @@ export default StyleSheet.create({
         backgroundColor: 'transparent',
       },
       lvl: {
-        fontSize: 15,
+        fontSize: 0.05*screenWidth,
         fontWeight: 'bold',
         color: "#C4C4C4",
+        justifyContent: "center",
+        alignSelf: "center",
+        paddingRight: "10%",
       },
       lvlHolder: {
         flex: 1,
+        width:"100%",
         color: "#C4C4C4",
-        alignSelf: "flex-start",
-        top: "160%",
+        alignSelf: "center",
+
+        top: "175%",
         height: "30%",
-        paddingRight: "35%",
+
         paddingBottom: "2%",
       },
       image: {
         flex: 1,
         height: undefined,
         width: undefined,
-        marginBottom: "-120%"
+        marginBottom: "-130%"
       },
 });

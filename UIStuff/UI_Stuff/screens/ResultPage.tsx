@@ -3,10 +3,11 @@ import styles2 from '../styles/ResultPage.style'
 import React, { useState, useEffect } from 'react';
 import { Image, ImageBackground, Pressable, TouchableOpacity} from "react-native";
 import { Text, View } from '../components/Themed';
-import {getPace, getTotalTime, getChallengeTime, getElapsedDistance, getDistanceGoal, checkCompleted} from '../ChallengeData';
+import {getPace, getTotalTime, getChallengeTime, getElapsedDistance, getDistanceGoal, checkCompleted, calculateXP} from '../ChallengeData';
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 import ResultProgressBar from '../components/ResultProgressBar';
-import { ProgressBar } from 'react-native-paper';
+import XpProgressBar from '../components/XpProgressBar';
+
 
 export default function ResultPage({navigation}: RootTabScreenProps<'MainPage'>) {
     
@@ -25,8 +26,10 @@ export default function ResultPage({navigation}: RootTabScreenProps<'MainPage'>)
               <Text style={styles2.title}>Challenge</Text>
               <Text style={styles2.title2}>{string}</Text>
               <Text style={styles2.title}>Complete!</Text>  
-             
+              <Text>Rewards: + {calculateXP() +"xp, +" + 50 + "coins"}</Text>
+              <XpProgressBar></XpProgressBar>
             </View>
+            
             
         </ImageBackground>
         <ImageBackground source={require('../Graphics/banan.png')} style={styles.banan} resizeMode="stretch">
@@ -52,7 +55,7 @@ export default function ResultPage({navigation}: RootTabScreenProps<'MainPage'>)
                   <Text style={styles2.text2}>{"Pace (min/km)"}</Text>
                 </View>
               </View>
-              <ResultProgressBar goal={getDistanceGoal()} elapsedDistance={getElapsedDistance()}></ResultProgressBar>
+              <ResultProgressBar goal={5000} elapsedDistance={5339}></ResultProgressBar>
               
               <TouchableOpacity style={styles2.button} onPress={() => navigation.navigate('MainPage')}>
                 <Text style={styles2.buttonText}>Done</Text>

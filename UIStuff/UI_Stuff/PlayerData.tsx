@@ -87,6 +87,17 @@ export const getLevel = () => {
     return[lvl];
 }
 
+export const getLevelXp = () => {
+    
+    if(totalEXP < 20000)
+    {
+        return 1000;
+    }else
+    {
+        return 7500;
+    }
+}
+
 export const getLevelProgress = () => {
     var currentLvlProgress = 0.0;
     var lvl = 0;
@@ -118,6 +129,11 @@ export const getGems = ():number => {
     return gems;
 }
 
+export const getTotalExp = ():number => {
+
+    return totalEXP;
+}
+
 export var addCoin = (n:number) => {
     coins += n;
     updateValues();
@@ -133,7 +149,7 @@ export var addGem = (n:number) => {
 export var addEXP = (n:number) => {
     totalEXP += n;
     updateValues();
-    console.log(totalEXP);
+    //console.log(totalEXP);
 };
 
 //Function that removes a given number of coins (used to buy items)

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { getPlayerId } from "./PlayerData";
+import { addEXP, getPlayerId, getTotalExp } from "./PlayerData";
 
 var type = "distance";
-var distance_goal = 100;
-var elapsed_distance = 150;
+var distance_goal = 5000;
+var elapsed_distance = 0;
 var total_time = "null";
 var challenge_time = "null";
 var completed = false;
@@ -81,8 +81,8 @@ export function CompleteChallenge(){
 }
 
 export function calculateXP(){
-
-    
+    var xp_earned = 100*(5000 / 1000)+ 50*((5339-5000)/1000)
+    return xp_earned;
 }
 
 export function getMinPerK(){
@@ -96,12 +96,7 @@ export function getMinPerK(){
 export function calculateCoins(){
     
 
-    if ( < ) {
-        return 
-    }
-    else {
-        return
-    }
+    
 
-    return ;
+   
 }

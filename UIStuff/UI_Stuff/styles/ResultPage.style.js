@@ -54,6 +54,12 @@ export default StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'transparent',
     },
+    progressContainer2: {
+        height: 20,
+        width: 400,
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+    },
     timeContainer: {
         flex: 3,
         marginHorizontal: 2,

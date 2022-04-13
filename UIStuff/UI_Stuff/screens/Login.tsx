@@ -14,6 +14,7 @@ import { updateValues } from '../PlayerData';
 export default function LoginPage() {
     
     useEffect(() => {
+        logOut();
         getData();  
       }, []);
 

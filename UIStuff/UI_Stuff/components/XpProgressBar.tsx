@@ -2,7 +2,8 @@ import styles from '../styles/ResultPage.style';
 import React, { useState, useEffect } from 'react';
 import { Text, View } from '../components/Themed';
 import { Stopwatch} from 'react-native-stopwatch-timer';
-import {getType, getDistanceGoal, checkCompleted, getElapsedDistance} from '../ChallengeData';
+import {getType,calculateXP, getDistanceGoal, checkCompleted, getElapsedDistance} from '../ChallengeData';
+import { getLevelProgress, getLevelXp} from '../PlayerData';
 import {
     SafeAreaView,
     TouchableHighlight,
@@ -12,32 +13,30 @@ import { ProgressBar } from 'react-native-paper';
 
 export default function ResultProgressBar(props: any){ 
 
-    
-    const [distance, setDistance] = useState(0);
+    const [xp, setXP] = useState(0);
 
     useEffect(() => {
-        if(distance <= props.elapsedDistance - 1) {
+        if(xp <= calculateXP()) {
             const interval = setTimeout(() => {
-                if (props.elapsedDistance - distance > 500)   setDistance(prevDist => prevDist+500);
-                else if  (props.elapsedDistance - distance > 100)   setDistance(prevDist => prevDist+100);
-                else if  (props.elapsedDistance - distance > 10)   setDistance(prevDist => prevDist+10);
-                else   setDistance(prevDist => prevDist+1);         
+               setXP(prevXp => prevXp+1);   
+               if (xp < 500)  setXP(prevXp => prevXp+100);
+                else   setXP(prevXp => prevXp+1);   
             }, 10);
             return () => clearInterval(interval);
         }
-    }, [distance])
+        
+    }, [xp])
 
     return (
-        <View style={styles.progressContainer}>
-            <Text style={styles.text}>{distance + "m / "+ props.goal + "m"}</Text>
-            <ProgressBar color="#FF5C00" progress={distance/props.goal} style={{
+        <View style={styles.progressContainer2}>
+            <ProgressBar color="#FF5C00" progress={getLevelProgress() + xp/getLevelXp()} style={{
                 height: 20,
                 width: 340,
                 borderRadius: 20,
                 backgroundColor: "#151515",
                 
                 }}/>
-            <ProgressBar color="#17BEBB" progress={(distance-props.goal) / props.goal} style={{
+            <ProgressBar color="#17BEBB" progress={getLevelProgress()} style={{
                 height: 20,
                 width: 340,
                 backgroundColor: "transparent",

@@ -59,31 +59,24 @@ export default function FriendPageScreen() {
   }
   //Removes a friend-relation form the database
   const removeFriend = (relationId: string) => {
-    console.log(APIaddress + `/relation/remove/${relationId}`)
-    Axios.delete(APIaddress + `/relation/remove/${relationId}`).then((response) => {
+
+    Axios.delete(APIaddress + `/friends/remove/${relationId}`).then((response) => {
       console.log('Deleted!')
     })
   }
 
   //finds the friends of the user
-  const searchFriends = (id: string) => {
+  const getFriends = (id: string) => {
     console.log("Logged in as: " + id)
-    Axios.get(APIaddress + '/relations/' + id).then((response) => {
+    Axios.get(APIaddress + '/friends/' + id).then((response) => {
       setFriends(response.data);
     });
   };
 
   const [removeFriendVisible, setRemoveFriendVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
-  /** 
-  *@remarks Function that gets used in the flatlist to render the friend-list
-  *@param item Object that contains information about a user
-  *@param onLongPress Function that gets triggered by pressing the square
-  *@returns The friendsquare with the name of the friend, icon and the challengebutton
-  *@category Friendpage
-  */
-  const renderFriendSquare = ({ item }: { item: any }) => {
 
+  const renderFriendSquare = ({ item }: { item: any }) => {
     //sets the id to be removed and enables the modal
     const enableRemove = (id: string) => {
       setSelectedId(id);
@@ -119,7 +112,7 @@ export default function FriendPageScreen() {
             justifyContent: 'flex-end',
           }}
           // customBackdrop={<View style={{ height: '100%' }} />}
-          onModalHide={() => searchFriends(user)}
+          onModalHide={() => getFriends(user)}
           animationIn="slideInUp"
           isVisible={removeFriendVisible}
           onBackdropPress={() => setRemoveFriendVisible(false)}
@@ -198,7 +191,7 @@ export default function FriendPageScreen() {
       const value = await AsyncStorage.getItem('@user_Key')
       if (value !== null) {
         setUser(value);
-        searchFriends(value);
+        getFriends(value);
 
       }
     } catch (e) {

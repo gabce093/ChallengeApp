@@ -17,7 +17,7 @@ const FriendSquare = ({ item, onLongPress }: { item: any, onLongPress: any }) =>
       <View style={friendPageStyles.lvlBadge}>
 
         {/* Text dispalying the level */}
-        <Text style={friendPageStyles.lvlText}>{item.xp}</Text>
+        <Text style={friendPageStyles.lvlText}>{item.expAmount}</Text>
       </View>
 
       {/* user icon for the friend */}
@@ -33,7 +33,7 @@ const FriendSquare = ({ item, onLongPress }: { item: any, onLongPress: any }) =>
     </View>
     <View style={{ marginTop: 4, backgroundColor: 'transparent', alignItems: 'center' }}>
       {/* Show name of your friend */}
-      <Text style={[friendPageStyles.nameText]}>{item.name}</Text>
+      <Text style={[friendPageStyles.nameText]}>{item.userName}</Text>
 
       {/* Button to challenge your friend */}
       <Pressable style={friendPageStyles.friendChallengeButton} onPress={() => console.log('Pressed Challenge button')}>

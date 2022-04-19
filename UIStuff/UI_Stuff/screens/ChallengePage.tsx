@@ -54,7 +54,7 @@ export default function ChallengePageScreen() {
     var APIaddress = conn.API.adress + conn.API.port;
 
     //Retrieves friend-requests form the database
-    Axios.get(APIaddress + '/relations/request/' + id).then((response) => {
+    Axios.get(APIaddress + '/friends/request/' + id).then((response) => {
       setFriendRequest(response.data);
 
     });
@@ -63,7 +63,7 @@ export default function ChallengePageScreen() {
   //Updates the friend-request to accepted in the database
   const acceptRequest = async (relationId: string) => {
     var APIaddress = conn.API.adress + conn.API.port;
-    Axios.put(APIaddress + '/accept/request', { relId: relationId }).then((response) => {
+    Axios.put(APIaddress + '/friends/accept/request', { relId: relationId }).then((response) => {
       setAcceptPressed(true);
 
     });
@@ -74,7 +74,7 @@ export default function ChallengePageScreen() {
   //Updates the friend-request to declined in the database
   const declineRequest = async (relationId: string) => {
     var APIaddress = conn.API.adress + conn.API.port;
-    Axios.put(APIaddress + '/decline/request', { relId: relationId }).then((response) => {
+    Axios.put(APIaddress + '/friends/decline/request', { relId: relationId }).then((response) => {
       alert("declined")
       setDeclinePressed(true)
     });
@@ -115,13 +115,13 @@ export default function ChallengePageScreen() {
     }
     else {
       status = <>
-        <Pressable style={inboxStyles.acceptButton} onPress={() => acceptRequest(item.relation_id)}>
+        <Pressable style={inboxStyles.acceptButton} onPress={() => acceptRequest(item.relationId)}>
           <Image source={require('../assets/images/check.png')} style={{
             width: '60%',
             height: '60%',
           }} />
         </Pressable>
-        <Pressable style={inboxStyles.declineButton} onPress={() => declineRequest(item.relation_id)}>
+        <Pressable style={inboxStyles.declineButton} onPress={() => declineRequest(item.relationId)}>
           <Image source={require('../assets/images/cancel.png')} style={{
             width: '60%',
             height: '60%',
@@ -133,8 +133,8 @@ export default function ChallengePageScreen() {
     return (
       <TouchableOpacity style={inboxStyles.friendRequestContainer}>
         <View style={inboxStyles.imageAndNameHolder}>
-          <UserIcon level={item.xp} />
-          <Text style={inboxStyles.messageFromText}>{item.name}</Text>
+          <UserIcon level={item.expAmount} />
+          <Text style={inboxStyles.messageFromText}>{item.userName}</Text>
         </View>
 
         <View style={inboxStyles.textAndButtonsHolder}>

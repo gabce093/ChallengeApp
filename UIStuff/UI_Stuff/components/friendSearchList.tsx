@@ -39,21 +39,13 @@ export default function renderUserList(user: string) {
   };
 
   const [data, setData] = useState([]);
-  // const searchUser = (text: string) => {
-  //   var APIaddress = conn.API.adress + conn.API.port;
-  //   const request = APIaddress + '/users/' + `${user}` + '/' + `${text}`;
-  //   Axios.get(request).then((response) => {
-  //     setData(response.data);
-  //     setActiveSections([]);
-  //   });
-  // };
 
   const addFriend = (toUser: string) => {
     console.log(user + ' added ' + toUser);
 
     setShowButton(false);
 
-    Axios.post(APIaddress + '/createrelation', {
+    Axios.post(APIaddress + '/friends/create', {
       from: user,
       to: toUser,
     }).then(() => {
@@ -61,7 +53,7 @@ export default function renderUserList(user: string) {
     });
   };
 
-  const renderHeader = (section: any, _: any, isActive: any) => {
+  const renderHeader = (item: any, _: any, isActive: any) => {
 
     return (
       <Animatable.View
@@ -77,7 +69,7 @@ export default function renderUserList(user: string) {
           <View style={[friendPageStyles.lvlBadge, { marginTop: '50%' }]}>
 
             {/* Text dispalying the level */}
-            <Text style={friendPageStyles.lvlText}>{section.xp}</Text>
+            <Text style={friendPageStyles.lvlText}>{item.expAmount}</Text>
           </View>
 
           {/* user icon for the friend */}
@@ -92,7 +84,7 @@ export default function renderUserList(user: string) {
           />
         </View>
         <View style={{ alignItems: 'flex-start', justifyContent: 'center', backgroundColor: '#383838' }}>
-          <Animatable.Text style={styles.headerText}>{section.title} {section.name} | Level {section.xp}</Animatable.Text>
+          <Animatable.Text style={styles.headerText}>{item.userName} | Level {item.expAmount}</Animatable.Text>
         </View>
       </Animatable.View>
     );
@@ -106,7 +98,7 @@ export default function renderUserList(user: string) {
       var status = <Text>Request pending...</Text>
     else {
       var status = showButton === true ?
-        <Button onPress={() => addFriend(section.user_id)} title='Send Request' /> : <Text>Request Sent!</Text>
+        <Button onPress={() => addFriend(section.id)} title='Send Request' /> : <Text>Request Sent!</Text>
     }
     return (
       <Animatable.View
@@ -124,8 +116,10 @@ export default function renderUserList(user: string) {
         onChangeText={(text) => searchUser(user, text)
           .then(data => {
             setData(data);
+            console.log(data)
           })
-          .catch(() => console.log('error when searching user'))}
+          .catch(() => console.log('error when searching user'))
+        }
         placeholder={'Type name...'} />
       <ScrollView>
         {/*Code for Accordion/Expandable List starts here*/}

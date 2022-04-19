@@ -1,39 +1,29 @@
 import friendPageStyles from '../styles/FriendPage.style';
-import { Image, TouchableOpacity, Text, View, Pressable } from 'react-native';
-import Modal from "react-native-modal";
-import { useState, useContext } from 'react';
+
+import { TouchableOpacity, Text, View, Pressable } from 'react-native';
+import UserIcon from './UserIconLarge'
 /** 
-* @remarks This function returnsa a Square displaying a certain group.
+* This function creats a Square displaying a certain group.
+*
+* It uses the function <userIconLarge> for the image.
 * It it is used with a flatlist to render a list of groups.
 * It was created to be on the friendpage.
 * 
-*@param item Object that contains information about the group
-*@param onLongPress Function that gets triggered by pressing the square
+*@param item - Object that contains information about the group
+*
+*@param onLongPress - Function that gets triggered by pressing the square
+*
 *@returns The groupsquare with the name of the group, icon and the challengebutton
-*@category Friendpage
+*@category FriendPage
+*@author Gabriel
 */
 const GroupSquare = ({ item, onLongPress }: { item: any, onLongPress: any }) => (
     <>
         <TouchableOpacity style={friendPageStyles.groupHolder} onLongPress={onLongPress} >
-            <View style={friendPageStyles.groupIconHolder}>
-                <View style={friendPageStyles.groupLvlBadge}>
-
-                    {/* Text dispalying the level */}
-                    <Text style={friendPageStyles.lvlText}>{item.level}</Text></View>
-
-                {/* user icon for the friend */}
-                <Image source={require('../assets/images/emptyPlayerIcon.png')} style={{
-                    width: 110,
-                    height: 110,
-                    borderRadius: 100,
-                    borderWidth: 4,
-                    borderColor: "#766449",
-                }}
-                />
-            </View>
-            <View style={{ marginTop: 4, backgroundColor: 'transparent', alignItems: 'center' }}>
+            <UserIcon level={item.level} />
+            <View style={{ backgroundColor: 'transparent', alignItems: 'center' }}>
                 {/* Show name of your friend */}
-                <Text style={[friendPageStyles.nameText]}>{item.title}</Text>
+                <Text style={friendPageStyles.groupNameText}>{item.title}</Text>
 
                 {/* Button to challenge your friend */}
                 <Pressable style={friendPageStyles.groupChallengeButton} onPress={() => console.log('Pressed Challenge button')}>
@@ -41,7 +31,6 @@ const GroupSquare = ({ item, onLongPress }: { item: any, onLongPress: any }) => 
                 </Pressable>
             </View>
         </TouchableOpacity>
-
     </>
 )
 export default GroupSquare;

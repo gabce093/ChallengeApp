@@ -31,6 +31,15 @@ const GROUPS = [
 
 ]
 
+
+/**
+ * This is the the apps friend page. It displays the users friend and groups. On it you can also clock up a modal
+ * where you can search for new people and send them friend-requests. You can also remove friends by long pressing
+ * the friend icon and then pressing "Remove from friends" on the modal-menu.
+ *
+ * @returns The entire FriendPage for the app
+ * @category Friendpage
+ */
 export default function FriendPageScreen() {
 
   const [user, setUser] = useState("");
@@ -64,10 +73,8 @@ export default function FriendPageScreen() {
     });
   };
 
-
   const [removeFriendVisible, setRemoveFriendVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
-  //Function that gets fed into the flatlist and render the friend squares.
   /** 
   *@remarks Function that gets used in the flatlist to render the friend-list
   *@param item Object that contains information about a user
@@ -134,9 +141,15 @@ export default function FriendPageScreen() {
     );
   };
 
-  //Renders the Group icons in the group container
   const [removeGroupVisible, setRemoveGroupVisible] = useState(false);
-  const renderGroupSquare = ({ item }: { item: any }) => {
+  /** 
+  *@internal
+  *@remarks Function that gets used in the flatlist to render the group-list
+  *@param item Object that contains information about a group
+  *@returns The groupsquare with the name of the friend, icon and the challengebutton
+  *@category Friendpage
+  */
+  function renderGroupSquare({ item }: { item: any }) {
     return (
       <>
         {/*Renders the GroupSquare, see: ../Components/GroupSquare */}

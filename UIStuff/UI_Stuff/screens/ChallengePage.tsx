@@ -2,12 +2,13 @@ import styles from '../styles/Page.style';
 import friendPageStyles from '../styles/FriendPage.style';
 import inboxStyles from '../styles/Inbox.style.js';
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { ImageBackground, FlatList, TouchableOpacity, Button, RefreshControl } from 'react-native';
+import { ImageBackground, FlatList, TouchableOpacity, Image, RefreshControl, Pressable } from 'react-native';
 import { useState, useEffect, useCallback } from 'react';
 import Axios from 'axios';
 import conn from '../constants/databaseAPI';
+import UserIcon from '../components/UserIconLarge'
 
-//import EditScreenInfo from '../components/EditScreenInfo';
+
 import { Text, View } from '../components/Themed';
 
 
@@ -34,37 +35,52 @@ const friendRequestData = [
     name: 'Vicim994',
   },]
 
+/**
+ * This is the the apps inbox-page. It displays the recieved challenges and friend-requests. On it you can accept or decline
+ * friend-requests and accept or decline challenges. It refreshes when you pull down on the screen.
+ *
+ * @returns The entire FriendPage for the app
+ * @category Friendpage
+ */
 export default function ChallengePageScreen() {
 
   const [user, setUser] = useState('');
   const [friendRequest, setFriendRequest] = useState([]);
   const [error, setIsError] = useState(false);
 
+
   const searchFriendRequest = (id: string) => {
     console.log("Logged in as: " + id)
     var APIaddress = conn.API.adress + conn.API.port;
 
+    //Retrieves friend-requests form the database
     Axios.get(APIaddress + '/relations/request/' + id).then((response) => {
       setFriendRequest(response.data);
+
     });
   };
 
-  const acceptRequest = (relationId: string) => {
-    console.log("The realtion id: " + relationId)
+  //Updates the friend-request to accepted in the database
+  const acceptRequest = async (relationId: string) => {
     var APIaddress = conn.API.adress + conn.API.port;
-
     Axios.put(APIaddress + '/accept/request', { relId: relationId }).then((response) => {
-      alert("update")
+      setAcceptPressed(true);
+
     });
+    //Waits 1 second to show that it was accepted
+    await wait(1000)
+    searchFriendRequest(user)
   };
-
-  const declineRequest = (relationId: string) => {
-    console.log("The relation id is: " + relationId)
+  //Updates the friend-request to declined in the database
+  const declineRequest = async (relationId: string) => {
     var APIaddress = conn.API.adress + conn.API.port;
-
     Axios.put(APIaddress + '/decline/request', { relId: relationId }).then((response) => {
       alert("declined")
+      setDeclinePressed(true)
     });
+    //Waits 1 second to show that it was declined  
+    await wait(1000)
+    searchFriendRequest(user)
   };
 
   const asyncAction = async () => {
@@ -73,6 +89,8 @@ export default function ChallengePageScreen() {
       if (value !== null) {
         setUser(value);
         searchFriendRequest(value);
+        setAcceptPressed(false)
+        setDeclinePressed(false)
 
       }
     } catch (e) {
@@ -84,13 +102,52 @@ export default function ChallengePageScreen() {
     asyncAction();
   }, []);
 
+  const [acceptPressed, setAcceptPressed] = useState(false);
+  const [declinePressed, setDeclinePressed] = useState(false);
+  //Renders the friend-request
   const renderRequest = ({ item }: { item: any }) => {
+    var status;
+    if (acceptPressed) {
+      status = <Text style={{ color: 'white' }}>Accepted!</Text>
+    }
+    else if (declinePressed) {
+      status = <Text style={{ color: 'white' }}>Declined :(</Text>
+    }
+    else {
+      status = <>
+        <Pressable style={inboxStyles.acceptButton} onPress={() => acceptRequest(item.relation_id)}>
+          <Image source={require('../assets/images/check.png')} style={{
+            width: '60%',
+            height: '60%',
+          }} />
+        </Pressable>
+        <Pressable style={inboxStyles.declineButton} onPress={() => declineRequest(item.relation_id)}>
+          <Image source={require('../assets/images/cancel.png')} style={{
+            width: '60%',
+            height: '60%',
+          }} />
+        </Pressable>
+      </>
+    }
 
     return (
       <TouchableOpacity style={inboxStyles.friendRequestContainer}>
-        <Text>{item.name}</Text>
-        <Button title="Accept" onPress={() => acceptRequest(item.relation_id)}></Button>
-        <Button title="Decline" onPress={() => declineRequest(item.relation_id)}></Button>
+        <View style={inboxStyles.imageAndNameHolder}>
+          <UserIcon level={item.xp} />
+          <Text style={inboxStyles.messageFromText}>{item.name}</Text>
+        </View>
+
+        <View style={inboxStyles.textAndButtonsHolder}>
+
+          <View style={{ backgroundColor: '#383838' }}>
+            <Text style={inboxStyles.messageHeadText}>Friend Request!</Text>
+          </View>
+
+          <View style={inboxStyles.statusButtonHolder}>
+            {status}
+          </View>
+
+        </View>
       </TouchableOpacity>
 
     );
@@ -115,7 +172,6 @@ export default function ChallengePageScreen() {
 
           {/* List of friendrequests*/}
           <FlatList
-            //  style={inboxStyles.list}
             refreshControl={<RefreshControl
               refreshing={refreshing}
               onRefresh={onRefresh}

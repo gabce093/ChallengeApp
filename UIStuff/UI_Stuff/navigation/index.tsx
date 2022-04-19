@@ -6,7 +6,7 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons'; 
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
@@ -59,27 +59,27 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
- const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 // Root navigator is on all 5 main tabs, it includes the topbar
 function RootNavigator() {
   return (
     <Stack.Navigator>
-              
-      <Stack.Screen name="Root" component={BottomTabNavigator}  options=
-      {({navigation}) => ({
-        headerShown: true,
-        headerTransparent: true,
-        header: () => <TopBar {...navigation}/>
-         
-      })} />
+
+      <Stack.Screen name="Root" component={BottomTabNavigator} options=
+        {({ navigation }) => ({
+          headerShown: true,
+          headerTransparent: true,
+          header: () => <TopBar {...navigation} />
+
+        })} />
 
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
-        <Stack.Screen name="CreateRunPage" component={CreateRunPage} />
-        <Stack.Screen name="GPSPage" component={GPSPage} />
+      <Stack.Screen name="CreateRunPage" component={CreateRunPage} />
+      <Stack.Screen name="GPSPage" component={GPSPage} />
     </Stack.Navigator>
   );
 }
@@ -93,16 +93,16 @@ function BottomTabNavigator() {
       initialRouteName="MainPage"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
-        
+
       }}>
-        
+
       <BottomTab.Screen
         name="StatPage"
         component={StatPageScreen}
         options={{
           title: 'Stat Page',
           headerShown: false,
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons  name="medal" size={30} color={color} />,
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="medal" size={30} color={color} />,
         }}
       />
 
@@ -142,7 +142,7 @@ function BottomTabNavigator() {
           */
         })}
       />
-      
+
       <BottomTab.Screen
         name="ChallengePage"
         component={ChallengePageScreen}
@@ -162,7 +162,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <FontAwesome5 name="user-friends" size={24} color={color} />,
         }}
       />
-      
+
     </BottomTab.Navigator>
   );
 }

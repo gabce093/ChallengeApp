@@ -1,11 +1,12 @@
-import React, { useState, useEffect, } from "react";
+import React, { useState } from "react";
 import {
   ScrollView,
   Text,
   View,
   TouchableOpacity,
   Button,
-  Image
+  Image,
+  TextInput
 } from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 import * as Animatable from 'react-native-animatable';
@@ -17,7 +18,17 @@ import conn from '../constants/databaseAPI';
 
 import Axios from 'axios';
 
-export default function renderUserList(data: any, user: string) {
+import { searchUser } from '../API/FriendPage/APIrequests'
+
+/** 
+* @remarks This function generates a search result as a FlatList.
+* 
+*@param user The user that is searching
+*@returns A list of users
+*@category Friendpage
+*/
+
+export default function renderUserList(user: string) {
   const APIaddress = conn.API.adress + conn.API.port;
   const [activeSections, setActiveSections] = useState([]);
   const [showButton, setShowButton] = useState(true);
@@ -26,6 +37,16 @@ export default function renderUserList(data: any, user: string) {
     //setting up a active section state
     setActiveSections(sections.includes(undefined) ? [] : sections);
   };
+
+  const [data, setData] = useState([]);
+  // const searchUser = (text: string) => {
+  //   var APIaddress = conn.API.adress + conn.API.port;
+  //   const request = APIaddress + '/users/' + `${user}` + '/' + `${text}`;
+  //   Axios.get(request).then((response) => {
+  //     setData(response.data);
+  //     setActiveSections([]);
+  //   });
+  // };
 
   const addFriend = (toUser: string) => {
     console.log(user + ' added ' + toUser);
@@ -87,50 +108,50 @@ export default function renderUserList(data: any, user: string) {
       var status = showButton === true ?
         <Button onPress={() => addFriend(section.user_id)} title='Send Request' /> : <Text>Request Sent!</Text>
     }
-
     return (
       <Animatable.View
         duration={400}
         style={[styles.content]}
         transition="backgroundColor">
-
         {status}
-        {/* <Button
-          onPress={() => console.log('collapse button')}
-          title='Send Request' />
-        <Animatable.Text
-          animation={isActive ? 'bounceIn' : undefined}
-          style={{ textAlign: 'center' }}>
-          {section.content}
-        </Animatable.Text> */}
       </Animatable.View>
     )
   };
   return (
-    <ScrollView>
-      {/*Code for Accordion/Expandable List starts here*/}
-      <Accordion
-        activeSections={activeSections}
-        //for any default active section
-        sections={data}
-        //title and content of accordion
-        touchableComponent={TouchableOpacity}
-        //which type of touchable component you want
-        //It can be the following Touchables
-        //TouchableHighlight, TouchableNativeFeedback
-        //TouchableOpacity , TouchableWithoutFeedback
-        expandMultiple={false}
-        //Do you want to expand mutiple at a time or single at a time
-        renderHeader={renderHeader}
-        //Header Component(View) to render
-        renderContent={renderContent}
-        //Content Component(View) to render
-        duration={400}
-        //Duration for Collapse and expand
-        onChange={setSections}
-      //setting the state of active sections
-      />
-      {/*Code for Accordion/Expandable List ends here*/}
-    </ScrollView>
+    <>
+      {/* Input to write tha name of the friend */}
+      <TextInput style={styles.textWindow}
+        onChangeText={(text) => searchUser(user, text)
+          .then(data => {
+            setData(data);
+          })
+          .catch(() => console.log('error when searching user'))}
+        placeholder={'Type name...'} />
+      <ScrollView>
+        {/*Code for Accordion/Expandable List starts here*/}
+        <Accordion
+          activeSections={activeSections}
+          //for any default active section
+          sections={data}
+          //title and content of accordion
+          touchableComponent={TouchableOpacity}
+          //which type of touchable component you want
+          //It can be the following Touchables
+          //TouchableHighlight, TouchableNativeFeedback
+          //TouchableOpacity , TouchableWithoutFeedback
+          expandMultiple={false}
+          //Do you want to expand mutiple at a time or single at a time
+          renderHeader={renderHeader}
+          //Header Component(View) to render
+          renderContent={renderContent}
+          //Content Component(View) to render
+          duration={400}
+          //Duration for Collapse and expand
+          onChange={setSections}
+        //setting the state of active sections
+        />
+        {/*Code for Accordion/Expandable List ends here*/}
+      </ScrollView>
+    </>
   );
 }

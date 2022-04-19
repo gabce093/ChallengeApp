@@ -4,38 +4,46 @@ import { Button } from "react-native";
 import React, { useState, useEffect } from 'react';
 import { Text, View } from '../components/Themed';
 import { Stopwatch, Timer } from 'react-native-stopwatch-timer';
-import {getType, getTime, getDistanceGoal, checkCompleted, setElapsedDistance, setTime, CompleteChallenge} from '../ChallengeData';
+import { getType, getTime, getDistanceGoal, checkCompleted, setElapsedDistance, setTime, CompleteChallenge } from '../ChallengeData';
 import {
     SafeAreaView,
     TouchableHighlight,
     Modal,
-  } from 'react-native';
+} from 'react-native';
 
+/** 
+*Handles the GPS functions
+* 
+*@param position - The position from the GPS
+*
+*@returns The stopwatch
+*@category GPSPage
+*@author Victor
+*/
+export default function Recorder({ position }: any) {
 
-export default function Recorder({position}: any) {
-    
     const [distance, setDistance] = useState(0);
-    const [startposition, setStartPosition] = useState([0,0]);
+    const [startposition, setStartPosition] = useState([0, 0]);
     const [recording, setRecording] = useState(false);
     const [isStopwatchStart, setIsStopwatchStart] = useState(false);
     const [resetStopwatch, setResetStopwatch] = useState(false);
     const haversine = require('haversine');
-    
+
     var goal = getDistanceGoal();
 
     useEffect(() => {
-      if (recording == true) {
-        let distance_since_last = haversine(startposition, position, {unit: 'meter', format: '[lon,lat]' });
-        setDistance(distance + distance_since_last);
-        setStartPosition(position);
-      }
+        if (recording == true) {
+            let distance_since_last = haversine(startposition, position, { unit: 'meter', format: '[lon,lat]' });
+            setDistance(distance + distance_since_last);
+            setStartPosition(position);
+        }
     }, [position])
 
     const handleStartStop = () => {
         setIsStopwatchStart(!isStopwatchStart);
         setResetStopwatch(false);
         setRecording(!recording);
-        setStartPosition(position);  
+        setStartPosition(position);
     }
 
     const handleReset = () => {
@@ -63,23 +71,23 @@ export default function Recorder({position}: any) {
 
                 getTime={(time: any) => {
                     if (isStopwatchStart == false) {
-                        setTime(time); 
-                    }   
+                        setTime(time);
+                    }
                 }}
             />
-            <Text style={{color: "#fff"}}>{Math.round(distance) + "/" + goal}</Text>
+            <Text style={{ color: "#fff" }}>{Math.round(distance) + "/" + goal}</Text>
             <TouchableHighlight
                 onPress={handleStartStop}>
                 <Text>{!isStopwatchStart ? 'START' : 'STOP'}</Text>
             </TouchableHighlight>
             <Button
-                title= "Reset"
+                title="Reset"
                 onPress={handleReset}
             />
             <Button
-                title= "Finish"
+                title="Finish"
                 onPress={handleFinish}
             />
-        </SafeAreaView>   
+        </SafeAreaView>
     );
 }  

@@ -4,8 +4,17 @@
     "strict": true
   },
   "typedocOptions": {
-    "entryPoints": ["./components/GroupSquare.tsx"],
-    "out": "docs"
+    "entryPoints": ["navigation/index.tsx",
+                    "components/GroupSquare.tsx",
+                    "components/FriendSquare.tsx",
+                    "components/friendSearchList.tsx",
+                    "components/Recorder.tsx",
+                    "components/UserIconLarge.tsx",
+                    "screens/FriendPage.tsx",
+                    "screens/ChallengePage.tsx",
+                    "constants/databaseAPI.ts",
+                  ],
+    "out": "documentation"
   },
 }
 

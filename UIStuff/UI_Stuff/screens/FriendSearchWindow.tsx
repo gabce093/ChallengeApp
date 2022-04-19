@@ -17,18 +17,11 @@ import conn from '../constants/databaseAPI';
 */
 export function FriendSearchWindow(user: string) {
 
-    const [data, setData] = useState([]);
+
 
     const [modalVisible, setModalVisible] = useState(false);
     const [friendSearch, setFriendSearch] = useState('');
 
-    const searchUser = (text: string) => {
-        var APIaddress = conn.API.adress + conn.API.port;
-        const request = APIaddress + '/users/' + `${user}` + '/' + `${text}`;
-        Axios.get(request).then((response) => {
-            setData(response.data);
-        });
-    };
 
     // Fetches the users from the database based on the parameter "text"
 
@@ -37,7 +30,7 @@ export function FriendSearchWindow(user: string) {
             animationIn="slideInUp"
             isVisible={modalVisible}
             onBackdropPress={() => setModalVisible(false)}
-            onModalHide={() => setData([])}
+        // onModalHide={() => setData([])}
         >
             <View style={SearchFriend.centeredView}>
                 <View style={SearchFriend.modalView}>
@@ -60,13 +53,10 @@ export function FriendSearchWindow(user: string) {
                     </Pressable>
                     <Text style={SearchFriend.modalText}>Search for friend!</Text>
 
-                    {/* Input to write tha name of the friend */}
-                    <TextInput style={SearchFriend.textWindow}
-                        onChangeText={(text) => searchUser(text)}
-                        placeholder={'Type name...'} />
+
 
                     {/* Sends in data from the fectch and renders it as a list(accordion) */}
-                    {renderUserList(data, user)}
+                    {renderUserList(user)}
 
                 </View>
             </View>

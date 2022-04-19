@@ -15,7 +15,9 @@ export default function ResultProgressBar(props: any){
 
     const [xp, setXP] = useState(0);
 
+    //UseEffect that runs every time distance is changed.
     useEffect(() => {
+        //Increment xp after 10 millisec. Faster in the beginning, slower in the end.
         if(xp <= calculateXP()) {
             const interval = setTimeout(() => {
                setXP(prevXp => prevXp+1);   
@@ -23,27 +25,62 @@ export default function ResultProgressBar(props: any){
                 else   setXP(prevXp => prevXp+1);   
             }, 10);
             return () => clearInterval(interval);
-        }
-        
+        }     
     }, [xp])
+
+    //Set orange color to transparent if levelup
+    const handleOrange = (n: number) => {
+        
+        if (n > 1) {
+           return "transparent";
+        }
+        else {
+           return "#FF5C00";
+        }
+    }
+
+    //Set blue color to transparent if levelup
+    const handleBlue = (n: number) => {
+        
+        if (n > 1) {
+           return "transparent";
+        }
+        else {
+           return "#17BEBB";
+        }
+    }
 
     return (
         <View style={styles.progressContainer2}>
-            <ProgressBar color="#FF5C00" progress={getLevelProgress() + xp/getLevelXp()} style={{
+            <ProgressBar color={handleBlue(getLevelProgress()+xp/getLevelXp())} progress={getLevelProgress()+xp/getLevelXp()} style={{
                 height: 20,
                 width: 340,
                 borderRadius: 20,
-                backgroundColor: "#151515",
-                
+                backgroundColor: "#151515",   
                 }}/>
-            <ProgressBar color="#17BEBB" progress={getLevelProgress()} style={{
+            <ProgressBar color={handleOrange(getLevelProgress()+xp/getLevelXp())} progress={getLevelProgress()} style={{
                 height: 20,
                 width: 340,
                 backgroundColor: "transparent",
                 borderRadius: 20,
                 marginTop: -20,
                 }}/>
-                
+            <ProgressBar color="#17BEBB" progress={xp/getLevelXp() + getLevelProgress() - 1} style={{
+                height: 20,
+                width: 340,
+                borderRadius: 20,
+                backgroundColor: "transparent", 
+                marginTop: -20,
+                }}/> 
         </View>
     )
 }
+
+//getLevelProgress() + xp/getLevelXp()
+//getLevelProgress()
+//#F59756 sandy brown
+//#17BEBB light blue
+//#FF5C00 orange
+//#00A6A6 light sea green
+//#1D3354 prussian blue
+//#EAD2AC wheat

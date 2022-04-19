@@ -15,7 +15,9 @@ export default function ResultProgressBar(props: any){
     
     const [distance, setDistance] = useState(0);
 
+    //UseEffect that runs every time distance is changed.
     useEffect(() => {
+        //Increment distance after 10 millisec. Faster in the beginning, slower in the end.
         if(distance <= props.elapsedDistance - 1) {
             const interval = setTimeout(() => {
                 if (props.elapsedDistance - distance > 500)   setDistance(prevDist => prevDist+500);
@@ -34,8 +36,7 @@ export default function ResultProgressBar(props: any){
                 height: 20,
                 width: 340,
                 borderRadius: 20,
-                backgroundColor: "#151515",
-                
+                backgroundColor: "#151515",    
                 }}/>
             <ProgressBar color="#17BEBB" progress={(distance-props.goal) / props.goal} style={{
                 height: 20,
@@ -43,8 +44,7 @@ export default function ResultProgressBar(props: any){
                 backgroundColor: "transparent",
                 borderRadius: 20,
                 marginTop: -20,
-                }}/>
-                
+                }}/>        
         </View>
     )
 }

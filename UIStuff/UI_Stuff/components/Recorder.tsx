@@ -82,9 +82,17 @@ export default function Recorder(props: any){
         setElapsedDistance(distance);
         if (distance > goal) {
             CompleteChallenge();
+            console.log(props.watcher)
+            props.watcher.remove();
             props.navigation.navigate('ResultPage');
         }
-        else {
+        else if (modalVisible){
+            CompleteChallenge();
+            console.log(props.watcher)
+            props.watcher.remove();
+            props.navigation.navigate('ResultPage');
+        }
+        else{
             setModalVisible(!modalVisible)
         }
     }
@@ -123,7 +131,7 @@ export default function Recorder(props: any){
                <View>
                     <Text>Challenge not completed. Are you sure you want to finish run?</Text>
                     <TouchableHighlight 
-                        onPress={() => props.navigation.navigate('ResultPage')}>
+                        onPress={() => handleFinish()}>
                             <Text>Finish now</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
@@ -149,7 +157,7 @@ export default function Recorder(props: any){
             <View style={styles.subContainer}>
                 <View style={styles.distanceContainer}>
                     <Text style={styles.text}>{Math.round(distance) + "/" + goal}</Text>
-                    <Text style={styles.smallText}>Distance (km)</Text>
+                    <Text style={styles.smallText}>Distance (m)</Text>
                 </View>
                 <View style={styles.paceContainer}>
                     <Text style={styles.text}>{speed}</Text>
@@ -175,6 +183,7 @@ export default function Recorder(props: any){
                 <ProgressBar color="#FF5C00"progress={distance / goal} style={{
                 height: 20,
                     backgroundColor: "#151515",
+                    borderRadius: 10,
                     }}/>
             </View>
         </View>

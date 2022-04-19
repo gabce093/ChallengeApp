@@ -95,7 +95,7 @@ export function getMinPerK(){
 
 export function calculateCoins(){
     
-
+    
     
 
    

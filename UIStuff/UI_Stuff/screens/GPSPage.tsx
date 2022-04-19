@@ -5,6 +5,7 @@ import * as Location from 'expo-location';
 import { Text, View } from '../components/Themed';
 import Recorder from '../components/Recorder';
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
+import { HeadingSubscriber } from 'expo-location/build/LocationSubscribers';
 
 
 export default function GPSPage({ navigation }: RootStackScreenProps<'ResultPage'>) {
@@ -12,9 +13,10 @@ export default function GPSPage({ navigation }: RootStackScreenProps<'ResultPage
 
     const [position, setPosition] = useState([0,0]);
     const [pace, setPace] = useState(0.0);
+    const [watcher, setWatcher] = useState(null);
     const [errorMsg, setErrorMsg] = useState("null");
     
-    let subscriber = null;   
+  
     //Runs when page is open.
     useEffect(() => {
       (async () => {
@@ -24,11 +26,10 @@ export default function GPSPage({ navigation }: RootStackScreenProps<'ResultPage
         if (status !== 'granted') {
             setErrorMsg('Permission to access location was denied');
             console.log("permission denied")
-            return;
         }
         
         //Subscriber that watch the location. If user has moved more than 10 meters it will log the info.
-        subscriber = await Location.watchPositionAsync(
+        const subscriber = await Location.watchPositionAsync(
           {
               accuracy: Location.Accuracy.BestForNavigation,
               distanceInterval: 10,
@@ -38,15 +39,19 @@ export default function GPSPage({ navigation }: RootStackScreenProps<'ResultPage
               if (location.coords.speed != null) {
                 setPace(location.coords.speed);
               }   
-          }
-      ); 
+          },
+      ).then((locationWatcher) => {
+        setWatcher(locationWatcher);
+      }).catch((err) => {
+        console.log(err)
+      });  
       })()
     }, [])
 
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../Graphics/forest.png')} style={styles.forestBackground} resizeMode="cover"></ImageBackground>
-        <Recorder position={position} pace={pace} navigation={navigation}></Recorder>  
+        <Recorder position={position} pace={pace} watcher={watcher} navigation={navigation}></Recorder>  
       </View>
     );
 }

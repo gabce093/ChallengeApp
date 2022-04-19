@@ -55,10 +55,13 @@ export default StyleSheet.create({
         backgroundColor: 'transparent',
     },
     progressContainer2: {
-        height: 20,
-        width: 400,
+        height: 36,
+        width: 350,
         alignItems: 'center',
-        backgroundColor: 'transparent',
+        justifyContent: 'center',  
+        
+        backgroundColor: "rgba(52, 52, 52, 0.7)",
+        borderRadius: 10,
     },
     timeContainer: {
         flex: 3,

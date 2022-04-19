@@ -1,41 +1,46 @@
 import styles from '../styles/Page.style';
+import styles2 from '../styles/CreateRunPage.style';
 import {addCoin, addGem, addEXP} from '../PlayerData';
+import {setDistanceGoal} from '../ChallengeData';
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import React from 'react';
-import { Button } from 'react-native';
+import { Button, ImageBackground, TouchableHighlight } from 'react-native';
 
 export default function CreateRunPage({ navigation }: RootStackScreenProps<'GPSPage'>) {
+
+  const createChallenge = (distance: number) => {
+    setDistanceGoal(distance);
+    navigation.navigate('GPSPage')
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>FuskSidan</Text>
+      <ImageBackground source={require('../Graphics/forest.png')} style={styles.forestBackground} resizeMode="cover">
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       {/*<EditScreenInfo path="/screens/CreateRunPage.tsx" >*/}
-      <View style={styles.flipperContainer}>
-      <Button
-      onPress={() => addCoin(30)}
-      title="Adda Coin"
-      color="#ab309f"
-      />
-      <Button
-      onPress={() => addGem(2)}
-      title="Adda Gem"
-      color="#ed5e0e"
-      />
-      <Button
-      onPress={() => addEXP(500)}
-      title="Adda EXP"
-      color="#fcba03"
-      />
+
+      <View style={styles2.container}>
+        <Text style={styles2.bigText}>Select challenge:</Text>
+        <TouchableHighlight 
+          style={styles2.button}
+          onPress={() => createChallenge(3000)}>
+            <Text style={styles2.text}>3km</Text>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          style={styles2.button}
+          onPress={() => createChallenge(5000)}>
+            <Text style={styles2.text}>5km</Text>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          style={styles2.button}
+          onPress={() => createChallenge(7000)}>
+            <Text style={styles2.text}>7km</Text>
+        </TouchableHighlight>
       </View>
-
-      <Button
-        title= "Challenge"
-        onPress={() => navigation.navigate('GPSPage')}
-      />   
-
+      </ImageBackground>
     </View>
   );
 }

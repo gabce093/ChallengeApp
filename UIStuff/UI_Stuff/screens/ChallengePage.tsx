@@ -140,7 +140,6 @@ export default function ChallengePageScreen() {
       <ImageBackground resizeMode="cover" style={friendPageStyles.backimg} source={require('../assets/images/forest.png')}>
 
         <View style={inboxStyles.inboxContainer}>
-
           {/* List of friendrequests*/}
           <FlatList
             refreshControl={<RefreshControl

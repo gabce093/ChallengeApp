@@ -17,7 +17,7 @@ const APIaddress = conn.API.adress + conn.API.port;
  * @returns Returns an array of users based on the search word
  */
 export const searchUser = (userId: string, searchWord: string) => {
-    const request = APIaddress + '/users/' + `${userId}` + '/' + `${searchWord}`;
+    const request = APIaddress + '/users' + '/search/' + `${userId}` + '/' + `${searchWord}`;
 
     const dataPromise = Axios.get(request).then((response) => response.data)
     return dataPromise;

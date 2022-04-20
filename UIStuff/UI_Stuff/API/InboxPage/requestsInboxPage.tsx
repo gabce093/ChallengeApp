@@ -1,6 +1,4 @@
-import Axios, { AxiosResponse } from 'axios';
-import { SetStateAction, useState } from 'react';
-
+import Axios from 'axios';
 import conn from '../../constants/databaseAPI';
 
 const APIaddress = conn.API.adress + conn.API.port;
@@ -16,7 +14,7 @@ const APIaddress = conn.API.adress + conn.API.port;
  */
 export const getFriendRequests = (userId: string) => {
     console.log("Logged in as: " + userId)
-    const request = APIaddress + '/friends/request/' + userId;
+    const request = APIaddress + '/users/request/' + userId;
 
     const dataPromise = Axios.get(request).then((response) => response.data)
     return dataPromise;

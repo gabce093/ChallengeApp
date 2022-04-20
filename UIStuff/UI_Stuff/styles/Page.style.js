@@ -168,4 +168,8 @@ export default StyleSheet.create({
       fontSize: 14,
       color: '#C4C4C4',
     },
+    headertext: {
+      fontSize: 15,
+      color: '#C4C4C4',
+    },
   });

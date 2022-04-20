@@ -1,7 +1,10 @@
 import { StyleSheet, Dimensions } from 'react-native';
 var screenWidth = Dimensions.get('window').width;
 
-
+/**
+ * This function contains the style of the base stat page.
+ * @author Henrik Gustafsson
+ */
 export default StyleSheet.create({
     MainContainer: {
         position: "relative",
@@ -16,8 +19,11 @@ export default StyleSheet.create({
     },
     title:{
         flex: 1,
-        fontSize: 0.1*screenWidth,
+        flexDirection: "row",
+        fontSize: 0.11*screenWidth,
         fontWeight: 'bold',
+        justifyContent: "center",
+        alignItems: "center",
 
     },
     statHolder:{
@@ -28,8 +34,13 @@ export default StyleSheet.create({
     },
     row:{
         flex: 1,     
-        backgroundColor: "transparent", 
+        backgroundColor: "rgba(0,0,0,0.5)", 
+        padding: "2%",
+        margin: "1%",
+        borderRadius: 15,
         flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
     },
     statText:{
         width: "50%",

@@ -12,7 +12,14 @@ import { RootStackScreenProps } from '../types';
 import {getLevel, getLevelProgress, getCoins, getGems, getPlayer} from '../PlayerData';
 import React, { Component, useState, useEffect } from 'react';
 
-{/*Topbar has alot of components, the errors are false; it works*/}
+/**
+ * This function contains the functionality of the topbar in the header.
+ * It displayer player information and gives acces to the settings menu.
+ * 
+ * @author Henrik Gustafsson
+ * @param navigation Uses navigation data to remain on every desired page
+ * @returns Itself as a component to be used by the navigation function in Index.
+ */
 export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
   
     const colorScheme = useColorScheme();

@@ -5,7 +5,8 @@ import { Text, View } from '../components/Themed';
 import { ImageBackground, TouchableOpacity, ScrollView,FlatList} from "react-native";
 import Axios from "axios";
 
-import {buyItem} from '../ShopData';
+import {buyItem, UpdateHeadImg, UpdateShirtImg, UpdatePantsImg, UpdateShoesImg} from '../ShopData';
+import { getPlayer, getPlayerId } from '../PlayerData';
 
 
 
@@ -85,36 +86,69 @@ export default function ShoppingPageScreen() {
 
 
   const [itemList, setItemList] = useState([]);
+  const [inventoryList, setInventoryList] = useState([]);
 
   const GetShopItems = () => {
        
-    Axios.get("http://213.188.152.167:5000/items").then((response) => {       
+    Axios.get(`http://213.188.152.167:5000/items/owneditems/${getPlayerId()}`).then((response) => {       
     setItemList(response.data);
     console.log(response.data);
+    });  
+
+    
+  
+  }
+  const GetEquippedItems = () => {
+       
+    Axios.get(`http://213.188.152.167:5000/equipped/${getPlayerId()}`).then((response) => {       
+    
+    setHeadImg(`http://213.188.152.167:5000/graphics/character/${response.data[0].hat}.png`)
+    setShirtImg(`http://213.188.152.167:5000/graphics/character/${response.data[0].shirt}.png`)
+    setPantsImg(`http://213.188.152.167:5000/graphics/character/${response.data[0].pants}.png`)
+    setShoesImg(`http://213.188.152.167:5000/graphics/character/${response.data[0].shoes}.png`)
+
+
+    console.log(response.data[0].hat);
     });  
   
   }
  
   useEffect(() => {
-    GetShopItems();   
+    GetShopItems();
+    GetEquippedItems();
+
   }, []);
 
   //Used to select clothes to wear
-  const [headImg, setHeadImg] = useState (require('../Graphics/character/empty.png'));
-  const [shirtImg,setShirtImg] = useState (require('../Graphics/character/empty.png'));
-  const [thisPrevImg,setThisImg] = useState('');
+  const [headImg, setHeadImg] = useState ('http://213.188.152.167:5000/graphics/character/empty.png');
+  const [shirtImg,setShirtImg] = useState ('http://213.188.152.167:5000/graphics/character/empty.png');
+  const [pantsImg,setPantsImg] = useState ('http://213.188.152.167:5000/graphics/character/empty.png');
+  const [shoesImg,setShoesImg] = useState ('http://213.188.152.167:5000/graphics/character/empty.png');
 
   
   {/*Used to update the flatList if any new data is written to a specific item */}
   const [selectedId, setSelectedId] = useState(null);
+  const [ownedId, setOwnedId] = useState(false);
+
 
   {/*Function that sets the image source from the current item, inside headImg and shirtImg */}
   const setClothes = (type:any, imgSource:string) =>{
     if(type == 1){
-      setHeadImg(imgSource);
+      setHeadImg(`http://213.188.152.167:5000/graphics/character/${imgSource}.png`);
+      UpdateHeadImg(imgSource);
+
     }
     else if(type == 2){
-      setShirtImg(imgSource);
+      setShirtImg(`http://213.188.152.167:5000/graphics/character/${imgSource}.png`);
+      UpdateShirtImg(imgSource);
+    }
+    else if(type == 3){
+      setPantsImg(`http://213.188.152.167:5000/graphics/character/${imgSource}.png`);
+      UpdatePantsImg(imgSource);
+    }
+    else if(type == 4){
+      setShoesImg(`http://213.188.152.167:5000/graphics/character/${imgSource}.png`);
+      UpdateShoesImg(imgSource);
     }
     else{
       console.log('error: this item inside ItemDATA has an invalid type');
@@ -123,25 +157,36 @@ export default function ShoppingPageScreen() {
 
 {/*The render function that renders al the items inside shopMenu (flatList uses this)*/}
   const renderItem = ({ item }:{item:any}) => {
-    console.log(item.itemId);
-    setThisImg(`../Graphics/character/${item.itemId}_prev`);
+    
+   console.log(item.id)
+
+var itemOwn = false;
+
+   if (item.id == null){
+    itemOwn = false;
+  }  
+  else {
+    itemOwn = true;
+   }
+
+    
     return (
       <View style={shopStyles.shopButton}>
       {/*Checks if the character own the item. If it does: show the select button. if not: show the buy button*/}
-      {item.own ?(
+      {itemOwn ?(
           <TouchableOpacity
-          onPress={() => setClothes(item.itemType, `../Graphics/character/${item.itemId}`)}>
+          onPress={() => setClothes(item.itemType, item.itemId)}>
            <ImageBackground
-              source={require(thisPrevImg)}
+              source={{uri:`http://213.188.152.167:5000/graphics/character/${item.itemId}_prev.png` }}
               style={shopStyles.prevImg}>
             </ImageBackground>
             <Text style={shopStyles.itemText}>{item.itemName}</Text>
         </TouchableOpacity>
         ):(
           <TouchableOpacity
-            onPress={() => {buyItem(item.cost)[0]? (item.own = true, setSelectedId(item.id)) : (item.own = false)} }>     
+            onPress={() => {buyItem(item.itemPrice,item.itemId)? (itemOwn = true, setSelectedId(item.itemId), GetShopItems()) : (itemOwn = false)} }>     
             <ImageBackground
-              source={require(`../Graphics/character/${item.itemId}_prev`)}
+              source={{uri:`http://213.188.152.167:5000/graphics/character/${item.itemId}_prev.png` }}
               style={shopStyles.prevImg}>
           </ImageBackground>
           <Text style={shopStyles.itemText}>Buy for: {item.itemPrice} &#x1F315;</Text>
@@ -167,25 +212,40 @@ export default function ShoppingPageScreen() {
 
          {/*Original character is always rendered */}
          <ImageBackground
-           source={require('../Graphics/character/wut2.png')}
+           source={require('../Graphics/character/Base_Character.png')}
            style={shopStyles.character} resizeMode="cover">
          </ImageBackground>
 
           {/*Render the character. Use states to render the different images for the head and shirt. These are changed with the buttons in the shopMenu*/}
-         <ImageBackground
-           source={headImg}
-           style={shopStyles.character} resizeMode="cover">
-         </ImageBackground>
+         
  
          <ImageBackground
-           source={shirtImg}
+           source={{uri:shirtImg}}
+           fadeDuration={0}
            style={shopStyles.character} resizeMode="cover">
          </ImageBackground>
-         
+        
+         <ImageBackground
+           source={ {uri:pantsImg}}
+           fadeDuration={0}
+           style={shopStyles.character} resizeMode="cover">
+         </ImageBackground>
+
+         <ImageBackground
+           source={ {uri:shoesImg}}
+           fadeDuration={0}
+           style={shopStyles.character} resizeMode="cover">
+         </ImageBackground>
+
+         <ImageBackground
+           source={ {uri:headImg}}
+           fadeDuration={0}
+           style={shopStyles.character} resizeMode="cover">
+         </ImageBackground>
 
        </View>
 
-        <Text style={shopStyles.titleText}>The ssShop</Text>
+        <Text style={shopStyles.titleText}>The Shop</Text>
       
         <View style ={shopStyles.shopMenu}>
           <ScrollView style= {{paddingBottom: '2%'}} showsVerticalScrollIndicator={false}>

@@ -40,6 +40,13 @@ export default StyleSheet.create({
         borderRadius: 5,
     },
     button: {
+        opacity: 0.3,
+        width: '47%',
+        backgroundColor: '#282828',
+        justifyContent: 'center',
+        borderRadius: 5,
+    },
+    button2: {
         
         width: '47%',
         backgroundColor: '#282828',

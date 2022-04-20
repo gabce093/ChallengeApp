@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View } from '../components/Themed';
 import { Stopwatch} from 'react-native-stopwatch-timer';
 import {getType,calculateXP, getDistanceGoal, checkCompleted, getElapsedDistance} from '../ChallengeData';
-import { getLevelProgress, getLevelXp} from '../PlayerData';
+import { getLevel, getLevelProgress, getLevelXp} from '../PlayerData';
 import {
     SafeAreaView,
     TouchableHighlight,
@@ -14,14 +14,16 @@ import { ProgressBar } from 'react-native-paper';
 export default function ResultProgressBar(props: any){ 
 
     const [xp, setXP] = useState(0);
-
+    var lvl = getLevel();
+    var nextLvl = lvl +1;
+    
     //UseEffect that runs every time distance is changed.
     useEffect(() => {
         //Increment xp after 10 millisec. Faster in the beginning, slower in the end.
         if(xp <= calculateXP()) {
             const interval = setTimeout(() => {
                setXP(prevXp => prevXp+1);   
-               if (xp < 500)  setXP(prevXp => prevXp+100);
+               if (xp < 500)  setXP(prevXp => prevXp+50);
                 else   setXP(prevXp => prevXp+1);   
             }, 10);
             return () => clearInterval(interval);
@@ -72,6 +74,7 @@ export default function ResultProgressBar(props: any){
                 backgroundColor: "transparent", 
                 marginTop: -20,
                 }}/> 
+            <Text>{(getLevelProgress()+xp/getLevelXp() > 1) ? "Current level: " + nextLvl + " Level up!" : "Current level: " + lvl }</Text>
         </View>
     )
 }

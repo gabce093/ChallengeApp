@@ -84,7 +84,7 @@ export const getLevel = () => {
     {
         lvl = 20 + Math.floor((totalEXP-20000)/7500);
     }
-    return[lvl];
+    return lvl;
 }
 
 export const getLevelXp = () => {

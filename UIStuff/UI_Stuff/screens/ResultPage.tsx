@@ -26,7 +26,8 @@ export default function ResultPage({navigation}: RootTabScreenProps<'MainPage'>)
               <Text style={styles2.title}>Challenge</Text>
               <Text style={styles2.title2}>{string}</Text>
               <Text style={styles2.title}>Complete!</Text>  
-              <Text>Rewards: + {calculateXP() +"xp, +" + 50 + "coins"}</Text>
+              <Text style={styles2.text}>Rewards:</Text>
+              <Text style={styles2.text}>{"+"+Math.round(calculateXP()) +"xp, +" + 50 + "coins"}</Text>
               <XpProgressBar></XpProgressBar>
             </View>
             
@@ -55,7 +56,7 @@ export default function ResultPage({navigation}: RootTabScreenProps<'MainPage'>)
                   <Text style={styles2.text2}>{"Pace (min/km)"}</Text>
                 </View>
               </View>
-              <ResultProgressBar goal={5000} elapsedDistance={5339}></ResultProgressBar>
+              <ResultProgressBar goal={getDistanceGoal()} elapsedDistance={getElapsedDistance()}></ResultProgressBar>
               
               <TouchableOpacity style={styles2.button} onPress={() => navigation.navigate('MainPage')}>
                 <Text style={styles2.buttonText}>Done</Text>

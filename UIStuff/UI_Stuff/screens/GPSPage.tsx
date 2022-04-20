@@ -6,17 +6,28 @@ import { Text, View } from '../components/Themed';
 import Recorder from '../components/Recorder';
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 import { HeadingSubscriber } from 'expo-location/build/LocationSubscribers';
+import { LocationSubscription } from 'expo-location';
 
-
+/** 
+  * This function checks geolocationpermission from the user, if granted it starts logging geodata every 10 meters
+  * the user is moving. Sends pace, position and watcher props to recorder component.
+  * 
+  * @author Victor
+  * @param navigation The navigation variable to the resultpage.
+  * @returns The page that the user can record a challenge.
+*/
 export default function GPSPage({ navigation }: RootStackScreenProps<'ResultPage'>) {
   StatusBar.setHidden(false);
 
     const [position, setPosition] = useState([0,0]);
     const [pace, setPace] = useState(0.0);
-    const [watcher, setWatcher] = useState(null);
+    const [watcher, setWatcher] = useState<LocationSubscription | null>(null);
     const [errorMsg, setErrorMsg] = useState("null");
     
-  
+    /** 
+     * @author Victor
+     * 
+    */
     //Runs when page is open.
     useEffect(() => {
       (async () => {

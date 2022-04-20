@@ -7,10 +7,10 @@ import FriendSquare from "../components/FriendSquare";
 import GroupSquare from "../components/GroupSquare";
 import { FriendSearchWindow } from './FriendSearchWindow';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Axios from 'axios';
 import Modal from "react-native-modal";
 
-import conn from '../constants/databaseAPI';
+//getFriends finds the friends of the user
+import { getFriends, removeFriend } from '../API/FriendPage/requestsFriendPage';
 
 const GROUPS = [
   {
@@ -30,8 +30,6 @@ const GROUPS = [
   },
 
 ]
-
-
 /**
  * This is the the apps friend page. It displays the users friend and groups. On it you can also clock up a modal
  * where you can search for new people and send them friend-requests. You can also remove friends by long pressing
@@ -47,7 +45,7 @@ export default function FriendPageScreen() {
   const [error, setIsError] = useState(false);
 
   //Address of the API that connect to the database
-  const APIaddress = conn.API.adress + conn.API.port;
+
 
   //Changes the user in the AsyncStorage
   const storeData = async (value: string) => {
@@ -57,38 +55,11 @@ export default function FriendPageScreen() {
       // saving error
     }
   }
-  //Removes a friend-relation form the database
-  const removeFriend = (relationId: string) => {
 
-    Axios.delete(APIaddress + `/friends/remove/${relationId}`).then((response) => {
-      console.log('Deleted!')
-    })
-  }
-
-  //finds the friends of the user
-  const getFriends = (id: string) => {
-    console.log("Logged in as: " + id)
-    Axios.get(APIaddress + '/friends/' + id).then((response) => {
-      setFriends(response.data);
-    });
-  };
-
-  const [removeFriendVisible, setRemoveFriendVisible] = useState(false);
+  const [menuModalVisible, setMenuModalVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
 
   const renderFriendSquare = ({ item }: { item: any }) => {
-    //sets the id to be removed and enables the modal
-    const enableRemove = (id: string) => {
-      setSelectedId(id);
-      setRemoveFriendVisible(true);
-    }
-
-    //Rmoves a user from the database and disables the modal
-    const clickRemove = (removeId: string,) => {
-      removeFriend(removeId);
-      setRemoveFriendVisible(false);
-    }
-
     //changes the color of the button in the modal-menu
     const colorOnPress = ({ pressed }: { pressed: boolean }) => [
       {
@@ -102,7 +73,7 @@ export default function FriendPageScreen() {
         {/*Renders the friendSquare, see: ../Components/FriendSquare */}
         <FriendSquare
           item={item}
-          onLongPress={() => enableRemove(item.relation_id)}
+          onLongPress={() => [setSelectedId(item.relationId), setMenuModalVisible(true)]}
         />
         {/* A modal with options for a specific friend. Triggered by a longpress on the friendsquare */}
         <Modal
@@ -111,15 +82,20 @@ export default function FriendPageScreen() {
 
             justifyContent: 'flex-end',
           }}
-          // customBackdrop={<View style={{ height: '100%' }} />}
-          onModalHide={() => getFriends(user)}
+          onModalHide={() => getFriends(user)
+            .then(data => {
+              setFriends(data);
+            })
+            .catch((error) => console.log(error + ' when deleting friend in FriendPage.tsx'))}
+
           animationIn="slideInUp"
-          isVisible={removeFriendVisible}
-          onBackdropPress={() => setRemoveFriendVisible(false)}
+          isVisible={menuModalVisible}
+          onBackdropPress={() => setMenuModalVisible(false)}
         >
           {/* The optins in the modal */}
           <View style={friendPageStyles.friendModal}>
-            <Pressable onPress={() => clickRemove(selectedId)} style={({ pressed }) => [colorOnPress({ pressed }), friendPageStyles.modalMenuButton]}>
+            <Pressable onPress={() => [removeFriend(selectedId), setMenuModalVisible(false)]}
+              style={({ pressed }) => [colorOnPress({ pressed }), friendPageStyles.modalMenuButton]}>
               <Text style={friendPageStyles.modalMenuText}>Remove from friends</Text>
             </Pressable>
             <Pressable style={({ pressed }) => [colorOnPress({ pressed }), friendPageStyles.modalMenuButton]}>
@@ -186,13 +162,16 @@ export default function FriendPageScreen() {
 
   //Function for retrieving the current user on load, needed for displaying the users friends. Used for refresh
   const asyncAction = async () => {
+    //Retrievs user form AsyncStorage
+    const value = await AsyncStorage.getItem('@user_Key');
     try {
-      //Retrievs user form AsyncStorage
-      const value = await AsyncStorage.getItem('@user_Key')
       if (value !== null) {
-        setUser(value);
-        getFriends(value);
-
+        setUser(value)
+        await getFriends(value)
+          .then(data => {
+            setFriends(data);
+          })
+          .catch((error) => console.log(error + ' when retrieving friends in FriendPage.tsx (asyncAction-function)'))
       }
     } catch (e) {
       setIsError(true);

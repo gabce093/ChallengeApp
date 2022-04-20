@@ -3,10 +3,7 @@ import { Pressable, TextInput, Image, Text, View, FlatList, } from 'react-native
 import SearchFriend from '../styles/SearchFriend.style.js';
 import { useState, useEffect } from 'react';
 import Modal from "react-native-modal";
-import Axios from 'axios';
-import renderUserList from "../components/friendSearchList";
-
-import conn from '../constants/databaseAPI';
+import friendSearchList from "../components/friendSearchList";
 
 /** 
 * @remarks This fucntion opens a modal in which a the searchlist is displayed
@@ -17,11 +14,8 @@ import conn from '../constants/databaseAPI';
 */
 export function FriendSearchWindow(user: string) {
 
-
-
     const [modalVisible, setModalVisible] = useState(false);
     const [friendSearch, setFriendSearch] = useState('');
-
 
     // Fetches the users from the database based on the parameter "text"
 
@@ -53,10 +47,8 @@ export function FriendSearchWindow(user: string) {
                     </Pressable>
                     <Text style={SearchFriend.modalText}>Search for friend!</Text>
 
-
-
                     {/* Sends in data from the fectch and renders it as a list(accordion) */}
-                    {renderUserList(user)}
+                    {friendSearchList(user)}
 
                 </View>
             </View>

@@ -13,6 +13,8 @@
                     "screens/FriendPage.tsx",
                     "screens/ChallengePage.tsx",
                     "constants/databaseAPI.ts",
+                    "API/FriendPage/requestsFriendPage.tsx",
+                    "API/InboxPage/requestsInboxPage.tsx",
                   ],
     "out": "documentation"
   },

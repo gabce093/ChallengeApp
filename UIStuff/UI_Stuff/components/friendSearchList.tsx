@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ScrollView,
   Text,
@@ -14,11 +14,7 @@ import * as Animatable from 'react-native-animatable';
 import styles from '../styles/SearchFriend.style.js';
 import friendPageStyles from '../styles/FriendPage.style';
 
-import conn from '../constants/databaseAPI';
-
-import Axios from 'axios';
-
-import { searchUser } from '../API/FriendPage/APIrequests'
+import { searchUser, sendFriendRequest } from '../API/FriendPage/requestsFriendPage'
 
 /** 
 * @remarks This function generates a search result as a FlatList.
@@ -29,29 +25,17 @@ import { searchUser } from '../API/FriendPage/APIrequests'
 */
 
 export default function renderUserList(user: string) {
-  const APIaddress = conn.API.adress + conn.API.port;
   const [activeSections, setActiveSections] = useState([]);
-  const [showButton, setShowButton] = useState(true);
+
 
   const setSections = (sections: any) => {
     //setting up a active section state
     setActiveSections(sections.includes(undefined) ? [] : sections);
   };
-
   const [data, setData] = useState([]);
 
-  const addFriend = (toUser: string) => {
-    console.log(user + ' added ' + toUser);
+  const [selectId, setSelectedId] = useState([]);
 
-    setShowButton(false);
-
-    Axios.post(APIaddress + '/friends/create', {
-      from: user,
-      to: toUser,
-    }).then(() => {
-      console.log('Success');
-    });
-  };
 
   const renderHeader = (item: any, _: any, isActive: any) => {
 
@@ -90,16 +74,28 @@ export default function renderUserList(user: string) {
     );
   };
 
-  const renderContent = (section: any, _: any, isActive: any) => {
 
-    if (section.status == 1)
+  const [searchWord, setSearchWord] = useState('');
+
+  const renderContent = (item: any, _: any, isActive: any) => {
+    if (item.status == 1)
       var status = <Text>You are already friends</Text>
-    else if (section.status == 2)
+    else if (item.status == 2)
       var status = <Text>Request pending...</Text>
-    else {
-      var status = showButton === true ?
-        <Button onPress={() => addFriend(section.id)} title='Send Request' /> : <Text>Request Sent!</Text>
+    else if (item.id == selectId) {
+      var status = <Text>Request Sent!</Text>;
     }
+    else {
+      var status =
+        <Button onPress={() => [setSelectedId(item.id), sendFriendRequest(user, item.id),
+        searchUser(user, searchWord)
+          .then(data => {
+            setData(data);
+          })
+          .catch((error) => console.log(error + ' when searching for user in friendSearchList.tsx'))
+        ]} title='Send Request' />
+    }
+
     return (
       <Animatable.View
         duration={400}
@@ -113,12 +109,12 @@ export default function renderUserList(user: string) {
     <>
       {/* Input to write tha name of the friend */}
       <TextInput style={styles.textWindow}
-        onChangeText={(text) => searchUser(user, text)
+        onChangeText={(text) => [setSearchWord(text), searchUser(user, text)
           .then(data => {
             setData(data);
-            console.log(data)
+            setActiveSections([])
           })
-          .catch(() => console.log('error when searching user'))
+          .catch((error) => console.log(error + ' when searching for user in friendSearchList.tsx'))]
         }
         placeholder={'Type name...'} />
       <ScrollView>
@@ -126,6 +122,7 @@ export default function renderUserList(user: string) {
         <Accordion
           activeSections={activeSections}
           //for any default active section
+
           sections={data}
           //title and content of accordion
           touchableComponent={TouchableOpacity}
@@ -141,8 +138,9 @@ export default function renderUserList(user: string) {
           //Content Component(View) to render
           duration={400}
           //Duration for Collapse and expand
-          onChange={setSections}
+          onChange={(index) => [setSections(index)]}
         //setting the state of active sections
+
         />
         {/*Code for Accordion/Expandable List ends here*/}
       </ScrollView>

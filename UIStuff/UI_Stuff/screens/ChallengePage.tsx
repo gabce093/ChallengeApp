@@ -4,36 +4,10 @@ import inboxStyles from '../styles/Inbox.style.js';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ImageBackground, FlatList, TouchableOpacity, Image, RefreshControl, Pressable } from 'react-native';
 import { useState, useEffect, useCallback } from 'react';
-import Axios from 'axios';
-import conn from '../constants/databaseAPI';
 import UserIcon from '../components/UserIconLarge'
-
+import { getFriendRequests, acceptRequest, declineRequest } from '../API/InboxPage/requestsInboxPage';
 
 import { Text, View } from '../components/Themed';
-
-
-const friendRequestData = [
-  {
-    relationId: "bd7acbea-c1b1-46c2-aed5-3ad53abb28bf",
-    fromId: 24,
-    toId: 11,
-    status: 2,
-    name: 'Jonca320',
-  },
-  {
-    relationId: "bd7acbea-c1b1-46c2-aed5-3ad53abb28bs",
-    fromId: 24,
-    toId: 11,
-    status: 2,
-    name: 'Hengu510',
-  },
-  {
-    relationId: "bd7acbea-c1b1-46c2-aed5-3ad53abb28bk",
-    fromId: 24,
-    toId: 11,
-    status: 2,
-    name: 'Vicim994',
-  },]
 
 /**
  * This is the the apps inbox-page. It displays the recieved challenges and friend-requests. On it you can accept or decline
@@ -48,47 +22,44 @@ export default function ChallengePageScreen() {
   const [friendRequest, setFriendRequest] = useState([]);
   const [error, setIsError] = useState(false);
 
-
-  const searchFriendRequest = (id: string) => {
-    console.log("Logged in as: " + id)
-    var APIaddress = conn.API.adress + conn.API.port;
-
-    //Retrieves friend-requests form the database
-    Axios.get(APIaddress + '/friends/request/' + id).then((response) => {
-      setFriendRequest(response.data);
-
-    });
-  };
-
-  //Updates the friend-request to accepted in the database
-  const acceptRequest = async (relationId: string) => {
-    var APIaddress = conn.API.adress + conn.API.port;
-    Axios.put(APIaddress + '/friends/accept/request', { relId: relationId }).then((response) => {
+  //FUNCTION: Updates the friend-request to accepted in the database
+  const acceptAndRefresh = async (relationId: string) => {
+    acceptRequest(relationId).then(() => {
       setAcceptPressed(true);
-
     });
     //Waits 1 second to show that it was accepted
     await wait(1000)
-    searchFriendRequest(user)
+    //searches again so thath it disappears
+    getFriendRequests(user).then((data) => {
+      setFriendRequest(data)
+    });
   };
-  //Updates the friend-request to declined in the database
-  const declineRequest = async (relationId: string) => {
-    var APIaddress = conn.API.adress + conn.API.port;
-    Axios.put(APIaddress + '/friends/decline/request', { relId: relationId }).then((response) => {
-      alert("declined")
-      setDeclinePressed(true)
+
+  const [selectedId, setSelectedId] = useState('')
+
+  //FUNCTION:Updates the friend-request to declined in the database
+  const declineAndRefresh = async (relationId: string) => {
+    declineRequest(relationId).then(() => {
+      setDeclinePressed(true);
     });
     //Waits 1 second to show that it was declined  
     await wait(1000)
-    searchFriendRequest(user)
+    getFriendRequests(user).then((data) => {
+      setFriendRequest(data)
+    });
   };
 
+  //FUNCTION:Runs on load to find friendrequests
   const asyncAction = async () => {
     try {
-      const value = await AsyncStorage.getItem('@user_Key')
-      if (value !== null) {
-        setUser(value);
-        searchFriendRequest(value);
+      const currentUserId = await AsyncStorage.getItem('@user_Key')
+      if (currentUserId !== null) {
+        setUser(currentUserId);
+        //Retrieves the users friend-request
+        getFriendRequests(currentUserId).then((data) => {
+          setFriendRequest(data)
+        });
+
         setAcceptPressed(false)
         setDeclinePressed(false)
 
@@ -104,24 +75,24 @@ export default function ChallengePageScreen() {
 
   const [acceptPressed, setAcceptPressed] = useState(false);
   const [declinePressed, setDeclinePressed] = useState(false);
-  //Renders the friend-request
+  //FUNCTION:Renders the friend-request
   const renderRequest = ({ item }: { item: any }) => {
     var status;
-    if (acceptPressed) {
+    if (acceptPressed && item.relationId == selectedId) {
       status = <Text style={{ color: 'white' }}>Accepted!</Text>
     }
-    else if (declinePressed) {
+    else if (declinePressed && item.relationId == selectedId) {
       status = <Text style={{ color: 'white' }}>Declined :(</Text>
     }
     else {
       status = <>
-        <Pressable style={inboxStyles.acceptButton} onPress={() => acceptRequest(item.relationId)}>
+        <Pressable style={inboxStyles.acceptButton} onPress={() => [setSelectedId(item.relationId), acceptAndRefresh(item.relationId)]}>
           <Image source={require('../assets/images/check.png')} style={{
             width: '60%',
             height: '60%',
           }} />
         </Pressable>
-        <Pressable style={inboxStyles.declineButton} onPress={() => declineRequest(item.relationId)}>
+        <Pressable style={inboxStyles.declineButton} onPress={() => [setSelectedId(item.relationId), declineAndRefresh(item.relationId)]}>
           <Image source={require('../assets/images/cancel.png')} style={{
             width: '60%',
             height: '60%',
@@ -179,7 +150,8 @@ export default function ChallengePageScreen() {
             nestedScrollEnabled
             data={friendRequest}
             renderItem={renderRequest}
-            keyExtractor={(item) => item.user_id}
+            extraData={selectedId}
+            keyExtractor={(item) => item.id}
             ListEmptyComponent={<Text>There is nothing in your inbox</Text>}
             getItemLayout={(data, index) => (
               { length: 200, offset: 200 * index, index }

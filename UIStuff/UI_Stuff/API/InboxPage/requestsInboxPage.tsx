@@ -11,6 +11,7 @@ const APIaddress = conn.API.adress + conn.API.port;
  * @author Gabriel
  * @param userId The user id of the person who the friend-request belongs to. 
  * @returns An array of friendrequests belonging to the given user
+ * @category API Requests
  */
 export const getFriendRequests = (userId: string) => {
     console.log("Logged in as: " + userId)
@@ -26,6 +27,7 @@ export const getFriendRequests = (userId: string) => {
  * 
  * @author Gabriel
  * @param relationId The id of the relation in the friendtable in the database 
+ * @category API Requests
  */
 export const acceptRequest = async (relationId: string) => {
     const request = APIaddress + '/friends/accept/request';
@@ -40,6 +42,7 @@ export const acceptRequest = async (relationId: string) => {
  * 
  * @author Gabriel
  * @param relationId The id of the relation in the friendtable in the database 
+ * @category API Requests
  */
 export const declineRequest = async (relationId: string) => {
     const request = APIaddress + '/friends/decline/request';

@@ -1,4 +1,3 @@
-
 //React
 import { TouchableOpacity, Text, View, Pressable } from 'react-native';
 //Styles

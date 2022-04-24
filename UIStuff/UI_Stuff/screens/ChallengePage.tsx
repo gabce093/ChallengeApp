@@ -131,9 +131,9 @@ export default function ChallengePageScreen(props: any): JSX.Element {
             data={friendRequest.concat(challengeRequest)}
             renderItem={renderFriendRequest}
             extraData={selectedId}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item, index) => item.id + index}
             ListEmptyComponent={<Text>There is nothing in your inbox</Text>}
-            getItemLayout={(data, index) => (
+            getItemLayout={(_, index) => (
               { length: 200, offset: 200 * index, index }
             )}
           />

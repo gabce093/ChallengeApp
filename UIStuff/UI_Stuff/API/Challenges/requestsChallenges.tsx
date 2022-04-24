@@ -10,6 +10,7 @@ const APIaddress = conn.API.adress + conn.API.port;
  * @author Gabriel
  * @param userId The user id of the person who the  challenge-requests belongs to. 
  * @returns An array of  challenge-requests belonging to the given user
+ * @category API Requests
  */
 export const getChallengeRequests = (userId: string) => {
 

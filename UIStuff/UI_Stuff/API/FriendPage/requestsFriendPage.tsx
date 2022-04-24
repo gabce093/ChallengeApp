@@ -13,6 +13,7 @@ const APIaddress = conn.API.adress + conn.API.port;
  * @param userId The user id of the person doing the search. 
  * @param searchWord The word the user types in as the search
  * @returns Returns an array of users based on the search word
+ * @category API Requests
  */
 export const searchUser = (userId: string, searchWord: string) => {
     const request = APIaddress + '/users' + '/search/' + `${userId}` + '/' + `${searchWord}`;
@@ -28,6 +29,7 @@ export const searchUser = (userId: string, searchWord: string) => {
  * @author Gabriel
  * @param userId The user id of the person whos friends you want to find. 
  * @returns Returns an array of friends based on the userId
+ * @category API Requests
  */
 export const getFriends = (userId: string) => {
     console.log("Logged in as: " + userId)
@@ -45,6 +47,7 @@ export const getFriends = (userId: string) => {
  * @author Gabriel
  * @param fromUserId The user id of the person who sends the friend-request. 
  * @param toUserId The user id of the person who recieves the friend-request. 
+ * @category API Requests
  */
 export const sendFriendRequest = (fromUserId: string, toUserId: string) => {
     console.log(fromUserId + ' added ' + toUserId);
@@ -64,6 +67,7 @@ export const sendFriendRequest = (fromUserId: string, toUserId: string) => {
  * 
  * @author Gabriel
  * @param relationId The user id of the person who sends the friend-request. 
+ * @category API Requests
  */
 export const removeFriend = (relationId: string) => {
 

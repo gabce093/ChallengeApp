@@ -17,8 +17,6 @@ import Modal from "react-native-modal";
 const FriendSearchWindow = ({ user, onBackdropPress, isVisible }:
     { user: string, onBackdropPress: () => void, isVisible: boolean }) => {
 
-    const [modalVisible, setModalVisible] = useState(false);
-
     return <View style={{ backgroundColor: 'rgba(0,0,0,0)' }}>
         <Modal
             animationIn="slideInUp"

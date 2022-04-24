@@ -1,15 +1,18 @@
+//React imports
+import { ImageBackground, FlatList, Text, View, TextInput, Button, Pressable, RefreshControl, Image } from 'react-native';
+import { useState, useEffect, useCallback } from 'react';
+//Styles
 import friendPageStyles from '../styles/FriendPage.style';
+import SearchFriend from '../styles/SearchFriend.style.js';
 import styles from '../styles/Page.style';
-
-import { ImageBackground, FlatList, Text, View, TextInput, Button, Pressable, RefreshControl } from 'react-native';
-import { useState, useEffect, useCallback, Component } from 'react';
+//Components
 import FriendSquare from "../components/FriendSquare";
 import GroupSquare from "../components/GroupSquare";
-import { FriendSearchWindow } from './FriendSearchWindow';
+import FriendSearchWindow from './FriendSearchWindow';
+//Additional libraries
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Modal from "react-native-modal";
-
-//getFriends finds the friends of the user
+//API requests
 import { getFriends, removeFriend } from '../API/FriendPage/requestsFriendPage';
 
 const GROUPS = [
@@ -43,6 +46,8 @@ export default function FriendPageScreen() {
   const [user, setUser] = useState("");
   const [friends, setFriends] = useState([]);
   const [error, setIsError] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+
 
   //Address of the API that connect to the database
 
@@ -118,7 +123,7 @@ export default function FriendPageScreen() {
   *@returns The groupsquare with the name of the friend, icon and the challengebutton
   *@category Friendpage
   */
-  function renderGroupSquare({ item }: { item: any }) {
+  function renderGroupSquare({ item }: { item: Object }) {
     return (
       <>
         {/*Renders the GroupSquare, see: ../Components/GroupSquare */}
@@ -150,7 +155,7 @@ export default function FriendPageScreen() {
   };
 
   //Code to refresh the page
-  const wait = (timeout: any) => {
+  const wait = (timeout: number) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   }
   const [refreshing, setRefreshing] = useState(false);
@@ -211,37 +216,56 @@ export default function FriendPageScreen() {
         </View>
 
         {/* Modal for searching for and adding friends */}
-        {FriendSearchWindow(user)}
+        <FriendSearchWindow user={user}
+          isVisible={modalVisible}
+          onBackdropPress={() => setModalVisible(false)} />
 
         {/* Textinput used in development to change user */}
         <TextInput placeholder='Id of user...' onChangeText={(text) => setUser(text)} onSubmitEditing={() => storeData(user)} />
 
-        <Text style={styles.title} > Friends</Text>
-        <View style={friendPageStyles.friendContainer}>
-          {/* List of all the friends */}
-          <FlatList
-            refreshControl={<RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-            />}
-            nestedScrollEnabled
-            data={friends}
-            renderItem={renderFriendSquare}
-            horizontal={false}
-            columnWrapperStyle={{ height: 190, }}
-            numColumns={3}
-            extraData={selectedId}
-            keyExtractor={(item) => item.user_id_1}
-            ListEmptyComponent={<Text>You currently haven't added any friends</Text>}
-            getItemLayout={(data, index) => (
-              { length: 200, offset: 100 * index, index }
-            )}
+        <View style={{ height: "50%", width: "100%", alignItems: "center" }}>
+          <Text style={[styles.title, { alignSelf: "center" }]} > Friends</Text>
 
-          />
+          <View style={{
+            alignItems: "center", justifyContent: "center", height: 70, width: 70
+            , position: "absolute", zIndex: 2, alignSelf: "flex-end"
+          }}>
+            <Pressable style={SearchFriend.buttonOpen}
+              onPress={() => setModalVisible(true)}>
+              {/* <Text style={{ color: "white", fontWeight: "bold", fontSize: 20 }}>Add a Friend!</Text> */}
+              <Image style={{ height: 27, width: 27, marginLeft: 3 }} source={require('../assets/images/add-user.png')} />
 
+            </Pressable>
+          </View>
+
+          <View style={friendPageStyles.friendContainer}>
+
+
+
+            <FlatList
+              refreshControl={<RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+              />}
+              nestedScrollEnabled
+              data={friends}
+              renderItem={renderFriendSquare}
+              horizontal={false}
+              columnWrapperStyle={{ height: 190, }}
+              numColumns={3}
+              extraData={selectedId}
+              keyExtractor={(item) => item.user_id_1}
+              ListEmptyComponent={<Text>You currently haven't added any friends</Text>}
+              getItemLayout={(data, index) => (
+                { length: 200, offset: 100 * index, index }
+              )}
+
+            />
+
+          </View>
         </View>
-      </ImageBackground>
-    </View>
+      </ImageBackground >
+    </View >
 
   );
 }

@@ -1,13 +1,18 @@
+//React imports
+import { ImageBackground, FlatList, RefreshControl, View, Text } from 'react-native';
+import { useState, useEffect, useCallback } from 'react';
+//Styles
 import styles from '../styles/Page.style';
 import friendPageStyles from '../styles/FriendPage.style';
 import inboxStyles from '../styles/Inbox.style.js';
+//Components
+import FriendRequestCard from '../components/FriendRequest';
+import ChallengeRequestCard from '../components/ChallengeRequest';
+//Additional libraries
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { ImageBackground, FlatList, TouchableOpacity, Image, RefreshControl, Pressable } from 'react-native';
-import { useState, useEffect, useCallback } from 'react';
-import UserIcon from '../components/UserIconLarge'
+//API requests
 import { getFriendRequests, acceptRequest, declineRequest } from '../API/InboxPage/requestsInboxPage';
-
-import { Text, View } from '../components/Themed';
+import { getChallengeRequests } from '../API/Challenges/requestsChallenges';
 
 /**
  * This is the the apps inbox-page. It displays the recieved challenges and friend-requests. On it you can accept or decline
@@ -16,14 +21,15 @@ import { Text, View } from '../components/Themed';
  * @returns The entire FriendPage for the app
  * @category Friendpage
  */
-export default function ChallengePageScreen() {
+export default function ChallengePageScreen(props: any): JSX.Element {
 
   const [user, setUser] = useState('');
-  const [friendRequest, setFriendRequest] = useState([]);
+
   const [error, setIsError] = useState(false);
 
   //FUNCTION: Updates the friend-request to accepted in the database
   const acceptAndRefresh = async (relationId: string) => {
+    console.log('bing')
     acceptRequest(relationId).then(() => {
       setAcceptPressed(true);
     });
@@ -34,8 +40,6 @@ export default function ChallengePageScreen() {
       setFriendRequest(data)
     });
   };
-
-  const [selectedId, setSelectedId] = useState('')
 
   //FUNCTION:Updates the friend-request to declined in the database
   const declineAndRefresh = async (relationId: string) => {
@@ -49,6 +53,8 @@ export default function ChallengePageScreen() {
     });
   };
 
+  const [friendRequest, setFriendRequest] = useState([]);
+  const [challengeRequest, setChallengeRequest] = useState([]);
   //FUNCTION:Runs on load to find friendrequests
   const asyncAction = async () => {
     try {
@@ -58,6 +64,10 @@ export default function ChallengePageScreen() {
         //Retrieves the users friend-request
         getFriendRequests(currentUserId).then((data) => {
           setFriendRequest(data)
+        });
+        //Retrieves the users challenge-request
+        getChallengeRequests(currentUserId).then((data) => {
+          setChallengeRequest(data)
         });
 
         setAcceptPressed(false)
@@ -75,57 +85,28 @@ export default function ChallengePageScreen() {
 
   const [acceptPressed, setAcceptPressed] = useState(false);
   const [declinePressed, setDeclinePressed] = useState(false);
-  //FUNCTION:Renders the friend-request
-  const renderRequest = ({ item }: { item: any }) => {
-    var status;
-    if (acceptPressed && item.relationId == selectedId) {
-      status = <Text style={{ color: 'white' }}>Accepted!</Text>
+  const [selectedId, setSelectedId] = useState('')
+
+  //FUNCTION: Used in the flatlist to render the friend-and challenge requests
+  const renderFriendRequest = ({ item }: { item: any }) => {
+    if (item.distance != null) {
+      return <ChallengeRequestCard
+        item={item}
+        onAccept={() => [console.log('Challenge accepted!'), props.navigation.navigate('GPSPage')]}
+        selectedId={selectedId}
+        acceptPressed={acceptPressed}
+      />
     }
-    else if (declinePressed && item.relationId == selectedId) {
-      status = <Text style={{ color: 'white' }}>Declined :(</Text>
-    }
-    else {
-      status = <>
-        <Pressable style={inboxStyles.acceptButton} onPress={() => [setSelectedId(item.relationId), acceptAndRefresh(item.relationId)]}>
-          <Image source={require('../assets/images/check.png')} style={{
-            width: '60%',
-            height: '60%',
-          }} />
-        </Pressable>
-        <Pressable style={inboxStyles.declineButton} onPress={() => [setSelectedId(item.relationId), declineAndRefresh(item.relationId)]}>
-          <Image source={require('../assets/images/cancel.png')} style={{
-            width: '60%',
-            height: '60%',
-          }} />
-        </Pressable>
-      </>
-    }
-
-    return (
-      <TouchableOpacity style={inboxStyles.friendRequestContainer}>
-        <View style={inboxStyles.imageAndNameHolder}>
-          <UserIcon level={item.expAmount} />
-          <Text style={inboxStyles.messageFromText}>{item.userName}</Text>
-        </View>
-
-        <View style={inboxStyles.textAndButtonsHolder}>
-
-          <View style={{ backgroundColor: '#383838' }}>
-            <Text style={inboxStyles.messageHeadText}>Friend Request!</Text>
-          </View>
-
-          <View style={inboxStyles.statusButtonHolder}>
-            {status}
-          </View>
-
-        </View>
-      </TouchableOpacity>
-
-    );
-  };
+    return <FriendRequestCard item={item}
+      onAccept={() => [setSelectedId(item.relationId), acceptAndRefresh(item.relationId)]}
+      onDecline={() => [setSelectedId(item.relationId), declineAndRefresh(item.relationId)]}
+      selectedId={selectedId}
+      acceptPressed={acceptPressed}
+      declinePressed={declinePressed} />
+  }
 
   //Code to refresh the page
-  const wait = (timeout: any) => {
+  const wait = (timeout: number) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   }
   const [refreshing, setRefreshing] = useState(false);
@@ -147,8 +128,8 @@ export default function ChallengePageScreen() {
               onRefresh={onRefresh}
             />}
             nestedScrollEnabled
-            data={friendRequest}
-            renderItem={renderRequest}
+            data={friendRequest.concat(challengeRequest)}
+            renderItem={renderFriendRequest}
             extraData={selectedId}
             keyExtractor={(item) => item.id}
             ListEmptyComponent={<Text>There is nothing in your inbox</Text>}

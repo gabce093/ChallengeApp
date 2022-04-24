@@ -1,6 +1,9 @@
-import friendPageStyles from '../styles/FriendPage.style';
 
+//React
 import { TouchableOpacity, Text, View, Pressable } from 'react-native';
+//Styles
+import friendPageStyles from '../styles/FriendPage.style';
+//Components
 import UserIcon from './UserIconLarge'
 /** 
 * This function creats a Square displaying a certain group.
@@ -17,7 +20,7 @@ import UserIcon from './UserIconLarge'
 *@category FriendPage
 *@author Gabriel
 */
-const GroupSquare = ({ item, onLongPress }: { item: any, onLongPress: any }) => (
+const GroupSquare = ({ item, onLongPress }: { item: any, onLongPress: () => void }) => (
     <>
         <TouchableOpacity style={friendPageStyles.groupHolder} onLongPress={onLongPress} >
             <UserIcon level={item.level} />

@@ -12,7 +12,7 @@ export default StyleSheet.create({
   //friend-part
   friendContainer: {
     backgroundColor: "rgba(196, 196, 196, 0.9)",
-    height: "40%",
+    height: "80%",
     width: "90%",
     borderRadius: 5,
     marginBottom: "7%",

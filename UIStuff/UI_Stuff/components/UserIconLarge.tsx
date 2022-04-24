@@ -1,9 +1,6 @@
-import {
-    View,
-    Image,
-    Text,
-} from 'react-native'
-
+//React
+import { View, Image, Text } from 'react-native'
+//Styles
 import friendPageStyles from '../styles/FriendPage.style'
 /** 
 *A large circular image with a level used for displaying the group-image

@@ -1,5 +1,8 @@
-import friendPageStyles from '../styles/FriendPage.style';
+//React
 import { Image, TouchableOpacity, Text, View, Pressable } from 'react-native';
+//Styles
+import friendPageStyles from '../styles/FriendPage.style';
+
 /** 
 * @remarks This function returnsa a Square displaying a certain friend.
 * It it is used with a flatlist to render a list of friends.
@@ -10,7 +13,7 @@ import { Image, TouchableOpacity, Text, View, Pressable } from 'react-native';
 *@returns The friendsquare with the name of the friend, icon and the challengebutton
 *@category Friendpage
 */
-const FriendSquare = ({ item, onLongPress }: { item: any, onLongPress: any }) => (
+const FriendSquare = ({ item, onLongPress }: { item: any, onLongPress: () => void }) => (
   //Pressable friend square that makes the modal pop up on a Long press
   <TouchableOpacity style={friendPageStyles.friendHolder} onLongPress={onLongPress} >
     <View style={friendPageStyles.friendIconHolder}>

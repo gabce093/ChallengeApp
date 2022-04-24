@@ -1,19 +1,13 @@
-import React, { useState, useEffect } from "react";
-import {
-  ScrollView,
-  Text,
-  View,
-  TouchableOpacity,
-  Button,
-  Image,
-  TextInput
-} from 'react-native';
-import Accordion from 'react-native-collapsible/Accordion';
-import * as Animatable from 'react-native-animatable';
-
+//React
+import React, { useState } from "react";
+import { ScrollView, Text, View, TouchableOpacity, Button, Image, TextInput } from 'react-native';
+//Styles
 import styles from '../styles/SearchFriend.style.js';
 import friendPageStyles from '../styles/FriendPage.style';
-
+//Additional libraries
+import Accordion from 'react-native-collapsible/Accordion';
+import * as Animatable from 'react-native-animatable';
+//API requests
 import { searchUser, sendFriendRequest } from '../API/FriendPage/requestsFriendPage'
 
 /** 
@@ -24,7 +18,7 @@ import { searchUser, sendFriendRequest } from '../API/FriendPage/requestsFriendP
 *@category Friendpage
 */
 
-export default function renderUserList(user: string) {
+const renderUserList = ({ user }: { user: string }) => {
   const [activeSections, setActiveSections] = useState([]);
 
 
@@ -33,11 +27,10 @@ export default function renderUserList(user: string) {
     setActiveSections(sections.includes(undefined) ? [] : sections);
   };
   const [data, setData] = useState([]);
-
   const [selectId, setSelectedId] = useState([]);
 
 
-  const renderHeader = (item: any, _: any, isActive: any) => {
+  const renderHeader = (item: any, _: number, isActive: boolean) => {
 
     return (
       <Animatable.View
@@ -77,7 +70,7 @@ export default function renderUserList(user: string) {
 
   const [searchWord, setSearchWord] = useState('');
 
-  const renderContent = (item: any, _: any, isActive: any) => {
+  const renderContent = (item: any, _: number, isActive: boolean) => {
     if (item.status == 1)
       var status = <Text>You are already friends</Text>
     else if (item.status == 2)
@@ -147,3 +140,5 @@ export default function renderUserList(user: string) {
     </>
   );
 }
+
+export default renderUserList;

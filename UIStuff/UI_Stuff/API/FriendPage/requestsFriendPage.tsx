@@ -1,6 +1,4 @@
-import Axios, { AxiosResponse } from 'axios';
-import { SetStateAction, useState } from 'react';
-
+import Axios from 'axios';
 import conn from '../../constants/databaseAPI';
 
 const APIaddress = conn.API.adress + conn.API.port;

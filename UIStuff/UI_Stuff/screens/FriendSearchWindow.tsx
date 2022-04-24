@@ -1,9 +1,11 @@
-
-import { Pressable, TextInput, Image, Text, View, FlatList, } from 'react-native';
+//React imports
+import { Pressable, Image, Text, View } from 'react-native';
+import { useState } from 'react';
+//Components
 import SearchFriend from '../styles/SearchFriend.style.js';
-import { useState, useEffect } from 'react';
+import FriendSearchList from "../components/friendSearchList";
+//Additional libraries
 import Modal from "react-native-modal";
-import friendSearchList from "../components/friendSearchList";
 
 /** 
 * @remarks This fucntion opens a modal in which a the searchlist is displayed
@@ -12,25 +14,24 @@ import friendSearchList from "../components/friendSearchList";
 *@returns A modal with a search list
 *@category Friendpage
 */
-export function FriendSearchWindow(user: string) {
+const FriendSearchWindow = ({ user, onBackdropPress, isVisible }:
+    { user: string, onBackdropPress: () => void, isVisible: boolean }) => {
 
     const [modalVisible, setModalVisible] = useState(false);
-    const [friendSearch, setFriendSearch] = useState('');
-
-    // Fetches the users from the database based on the parameter "text"
 
     return <View style={{ backgroundColor: 'rgba(0,0,0,0)' }}>
         <Modal
             animationIn="slideInUp"
-            isVisible={modalVisible}
-            onBackdropPress={() => setModalVisible(false)}
-        // onModalHide={() => setData([])}
+            isVisible={isVisible}
+            onBackdropPress={onBackdropPress}
+            //Empty the search when clicking down the modal
+            onModalHide={() => user = ''}
         >
             <View style={SearchFriend.centeredView}>
                 <View style={SearchFriend.modalView}>
                     {/* Image of an "x" for tabbing out of the modal */}
                     <Pressable
-                        onPress={() => setModalVisible(!modalVisible)}
+                        onPress={onBackdropPress}
                         style={{
                             alignSelf: 'flex-end',
                             marginRight: '3%',
@@ -45,20 +46,14 @@ export function FriendSearchWindow(user: string) {
                             }}
                         />
                     </Pressable>
-                    <Text style={SearchFriend.modalText}>Search for friend!</Text>
+                    <Text style={SearchFriend.modalText}>Search for a User...</Text>
 
                     {/* Sends in data from the fectch and renders it as a list(accordion) */}
-                    {friendSearchList(user)}
+                    <FriendSearchList user={user} />
 
                 </View>
             </View>
         </Modal>
-
-        <Pressable
-            style={[SearchFriend.button, SearchFriend.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-        >
-            <Image style={{ height: 30, width: 30, marginLeft: 3 }} source={require('../assets/images/add-user.png')} />
-        </Pressable>
     </View>
 }
+export default FriendSearchWindow;

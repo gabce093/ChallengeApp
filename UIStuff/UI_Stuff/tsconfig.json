@@ -10,6 +10,7 @@
                     "components/friendSearchList.tsx",
                     "components/Recorder.tsx",
                     "components/UserIconLarge.tsx",
+                    "components/FriendRequest.tsx",
                     "screens/FriendPage.tsx",
                     "screens/ChallengePage.tsx",
                     "constants/databaseAPI.ts",

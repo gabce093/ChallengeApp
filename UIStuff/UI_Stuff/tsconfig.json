@@ -11,6 +11,8 @@
                     "components/Recorder.tsx",
                     "components/UserIconLarge.tsx",
                     "components/FriendRequest.tsx",
+                    "components/OptionModalFriend.tsx",
+                    "components/OptionModalGroup.tsx",
                     "screens/FriendPage.tsx",
                     "screens/ChallengePage.tsx",
                     "constants/databaseAPI.ts",

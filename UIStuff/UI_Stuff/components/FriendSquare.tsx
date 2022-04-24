@@ -12,6 +12,7 @@ import friendPageStyles from '../styles/FriendPage.style';
 *@param onLongPress Function that gets triggered by pressing the square
 *@returns The friendsquare with the name of the friend, icon and the challengebutton
 *@category Friendpage
+*@author Gabriel
 */
 const FriendSquare = ({ item, onLongPress }: { item: any, onLongPress: () => void }) => (
   //Pressable friend square that makes the modal pop up on a Long press

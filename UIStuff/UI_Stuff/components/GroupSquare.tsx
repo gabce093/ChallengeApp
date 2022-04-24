@@ -16,7 +16,7 @@ import UserIcon from './UserIconLarge'
 *@param onLongPress - Function that gets triggered by pressing the square
 *
 *@returns The groupsquare with the name of the group, icon and the challengebutton
-*@category FriendPage
+*@category Friendpage
 *@author Gabriel
 */
 const GroupSquare = ({ item, onLongPress }: { item: any, onLongPress: () => void }) => (

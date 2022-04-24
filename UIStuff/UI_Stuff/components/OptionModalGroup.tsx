@@ -12,7 +12,8 @@ import Modal from "react-native-modal";
  * @param isVisible Boolean that activates the modal
  * @param onBackdropPress A function that is triggered the user clicks on the backdrop
  * @returns Returns the option-menu when longpressing the GroupSquare
- * @category FriendPage
+ * @category Friendpage
+ * @author Gabriel
  */
 const OptionModalGroup = ({ selectedId, onModalHide, isVisible, onBackdropPress }:
     { selectedId: string, onModalHide: () => void, isVisible: boolean, onBackdropPress: () => void }) => {

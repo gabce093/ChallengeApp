@@ -8,7 +8,7 @@ import FriendSearchList from "../components/friendSearchList";
 import Modal from "react-native-modal";
 
 /** 
-* @remarks This fucntion opens a modal in which a the searchlist is displayed
+*  his fucntion opens a modal in which a the searchlist is displayed
 * 
 *@param user Object that contains information about the group
 *@returns A modal with a search list

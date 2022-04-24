@@ -14,6 +14,8 @@ import UserIcon from './UserIconLarge';
  * @param acceptPressed Boolean that tells if the acceptbutton was pressed
  * @param acceptPressed Boolean that tells if the declinebutton was pressed
  * @returns Returns a Friendrequest card  with the ability of accepting and declining friendrequests
+ * @category Inboxpage
+ * @author Gabriel
  */
 const renderChallengeRequest = ({ item, onAccept, selectedId, acceptPressed }:
     { item: any, onAccept: () => void, selectedId: string, acceptPressed: boolean }) => {

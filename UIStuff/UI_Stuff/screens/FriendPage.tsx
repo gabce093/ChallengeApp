@@ -13,9 +13,8 @@ import OptionModalFriend from '../components/OptionModalFriend';
 import OptionModalGroup from '../components/OptionModalGroup';
 //Additional libraries
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Modal from "react-native-modal";
-//API requests
-import { getFriends, removeFriend } from '../API/FriendPage/requestsFriendPage';
+//API request
+import { getFriends } from '../API/FriendPage/requestsFriendPage';
 
 const GROUPS = [
   {
@@ -34,7 +33,6 @@ const GROUPS = [
     level: 78,
   },
 ]
-
 
 /**
  * This is the the apps friend page. It displays the users friend and groups. On it you can also clock up a modal
@@ -92,6 +90,14 @@ export default function FriendPageScreen() {
 
   const [optionFriendVisible, setOptionFriendVisible] = useState(false);
   const [selectedIdFriend, setSelectedId] = useState('');
+  /** 
+  *Function that gets used in the FlatList to render a list of friends. Each item consists of 
+  *the FriendSquare and the menu activated when longpressing it.
+  *@param item Object that contains information about a friend.
+  *@returns The friendsquare with the name of the friend, icon and the challengebutton and the 
+  *feature of longpressing for a option menu.
+  *@category Friendpage
+  */
   const renderFriendSquare = ({ item }: { item: any }) => {
     return (
       <>
@@ -116,11 +122,11 @@ export default function FriendPageScreen() {
   const [optionGroupVisible, setOptionGroupVisible] = useState(false);
   const [selectedIdGroup, setSelectedIdGroup] = useState('');
   /** 
-  *
-  *Function that gets used in the FlatList to render the a list of groups. Each item consists of 
-  *the GroupSquare ant the menu activated when longpressing it.
-  *@param item Object that contains information about a group
-  *@returns The groupsquare with the name of the friend, icon and the challengebutton
+  *Function that gets used in the FlatList to render a list of groups. Each item consists of 
+  *the GroupSquare and the menu activated when longpressing it.
+  *@param item Object that contains information about a group.
+  *@returns The groupsquare with the name of the friend, icon and the challengebutton and the 
+  *feature of longpressing for a option menu.
   *@category Friendpage
   */
   function renderGroupSquare({ item }: { item: any }) {

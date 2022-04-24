@@ -15,7 +15,8 @@ import { removeFriend } from "../API/FriendPage/requestsFriendPage"
  * @param isVisible Boolean that activates the modal
  * @param onBackdropPress A function that is triggered the user clicks on the backdrop
  * @returns Returns the option-menu when longpressing the friendSquare
- * @category FriendPage
+ * @category Friendpage
+ * @author Gabriel
  */
 const OptionModalFriend = ({ selectedId, onModalHide, isVisible, onBackdropPress }:
     { selectedId: string, onModalHide: () => void, isVisible: boolean, onBackdropPress: () => void }) => {

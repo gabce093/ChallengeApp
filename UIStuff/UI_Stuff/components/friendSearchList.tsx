@@ -16,6 +16,7 @@ import { searchUser, sendFriendRequest } from '../API/FriendPage/requestsFriendP
 *@param user The user that is searching
 *@returns A list of users
 *@category Friendpage
+*@author Gabriel
 */
 
 const renderUserList = ({ user }: { user: string }) => {

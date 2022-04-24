@@ -6,7 +6,6 @@ import friendPageStyles from '../styles/FriendPage.style'
 *A large circular image with a level used for displaying the group-image
 * 
 *@param level - The level underneath the image 
-*
 *@returns  A circular image of with a level-badge underneath it. 
 *@category Friendpage
 *@author Gabriel

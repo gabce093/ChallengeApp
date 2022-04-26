@@ -12,13 +12,13 @@ export default StyleSheet.create({
       position:'relative',
       alignItems: 'center',
       backgroundColor: 'rgba(52, 52, 52, 0)',
-      top: '-18%',
+      top: '-10%',
     },
 
     //Used by every character item
     character:{
       flex: 1,
-      height: 250,
+      height:300,
       width: 250,
       position: 'absolute',
       scaleX: -1,

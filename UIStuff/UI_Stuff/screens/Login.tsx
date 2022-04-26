@@ -61,7 +61,7 @@ export default function LoginPage() {
        })
        .then(user => {
            console.log(user[0])
-           storeData(user[0].firstName)
+           storeData(user[0].userName)
            setValues(JSON.stringify(user[0]));
        })
        if (resUser == "") return "error";

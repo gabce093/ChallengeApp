@@ -43,11 +43,10 @@ export function updateValues() {
 
 
 }
+export function setValues(value:string) {
+    // Updates local values on with the database ones
 
-// Updates local values on with the database ones
-export function setValues(value: string) {
-
-    playerName = JSON.parse(value).firstName;
+    playerName = JSON.parse(value).userName;
     totalEXP = JSON.parse(value).expAmount;
     coins = JSON.parse(value).goldAmount;
     playerId = JSON.parse(value).id

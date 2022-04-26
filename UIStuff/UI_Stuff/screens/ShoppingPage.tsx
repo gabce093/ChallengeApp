@@ -105,7 +105,7 @@ export default function ShoppingPageScreen() {
     setHeadImg(`http://213.188.152.167:5000/graphics/character/${response.data[0].hat}.png`)
     setShirtImg(`http://213.188.152.167:5000/graphics/character/${response.data[0].shirt}.png`)
     setPantsImg(`http://213.188.152.167:5000/graphics/character/${response.data[0].pants}.png`)
-    setShoesImg(`http://213.188.152.167:5000/graphics/character/${response.data[0].shoes}.png`)
+    setShoesImg(`http://213.188.152.167:5000/graphics/character/${response.data[0].boots}.png`)
 
 
     console.log(response.data[0].hat);

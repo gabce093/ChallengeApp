@@ -10,6 +10,7 @@ import {
     Modal,
   } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
+import { background } from 'native-base/lib/typescript/theme/styled-system';
 
 /** 
   * This function records distance, time and pace for the user when recording a challenge.
@@ -154,19 +155,22 @@ export default function Recorder(props: any){
 
     return (
         <View style={styles.container}>
-           <Modal
+           <Modal style={styles.modalView}
+           transparent={true}
            animationType="slide"
            visible={modalVisible}
            onRequestClose={() => {
              setModalVisible(!modalVisible);
            }}>
-               <View>
+               
+               <View style={styles.modal}>
                     <Text>Challenge not completed. Are you sure you want to finish run?</Text>
                     <TouchableHighlight 
                         onPress={() => handleFinish()}>
                             <Text>Finish now</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
+                        style={styles.modalButton}
                         onPress={() => {
                             setModalVisible(!modalVisible)}}>
                        <Text>Cancel</Text>

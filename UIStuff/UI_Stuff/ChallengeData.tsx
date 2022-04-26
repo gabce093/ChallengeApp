@@ -101,11 +101,10 @@ export function getMinPerK(){
 
 
 export function calculateCoins(){
+    //Average min/k of users last 5 runs.
     var rank = 5.2;
 
     var earned_coins = (rank/getMinPerK()) * 300;
     
-    
-
-   
+    return earned_coins;
 }

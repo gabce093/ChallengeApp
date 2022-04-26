@@ -30,6 +30,7 @@ export default StyleSheet.create({
   },
   
   centeredView: {
+    height: 240,
     backgroundColor: '#dedede',
     flex: 1,
     justifyContent: "center",
@@ -50,8 +51,8 @@ export default StyleSheet.create({
     backgroundColor: "#5c5c5c",
     borderRadius: 5,
     width: '90%',
-    height: '90%',
-  
+    height: 220,
+    alignSelf: "center",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -64,11 +65,12 @@ export default StyleSheet.create({
   },
   textWindow: {
     backgroundColor: 'white',
+    paddingLeft: 5,
     borderRadius: 5,
     borderColor: '#383838',
     borderWidth: 3,
     height: '20%',
-    width: '70%',
+    width: '80%',
   },
 
 })

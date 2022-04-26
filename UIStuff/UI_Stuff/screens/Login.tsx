@@ -14,6 +14,7 @@ import { updateValues } from '../PlayerData';
 export default function LoginPage() {
     
     useEffect(() => {
+        logOut();
         getData();  
       }, []);
 
@@ -133,7 +134,7 @@ export default function LoginPage() {
             isVisible={modalVisible}
             onBackdropPress={() => setModalVisible(false)}
         >
-            <View style={SearchFriend.centeredView}>
+            {/*<View style={SearchFriend.centeredView}>*/}
                 <View style={SearchFriend.modalView}>
                     {/* Image of an "x" for tabbing out of the modal */}
                     <Pressable
@@ -161,9 +162,7 @@ export default function LoginPage() {
                         onPress={(user) => //AuthFunction(resUser,resPass)
                                 AuthFunction(resUser, resPass)
 
-                                //navigation.navigate('MainPage')
-
-                              
+                                //navigation.navigate('MainPage')                              
                         }
 
                     ><Text style={{ color: 'white' }}>Enter</Text>
@@ -172,7 +171,7 @@ export default function LoginPage() {
                     
                 </View>
                 
-            </View>
+           {/* </View>*/}
             
         </Modal>
         

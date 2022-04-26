@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 
+
 export default StyleSheet.create({
 
     container: {
@@ -40,6 +41,13 @@ export default StyleSheet.create({
         borderRadius: 5,
     },
     button: {
+        opacity: 0.3,
+        width: '47%',
+        backgroundColor: '#282828',
+        justifyContent: 'center',
+        borderRadius: 5,
+    },
+    button2: {
         
         width: '47%',
         backgroundColor: '#282828',
@@ -59,5 +67,27 @@ export default StyleSheet.create({
     buttonText: {
         textAlign: 'center',
         fontSize: 30,
+    },
+    modal: {
+        justifyContent: 'space-evenly',
+        backgroundColor: "#FF5C00",
+        borderRadius: 10,
+        width: '90%',
+        height: 220,
+        alignSelf: "center",
+        alignItems: "center",
+        marginTop: "60%",
+        margin: 25,
+    },
+    modalView: {
+        alignSelf: "center",
+        margin: 25,
+    },
+    modalText: {
+
+    },
+    modalButton: {
+        
+        borderColor: "white",
     }
 });

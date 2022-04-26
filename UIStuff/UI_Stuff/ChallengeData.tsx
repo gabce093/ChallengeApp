@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { addEXP, getPlayerId, getTotalExp } from "./PlayerData";
 
 var type = "distance";
-var distance_goal = 100;
-var elapsed_distance = 150;
+var distance_goal = 1;
+var elapsed_distance = 1;
 var total_time = "null";
 var challenge_time = "null";
 var completed = false;
@@ -79,3 +80,31 @@ export function CompleteChallenge(){
     completed = true;
 }
 
+export function calculateXP(){
+    var xp_earned = 0;
+    if (completed) {
+        xp_earned = 100*(distance_goal / 1000)+ 25*((elapsed_distance-distance_goal)/1000)
+    }
+    else {
+        xp_earned = 25 * (elapsed_distance/1000);
+    }
+    
+    return xp_earned;
+}
+
+export function getMinPerK(){
+    var temp = challenge_time.split(':');
+    var total_seconds = parseInt(temp[0])*3600 + parseInt(temp[1])*60 + parseInt(temp[2]);
+    var seconds_per_km = total_seconds / (distance_goal/1000);
+    return seconds_per_km/60;
+}
+
+
+export function calculateCoins(){
+    //Average min/k of users last 5 runs.
+    var rank = 5.2;
+
+    var earned_coins = (rank/getMinPerK()) * 300;
+    
+    return earned_coins;
+}

@@ -10,9 +10,17 @@ import {
     Modal,
 } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
+import { background } from 'native-base/lib/typescript/theme/styled-system';
 
-export default function Recorder(props: any) {
-
+/** 
+  * This function records distance, time and pace for the user when recording a challenge.
+  * 
+  * @author Victor
+  * @param props position, pace and watcher.
+  * @returns The component that the user can record a challenge.
+*/
+export default function Recorder(props: any){
+    
     const [distance, setDistance] = useState(0);
     const [startposition, setStartPosition] = useState([0, 0]);
     const [recording, setRecording] = useState(false);
@@ -38,11 +46,10 @@ export default function Recorder(props: any) {
     }, [props.position])
 
     useEffect(() => {
-        //If recording, calculates distance moved from last point and add it
-        //to the total distance.
+        //If recording, calculates min/km.
         if (recording == true) {
-            var min_per_m = props.pace * 60;
-            var min_per_km = 1000 / min_per_m;
+            var meter_per_min = props.pace*60;
+            var min_per_km = 1000/meter_per_min;
             var minutes = Math.floor(min_per_km)
             var seconds = Math.round((min_per_km - minutes) * 60);
 
@@ -54,8 +61,13 @@ export default function Recorder(props: any) {
             }
         }
     }, [props.pace])
-
-    //Switch between start and stop,
+    
+    /** 
+     * This function switches the a button between between start and stop. Starts the recording and the stopwatch
+     * when start is pressed. Stops recording and stopwatch when stop is pressed.
+     * 
+     * @author Victor 
+    */
     const handleStartStop = () => {
         setIsStopwatchStart(!isStopwatchStart);
         setResetStopwatch(false);
@@ -69,7 +81,11 @@ export default function Recorder(props: any) {
         }
     }
 
-    //Reset button
+    /** 
+     * This function handles the reset button. Resets distance and stopwatch.
+     * 
+     * @author Victor 
+    */
     const handleReset = () => {
         setDistance(0)
         setRecording(false)
@@ -77,14 +93,28 @@ export default function Recorder(props: any) {
         setResetStopwatch(true);
     }
 
-    //Finish button, navigate to resultpage.
+    /** 
+     * This function handles the finish button. Elapsed distance is saved. If distance goal is reached then 
+     * the challenge is completed and the watcher is removed and the user is navigated to the ResultPage.
+     * If not a modal pops up. If modal is visible when running function, watcher is removed and user 
+     * is navigated to the ResultPage.
+     * 
+     * @author Victor 
+    */
     const handleFinish = () => {
         setElapsedDistance(distance);
         if (distance > goal) {
             CompleteChallenge();
+            console.log(props.watcher)
+            props.watcher.remove();
             props.navigation.navigate('ResultPage');
         }
-        else {
+        else if (modalVisible){
+            console.log(props.watcher)
+            props.watcher.remove();
+            props.navigation.navigate('ResultPage');
+        }
+        else{
             setModalVisible(!modalVisible)
         }
     }
@@ -94,13 +124,13 @@ export default function Recorder(props: any) {
         if (isStopwatchStart == false) {
             return (
                 <View style={styles.subContainer}>
-                    <TouchableHighlight
-                        style={styles.button}
+                    <TouchableHighlight 
+                        style={styles.button2}
                         onPress={handleReset}>
                         <Text style={styles.buttonText}>RESET</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
-                        style={styles.button}
+                        style={styles.button2}
                         onPress={handleFinish}>
                         <Text style={styles.buttonText}>FINISH</Text>
                     </TouchableHighlight>
@@ -108,25 +138,39 @@ export default function Recorder(props: any) {
             )
         }
         else {
-            return (<View></View>)
+            return (<View style={styles.subContainer}>
+                <TouchableHighlight 
+                    style={styles.button}
+                    >
+                    <Text style={styles.buttonText}>RESET</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    style={styles.button}
+                    >
+                    <Text style={styles.buttonText}>FINISH</Text>
+                </TouchableHighlight>
+            </View>)
         }
     }
 
     return (
         <View style={styles.container}>
-            <Modal
-                animationType="slide"
-                visible={modalVisible}
-                onRequestClose={() => {
-                    setModalVisible(!modalVisible);
-                }}>
-                <View>
+           <Modal style={styles.modalView}
+           transparent={true}
+           animationType="slide"
+           visible={modalVisible}
+           onRequestClose={() => {
+             setModalVisible(!modalVisible);
+           }}>
+               
+               <View style={styles.modal}>
                     <Text>Challenge not completed. Are you sure you want to finish run?</Text>
-                    <TouchableHighlight
-                        onPress={() => props.navigation.navigate('ResultPage')}>
-                        <Text>Finish now</Text>
+                    <TouchableHighlight 
+                        onPress={() => handleFinish()}>
+                            <Text>Finish now</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
+                        style={styles.modalButton}
                         onPress={() => {
                             setModalVisible(!modalVisible)
                         }}>
@@ -150,7 +194,7 @@ export default function Recorder(props: any) {
             <View style={styles.subContainer}>
                 <View style={styles.distanceContainer}>
                     <Text style={styles.text}>{Math.round(distance) + "/" + goal}</Text>
-                    <Text style={styles.smallText}>Distance (km)</Text>
+                    <Text style={styles.smallText}>Distance (m)</Text>
                 </View>
                 <View style={styles.paceContainer}>
                     <Text style={styles.text}>{speed}</Text>
@@ -173,10 +217,11 @@ export default function Recorder(props: any) {
             </TouchableHighlight>
             <StartAndResetButtons />
             <View style={styles.progressContainer}>
-                <ProgressBar color="#FF5C00" progress={distance / goal} style={{
+                <ProgressBar color="#00FF47"progress={distance / goal} style={{
                     height: 20,
-                    backgroundColor: "#151515",
-                }} />
+                    backgroundColor: "#B8BCC3",
+                    borderRadius: 10,
+                    }}/>
             </View>
         </View>
     )

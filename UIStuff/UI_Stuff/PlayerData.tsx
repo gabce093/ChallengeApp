@@ -6,6 +6,7 @@ import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScre
 var playerName = "";
 var coins = 0;
 var gems = 0;
+var rank = 0;
 var playerId = "";
 var totalDistance = 0;
 var username = "VeryLongNameTe";
@@ -40,7 +41,6 @@ export function updateValues() {
 
         })
         .then(response => "")
-
 
 }
 export function setValues(value:string) {
@@ -81,7 +81,18 @@ export const getLevel = () => {
     } else {
         lvl = 20 + Math.floor((totalEXP - 20000) / 7500);
     }
-    return [lvl];
+    return lvl;
+}
+
+export const getLevelXp = () => {
+    
+    if(totalEXP < 20000)
+    {
+        return 1000;
+    }else
+    {
+        return 7500;
+    }
 }
 
 export const getLevelProgress = () => {
@@ -113,7 +124,12 @@ export const getGems = (): number => {
     return gems;
 }
 
-export var addCoin = (n: number) => {
+export const getTotalExp = ():number => {
+
+    return totalEXP;
+}
+
+export var addCoin = (n:number) => {
     coins += n;
     updateValues();
     console.log(coins);
@@ -128,7 +144,7 @@ export var addGem = (n: number) => {
 export var addEXP = (n: number) => {
     totalEXP += n;
     updateValues();
-    console.log(totalEXP);
+    //console.log(totalEXP);
 };
 
 //Function that removes a given number of coins (used to buy items)

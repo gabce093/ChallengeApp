@@ -38,6 +38,15 @@ import LinkingConfiguration from './LinkingConfiguration';
 
 import pageStyles from '../styles/Page.style';
 
+
+/**
+ * This function provides the base navigatin through the pages as well as
+ * the custom made topbar in the header. 
+ * 
+ * @author Henrik Gustafsson
+ * @param colorScheme The colors of wgich the app will use. It is hardcoded to dark theme as of now 
+ * @returns The navigation functionality of the app
+ */
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
 

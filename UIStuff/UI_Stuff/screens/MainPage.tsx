@@ -9,6 +9,13 @@ import {getUsername, getLevel, getCoins, getGems} from '../PlayerData';
 
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 
+/**
+ * This function contains the functionality of the main page.
+ * 
+ * @author Henrik Gustafsson
+ * @param navigation Uses navigation data keep track of what to diplay
+ * @returns Itself as a component to be used by the navigation function in Index.
+ */
 export default function MainPageScreen({ navigation }: RootStackScreenProps<'CreateRunPage'>) {
   
   return (

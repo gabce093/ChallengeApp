@@ -72,7 +72,12 @@ export const getUsername = (): string => {
     return username;
 }
 
-
+/**
+ * This function calculates the level of the player based on the total exp they have.
+ * 
+ * @author Henrik Gustafsson
+ * @returns The level of the player
+ */
 export const getLevel = () => {
     var lvl = 0;
     if (totalEXP < 20000) {
@@ -95,6 +100,13 @@ export const getLevelXp = () => {
     }
 }
 
+/**
+ * This function calculates the progress towards the next level for the player.
+ * This will be a number between  0.0 <= x < 1.0
+ * 
+ * @author Henrik Gustafsson
+ * @returns The progress towards the next level for the player.
+ */
 export const getLevelProgress = () => {
     var currentLvlProgress = 0.0;
     var lvl = 0;

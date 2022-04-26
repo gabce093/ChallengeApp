@@ -6,13 +6,13 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons'; 
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, ImageBackground, Pressable, StatusBar  } from 'react-native';
+import { ColorSchemeName, ImageBackground, Pressable, StatusBar } from 'react-native';
 import TopBar from '../components/TopBar'
 
 import Colors from '../constants/Colors';
@@ -40,7 +40,7 @@ import pageStyles from '../styles/Page.style';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
-    
+
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -60,32 +60,32 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
- const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 // Root navigator is on all 5 main tabs, it includes the topbar
 function RootNavigator() {
   const colorScheme = useColorScheme();
   return (
     <ImageBackground source={require('../Graphics/forest.png')} style={pageStyles.forestHeader} resizeMode="cover">
-    <Stack.Navigator> 
-      <Stack.Screen name="Root" component={BottomTabNavigator}  options=
-      {({navigation}) => ({
-        //headerShown: true,
-        //headerMode: "screen",
-        headerBackTitleVisible: false,
-        headerTransparent: true,
-        header: () => <TopBar  {...navigation}/>
-         
-      })} />
+      <Stack.Navigator>
+        <Stack.Screen name="Root" component={BottomTabNavigator} options=
+          {({ navigation }) => ({
+            //headerShown: true,
+            //headerMode: "screen",
+            headerBackTitleVisible: false,
+            headerTransparent: true,
+            header: () => <TopBar  {...navigation} />
 
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
+          })} />
+
+        <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+          <Stack.Screen name="Modal" component={ModalScreen} />
+        </Stack.Group>
         <Stack.Screen name="CreateRunPage" component={CreateRunPage} />
         <Stack.Screen name="GPSPage" component={GPSPage} />
         <Stack.Screen name="ResultPage" component={ResultPage} />
-    </Stack.Navigator>
+      </Stack.Navigator>
     </ImageBackground>
   );
 }
@@ -101,14 +101,14 @@ function BottomTabNavigator() {
       screenOptions={{
         tabBarActiveTintColor: "#ff5C00",
       }}>
-        
+
       <BottomTab.Screen
         name="StatPage"
         component={StatPageScreen}
         options={{
           title: 'Stat Page',
           headerShown: false,
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons  name="medal" size={30} color={color} />,
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="medal" size={30} color={color} />,
         }}
       />
 

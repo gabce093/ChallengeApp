@@ -4,8 +4,22 @@
     "strict": true
   },
   "typedocOptions": {
-    "entryPoints": ["./components/GroupSquare.tsx"],
-    "out": "docs"
+    "entryPoints": ["navigation/index.tsx",
+                    "components/GroupSquare.tsx",
+                    "components/FriendSquare.tsx",
+                    "components/friendSearchList.tsx",
+                    "components/Recorder.tsx",
+                    "components/UserIconLarge.tsx",
+                    "components/FriendRequest.tsx",
+                    "components/OptionModalFriend.tsx",
+                    "components/OptionModalGroup.tsx",
+                    "screens/FriendPage.tsx",
+                    "screens/ChallengePage.tsx",
+                    "constants/databaseAPI.ts",
+                    "API/FriendPage/requestsFriendPage.tsx",
+                    "API/InboxPage/requestsInboxPage.tsx",
+                  ],
+    "out": "documentation"
   },
 }
 

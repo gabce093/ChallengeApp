@@ -2,19 +2,19 @@
 import styles from '../styles/GPSPage.style';
 import React, { useState, useEffect } from 'react';
 import { Text, View } from '../components/Themed';
-import { Stopwatch} from 'react-native-stopwatch-timer';
-import {getType, getDistanceGoal, checkCompleted, setElapsedDistance, setTotalTime, setChallengeTime, CompleteChallenge} from '../ChallengeData';
+import { Stopwatch } from 'react-native-stopwatch-timer';
+import { getType, getDistanceGoal, checkCompleted, setElapsedDistance, setTotalTime, setChallengeTime, CompleteChallenge } from '../ChallengeData';
 import {
     SafeAreaView,
     TouchableHighlight,
     Modal,
-  } from 'react-native';
+} from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 
-export default function Recorder(props: any){
-    
+export default function Recorder(props: any) {
+
     const [distance, setDistance] = useState(0);
-    const [startposition, setStartPosition] = useState([0,0]);
+    const [startposition, setStartPosition] = useState([0, 0]);
     const [recording, setRecording] = useState(false);
     const [isStopwatchStart, setIsStopwatchStart] = useState(false);
     const [resetStopwatch, setResetStopwatch] = useState(false);
@@ -25,28 +25,28 @@ export default function Recorder(props: any){
 
 
     var goal = getDistanceGoal();
-   
+
     //Runs when component opens and when position changes.
     useEffect(() => {
         //If recording, calculates distance moved from last point and add it
         //to the total distance.
         if (recording == true) {
-            let distance_since_last = haversine(startposition, props.position, {unit: 'meter', format: '[lon,lat]' });
+            let distance_since_last = haversine(startposition, props.position, { unit: 'meter', format: '[lon,lat]' });
             setDistance(distance + distance_since_last);
             setStartPosition(props.position);
         }
     }, [props.position])
-    
+
     useEffect(() => {
         //If recording, calculates distance moved from last point and add it
         //to the total distance.
         if (recording == true) {
-            var min_per_m = props.pace*60;
-            var min_per_km = 1000/min_per_m;
+            var min_per_m = props.pace * 60;
+            var min_per_km = 1000 / min_per_m;
             var minutes = Math.floor(min_per_km)
-            var seconds = Math.round((min_per_km-minutes) * 60);
-                
-            if(10>seconds){
+            var seconds = Math.round((min_per_km - minutes) * 60);
+
+            if (10 > seconds) {
                 setSpeed(minutes + ":" + '0' + seconds);
             }
             else {
@@ -54,14 +54,14 @@ export default function Recorder(props: any){
             }
         }
     }, [props.pace])
-    
+
     //Switch between start and stop,
     const handleStartStop = () => {
         setIsStopwatchStart(!isStopwatchStart);
         setResetStopwatch(false);
         setRecording(!recording);
-        setStartPosition(props.position);  
-        if (isStopwatchStart==true){
+        setStartPosition(props.position);
+        if (isStopwatchStart == true) {
             setButtonColor('#00FF47');
         }
         else {
@@ -91,10 +91,10 @@ export default function Recorder(props: any){
 
     //Display reset and finshish if run is paused
     function StartAndResetButtons() {
-        if (isStopwatchStart==false){
+        if (isStopwatchStart == false) {
             return (
                 <View style={styles.subContainer}>
-                    <TouchableHighlight 
+                    <TouchableHighlight
                         style={styles.button}
                         onPress={handleReset}>
                         <Text style={styles.buttonText}>RESET</Text>
@@ -114,24 +114,25 @@ export default function Recorder(props: any){
 
     return (
         <View style={styles.container}>
-           <Modal
-           animationType="slide"
-           visible={modalVisible}
-           onRequestClose={() => {
-             setModalVisible(!modalVisible);
-           }}>
-               <View>
+            <Modal
+                animationType="slide"
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                }}>
+                <View>
                     <Text>Challenge not completed. Are you sure you want to finish run?</Text>
-                    <TouchableHighlight 
+                    <TouchableHighlight
                         onPress={() => props.navigation.navigate('ResultPage')}>
-                            <Text>Finish now</Text>
+                        <Text>Finish now</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
                         onPress={() => {
-                            setModalVisible(!modalVisible)}}>
-                       <Text>Cancel</Text>
+                            setModalVisible(!modalVisible)
+                        }}>
+                        <Text>Cancel</Text>
                     </TouchableHighlight>
-               </View>
+                </View>
             </Modal>
             <Stopwatch
                 start={isStopwatchStart}
@@ -139,9 +140,9 @@ export default function Recorder(props: any){
                 options={options}
                 getTime={(time: any) => {
                     if (isStopwatchStart == false) {
-                        setTotalTime(time); 
+                        setTotalTime(time);
                     }
-                    if(goal <= distance && distance <= (goal+15)) {
+                    if (goal <= distance && distance <= (goal + 15)) {
                         setChallengeTime(time);
                     }
                 }}
@@ -154,9 +155,9 @@ export default function Recorder(props: any){
                 <View style={styles.paceContainer}>
                     <Text style={styles.text}>{speed}</Text>
                     <Text style={styles.smallText}>Pace (min/km)</Text>
-                </View>   
+                </View>
             </View>
-            
+
             <TouchableHighlight style={
                 {
                     backgroundColor: buttonColor,
@@ -166,32 +167,32 @@ export default function Recorder(props: any){
                     marginBottom: '5%',
                     marginTop: '5%',
                 }
-                } 
+            }
                 onPress={handleStartStop}>
                 <Text style={styles.buttonText}>{!isStopwatchStart ? 'START' : 'STOP'}</Text>
             </TouchableHighlight>
             <StartAndResetButtons />
             <View style={styles.progressContainer}>
-                <ProgressBar color="#FF5C00"progress={distance / goal} style={{
-                height: 20,
+                <ProgressBar color="#FF5C00" progress={distance / goal} style={{
+                    height: 20,
                     backgroundColor: "#151515",
-                    }}/>
+                }} />
             </View>
         </View>
-    ) 
-       
-}  
+    )
+
+}
 
 const options = {
     container: {
-      backgroundColor: '#282828',
-      padding: 0,
-      borderRadius: 5,
-      marginBottom: '5%'
+        backgroundColor: '#282828',
+        padding: 0,
+        borderRadius: 5,
+        marginBottom: '5%'
     },
     text: {
-      fontSize: 65,
-      color: '#FFF',
-      textAlign: 'center',
+        fontSize: 65,
+        color: '#FFF',
+        textAlign: 'center',
     },
 }

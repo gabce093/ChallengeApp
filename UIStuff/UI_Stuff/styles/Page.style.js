@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 var screenWidth = Dimensions.get('window').width;
 var screenHeight = Dimensions.get('window').height;
 
-{/*StyleSheet for the base of the pages*/}
+{/*StyleSheet for friend-page*/}
 export default StyleSheet.create({
   forestHeader: {
       position: 'absolute',

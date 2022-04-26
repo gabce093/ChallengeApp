@@ -162,9 +162,7 @@ export default function LoginPage() {
                         onPress={(user) => //AuthFunction(resUser,resPass)
                                 AuthFunction(resUser, resPass)
 
-                                //navigation.navigate('MainPage')
-
-                              
+                                //navigation.navigate('MainPage')                              
                         }
 
                     ><Text style={{ color: 'white' }}>Enter</Text>

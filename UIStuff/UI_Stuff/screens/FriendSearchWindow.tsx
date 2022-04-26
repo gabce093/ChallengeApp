@@ -1,14 +1,14 @@
 //React imports
 import { Pressable, Image, Text, View } from 'react-native';
-import { useState } from 'react';
-//Components
+//Style
 import SearchFriend from '../styles/SearchFriend.style.js';
+//Components
 import FriendSearchList from "../components/friendSearchList";
 //Additional libraries
 import Modal from "react-native-modal";
 
 /** 
-*  his fucntion opens a modal in which a the searchlist is displayed
+*  This fucntion opens a modal in which a the searchlist is displayed
 * 
 *@param user Object that contains information about the group
 *@returns A modal with a search list
@@ -17,7 +17,7 @@ import Modal from "react-native-modal";
 const FriendSearchWindow = ({ user, onBackdropPress, isVisible }:
     { user: string, onBackdropPress: () => void, isVisible: boolean }) => {
 
-    return <View style={{ backgroundColor: 'rgba(0,0,0,0)' }}>
+    return <>
         <Modal
             animationIn="slideInUp"
             isVisible={isVisible}
@@ -52,6 +52,6 @@ const FriendSearchWindow = ({ user, onBackdropPress, isVisible }:
                 </View>
             </View>
         </Modal>
-    </View>
+    </>
 }
 export default FriendSearchWindow;

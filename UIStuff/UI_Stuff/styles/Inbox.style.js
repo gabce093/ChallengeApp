@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 }
 export default StyleSheet.create({
   inboxContainer: {
-    height: "90%",
+    height: "80%",
     width: "96%",
     marginBottom: "3%",
     backgroundColor: "rgba(196, 196, 196, 0.9)",
@@ -40,15 +40,15 @@ export default StyleSheet.create({
     alignItems: "center",
     borderRadius: 8,
   },
-  messageHeadText: {
-    color: "white",
+  FriendRequestText: {
+    color: "#C4C4C4",
     fontWeight: "bold",
     fontSize: 30,
   },
   messageFromText: {
-    color: "white",
+    color: "#C4C4C4",
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: 20,
     textAlign: "center",
   },
   statusButtonHolder: {
@@ -76,10 +76,15 @@ export default StyleSheet.create({
   },
 
   //**CHALLENGE-card**/
+  ChallengeText: {
+    color: "#C4C4C4",
+    fontWeight: "bold",
+    fontSize: 42,
+  },
   acceptChallengeButton: {
     backgroundColor: "#ff5c00",
     height: 40,
-    width: 120,
+    width: 180,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 8,
@@ -88,19 +93,30 @@ export default StyleSheet.create({
   acceptChallengeButtonText: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 27,
   },
-  challengeDistanceText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 25,
-  },
-  challengeDistanceHolder: {
+  challengeInfoHolder: {
+    flexDirection: "row",
     backgroundColor: "rgba(15, 15, 15, 0.5)",
     flex: 1,
-    borderRadius: 8,
+    borderRadius: 16,
     justifyContent: "center",
-    paddingHorizontal: 4,
+    paddingHorizontal: 1,
     marginBottom: 5,
+    alignItems: "center",
+  },
+  infoBubbles: {
+    backgroundColor: "#383838",
+    borderRadius: 16,
+    justifyContent: "center",
+    height: 32,
+    width: 100,
+    marginHorizontal: 4,
+    alignItems: "center",
+  },
+  challengeInfoText: {
+    color: "#C4C4C4",
+    fontWeight: "bold",
+    fontSize: 26,
   },
 });

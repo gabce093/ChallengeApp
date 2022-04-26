@@ -1,7 +1,10 @@
 //React
 import { Image, TouchableOpacity, Text, View, Pressable } from 'react-native';
+import { useState } from 'react';
 //Styles
 import friendPageStyles from '../styles/FriendPage.style';
+//Components
+import ConfirmMessage from './ConfirmMessage';
 
 /** 
 * @remarks This function returnsa a Square displaying a certain friend.
@@ -14,14 +17,15 @@ import friendPageStyles from '../styles/FriendPage.style';
 *@category Friendpage
 *@author Gabriel
 */
-const FriendSquare = ({ item, onLongPress }: { item: any, onLongPress: () => void }) => (
+const FriendSquare = ({ userObject, onLongPress }: { userObject: any, onLongPress: () => void }) => {
   //Pressable friend square that makes the modal pop up on a Long press
-  <TouchableOpacity style={friendPageStyles.friendHolder} onLongPress={onLongPress} >
+  const [confirmVisible, setConfirmVisible] = useState(false);
+  return <TouchableOpacity style={friendPageStyles.friendHolder} onLongPress={onLongPress} >
     <View style={friendPageStyles.friendIconHolder}>
       <View style={friendPageStyles.lvlBadge}>
 
         {/* Text dispalying the level */}
-        <Text style={friendPageStyles.lvlText}>{item.expAmount}</Text>
+        <Text style={friendPageStyles.FriendlvlText}>lvl {userObject.expAmount}</Text>
       </View>
 
       {/* user icon for the friend */}
@@ -37,13 +41,23 @@ const FriendSquare = ({ item, onLongPress }: { item: any, onLongPress: () => voi
     </View>
     <View style={{ marginTop: 4, backgroundColor: 'transparent', alignItems: 'center' }}>
       {/* Show name of your friend */}
-      <Text style={[friendPageStyles.nameText]}>{item.userName}</Text>
+      <Text style={[friendPageStyles.nameText]}>{userObject.userName}</Text>
 
       {/* Button to challenge your friend */}
-      <Pressable style={friendPageStyles.friendChallengeButton} onPress={() => console.log('Pressed Challenge button')}>
-        <Text style={friendPageStyles.challengeTxt}>Challenge</Text>
+      <Pressable style={friendPageStyles.friendChallengeButton}
+        onPress={() => [console.log('Pressed Challenge button'), setConfirmVisible(true)]}>
+        <Text style={friendPageStyles.friendChallengeButtonTxt}>Challenge</Text>
       </Pressable>
+
+      <ConfirmMessage
+        isVisible={confirmVisible}
+        onBackdropPress={() => setConfirmVisible(false)}
+        onNo={() => setConfirmVisible(false)}
+        onYes={() => console.log("send challenge")}
+        question={"Are you sure you want to challenge " + userObject.userName + "?"} />
+
     </View>
+
   </TouchableOpacity>
-)
+}
 export default FriendSquare;

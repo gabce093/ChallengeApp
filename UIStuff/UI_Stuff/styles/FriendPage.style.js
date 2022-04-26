@@ -60,11 +60,12 @@ export default StyleSheet.create({
     borderBottomRightRadius: 5,
     marginTop: "35%",
   },
-  lvlText: {
-    fontSize: 12,
+  FriendlvlText: {
+    fontSize: 13,
     fontWeight: "bold",
     color: "#181818",
   },
+
   friendChallengeButton: {
     backgroundColor: "#2076F6",
     width: 100,
@@ -72,7 +73,7 @@ export default StyleSheet.create({
     borderRadius: 10,
     elevation: 2,
   },
-  challengeTxt: {
+  friendChallengeButtonTxt: {
     textAlign: "center",
     color: "white",
     fontWeight: "bold",
@@ -99,6 +100,19 @@ export default StyleSheet.create({
     color: "rgb(66, 66, 66)",
   },
 
+  errorMessageText: {
+    color: "white",
+    fontSize: 17,
+  },
+
+  errorMessageHolder: {
+    backgroundColor: "rgba(97, 116, 143, 1)", // "#383838" "rgba(97, 116, 143, 1)"
+    alignItems: "center",
+    height: 50,
+    justifyContent: "center",
+    marginTop: "35%",
+  },
+
   //*****Group-part******//
 
   groupContainer: {
@@ -107,12 +121,14 @@ export default StyleSheet.create({
     width: "90%",
     borderRadius: 5,
     marginBottom: "2%",
+    paddingLeft: 13,
+    paddingRight: 13,
   },
   groupHolder: {
     flex: 1 / 2,
     flexDirection: "column",
     marginVertical: "2%",
-    marginHorizontal: "2%",
+    marginHorizontal: "0.5%",
     marginBottom: 1,
     backgroundColor: "#383838",
     borderRadius: 9,
@@ -130,7 +146,6 @@ export default StyleSheet.create({
     height: 110,
     borderRadius: 100,
     borderWidth: 4,
-    borderColor: "#766449",
   },
   groupLvlBadge: {
     position: "absolute",
@@ -139,7 +154,7 @@ export default StyleSheet.create({
     justifyContent: "flex-end",
     width: 65,
     height: "35%",
-    backgroundColor: "#766449",
+    backgroundColor: "#212121", //#766449
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
     marginTop: 80,
@@ -150,12 +165,24 @@ export default StyleSheet.create({
     fontSize: 20,
     marginTop: "2%",
   },
+  GrouplvlText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#C4C4C4", //#181818
+  },
   groupChallengeButton: {
     backgroundColor: "#ff5c00",
-    width: 100,
-    height: "30%",
-    borderRadius: 5,
+    width: 180,
+    height: "35%",
+    borderRadius: 6,
     elevation: 2,
+    justifyContent: "center",
+  },
+  groupChallengeButtonTxt: {
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 25,
   },
   createGroupButton: {
     backgroundColor: "grey",

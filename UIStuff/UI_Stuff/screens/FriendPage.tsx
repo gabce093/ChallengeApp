@@ -1,6 +1,6 @@
 //React imports
 import { ImageBackground, FlatList, Text, View, TextInput, Button, Pressable, RefreshControl, Image } from 'react-native';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, } from 'react';
 //Styles
 import friendPageStyles from '../styles/FriendPage.style';
 import SearchFriend from '../styles/SearchFriend.style.js';
@@ -15,7 +15,6 @@ import OptionModalGroup from '../components/OptionModalGroup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 //API request
 import { getFriends } from '../API/FriendPage/requestsFriendPage';
-
 const GROUPS = [
   {
     groupId: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
@@ -43,11 +42,13 @@ const GROUPS = [
  * @category Friendpage
  */
 export default function FriendPageScreen() {
+
   //Calls on load
   useEffect(() => {
     asyncAction();
   }, []);
   const [friends, setFriends] = useState([]);
+
 
   //FUNCTION: Changes the user in the AsyncStorage
   const [user, setUser] = useState("");
@@ -80,12 +81,28 @@ export default function FriendPageScreen() {
         await getFriends(value)
           .then(data => {
             setFriends(data);
+            setFriendConnectionError(false)
           })
-          .catch((error) => console.log(error + ' when retrieving friends in FriendPage.tsx (asyncAction-function)'))
+          .catch((error) => [console.log(error + ' when retrieving friends in FriendPage.tsx (asyncAction-function)')
+            , setFriendConnectionError(true)]
+          )
       }
     } catch (e) {
       console.log(e)
     }
+  }
+
+  //FUNCTION: Displays a message  in the friend container why it could be empty 
+  const [friendsConnectionError, setFriendConnectionError] = useState(false);
+  const errorMessage = () => {
+    if (friendsConnectionError) return (
+      <View style={friendPageStyles.errorMessageHolder}>
+        < Text style={friendPageStyles.errorMessageText}>Cant't connect!</Text>
+      </View>);
+    return (
+      <View style={friendPageStyles.errorMessageHolder}>
+        <Text style={friendPageStyles.errorMessageText}>You currently haven't added any friends</Text>
+      </View>);
   }
 
   const [optionFriendVisible, setOptionFriendVisible] = useState(false);
@@ -103,7 +120,7 @@ export default function FriendPageScreen() {
       <>
         {/*Renders the friendSquare, see: ../Components/FriendSquare */}
         <FriendSquare
-          item={item}
+          userObject={item}
           onLongPress={() => [setSelectedId(item.relationId), setOptionFriendVisible(true)]}
         />
         {/* A modal with options for a specific friend. Triggered by a longpress on the friendsquare */}
@@ -113,7 +130,8 @@ export default function FriendPageScreen() {
           onBackdropPress={() => setOptionFriendVisible(false)}
           onModalHide={() => getFriends(user)
             .then(data => { setFriends(data); })
-            .catch((error) => console.log(error + ' when deleting friend in FriendPage.tsx'))}
+            .catch((error) => [console.log(error + ' when deleting friend in FriendPage.tsx'),
+            setFriendConnectionError(true)])}
         />
       </>
     );
@@ -211,7 +229,7 @@ export default function FriendPageScreen() {
               numColumns={3}
               extraData={selectedIdFriend}
               keyExtractor={(item) => item.user_id_1}
-              ListEmptyComponent={<Text>You currently haven't added any friends</Text>}
+              ListEmptyComponent={errorMessage}
               getItemLayout={(data, index) => (
                 { length: 200, offset: 100 * index, index }
               )}

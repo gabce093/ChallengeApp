@@ -8,7 +8,7 @@ export default StyleSheet.create({
   },
   buttonOpen: {
     alignItems: "center",
-    backgroundColor: "rgba(97, 116, 143, 1)",
+    backgroundColor: "#2076F6", //"rgba(97, 116, 143, 1)"
     borderRadius: 100,
     flexDirection: "row",
     justifyContent: "center",

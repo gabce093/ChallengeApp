@@ -29,7 +29,7 @@ const GroupSquare = ({ item, onLongPress }: { item: any, onLongPress: () => void
 
                 {/* Button to challenge your friend */}
                 <Pressable style={friendPageStyles.groupChallengeButton} onPress={() => console.log('Pressed Challenge button')}>
-                    <Text style={friendPageStyles.challengeTxt}>Challenge!</Text>
+                    <Text style={friendPageStyles.groupChallengeButtonTxt}>Challenge!</Text>
                 </Pressable>
             </View>
         </TouchableOpacity>

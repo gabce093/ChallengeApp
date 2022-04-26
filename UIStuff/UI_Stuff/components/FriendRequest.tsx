@@ -58,7 +58,7 @@ const renderFriendRequest = ({ item, onAccept, onDecline, selectedId, acceptPres
             <View style={inboxStyles.textAndButtonsHolder}>
 
                 <View style={{ backgroundColor: '#383838' }}>
-                    <Text style={inboxStyles.messageHeadText}>Friend Request!</Text>
+                    <Text style={inboxStyles.FriendRequestText}>Friend Request!</Text>
                 </View>
 
 

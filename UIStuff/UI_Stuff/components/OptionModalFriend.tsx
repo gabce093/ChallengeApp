@@ -27,7 +27,6 @@ const OptionModalFriend = ({ selectedId, onModalHide, isVisible, onBackdropPress
                 ? 'rgb(255, 169, 99)'
                 : 'white'
         }]
-
     return (<Modal
         style={{
             margin: 0,
@@ -48,7 +47,7 @@ const OptionModalFriend = ({ selectedId, onModalHide, isVisible, onBackdropPress
             <Pressable style={({ pressed }) => [colorOnPress({ pressed }), friendPageStyles.modalMenuButton]}>
                 <Text style={friendPageStyles.modalMenuText}>View Profile</Text>
             </Pressable>
-            <Pressable style={({ pressed }) => [colorOnPress({ pressed }), friendPageStyles.modalMenuButton]}>
+            <Pressable onPress={onBackdropPress} style={({ pressed }) => [colorOnPress({ pressed }), friendPageStyles.modalMenuButton]}>
                 <Text style={friendPageStyles.modalMenuText}>Send Challenge</Text>
             </Pressable>
         </View>

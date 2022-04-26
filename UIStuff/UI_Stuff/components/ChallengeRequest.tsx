@@ -28,10 +28,8 @@ const renderChallengeRequest = ({ item, onAccept, selectedId, acceptPressed }:
             <Pressable style={inboxStyles.acceptChallengeButton} onPress={onAccept}>
                 <Text style={inboxStyles.acceptChallengeButtonText}>Accept!</Text>
             </Pressable>
-
         </>
     }
-
     return (
         <TouchableOpacity style={inboxStyles.friendRequestContainer}>
             <View style={inboxStyles.imageAndNameHolder}>
@@ -42,11 +40,14 @@ const renderChallengeRequest = ({ item, onAccept, selectedId, acceptPressed }:
             <View style={inboxStyles.textAndButtonsHolder}>
 
                 <View style={{ backgroundColor: '#383838', flex: 1 / 3, }}>
-                    <Text style={inboxStyles.messageHeadText}>Challenge!</Text>
+                    <Text style={inboxStyles.ChallengeText}>Challenge!</Text>
                 </View>
-                <View style={inboxStyles.challengeDistanceHolder}>
-                    <View style={{ backgroundColor: '#383838', borderRadius: 8, }}>
-                        <Text style={inboxStyles.challengeDistanceText}>{item.distance} km</Text>
+                <View style={inboxStyles.challengeInfoHolder}>
+                    <View style={inboxStyles.infoBubbles}>
+                        <Text style={inboxStyles.challengeInfoText}>{item.distance} km</Text>
+                    </View>
+                    <View style={inboxStyles.infoBubbles}>
+                        <Text style={inboxStyles.challengeInfoText}> -min</Text>
                     </View>
                 </View>
                 <View style={inboxStyles.statusButtonHolder} >
@@ -54,7 +55,7 @@ const renderChallengeRequest = ({ item, onAccept, selectedId, acceptPressed }:
                 </View>
 
             </View>
-        </TouchableOpacity>
+        </TouchableOpacity >
 
     );
 };

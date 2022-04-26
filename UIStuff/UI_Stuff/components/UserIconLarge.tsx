@@ -16,16 +16,16 @@ const userIconLarge = ({ level }: { level: string }) => {
             <View style={friendPageStyles.groupLvlBadge}>
 
                 {/* Text dispalying the level */}
-                <Text style={friendPageStyles.lvlText}>{level}</Text>
+                <Text style={friendPageStyles.GrouplvlText}>lvl {level}</Text>
             </View>
 
             {/* user icon for the friend */}
             <Image source={require('../assets/images/emptyPlayerIcon.png')} style={{
-                width: 110,
-                height: 110,
+                width: 107,
+                height: 107,
                 borderRadius: 100,
-                borderWidth: 4,
-                borderColor: "#766449",
+                borderWidth: 7,
+                borderColor: "#212121",
             }}
             />
         </View>

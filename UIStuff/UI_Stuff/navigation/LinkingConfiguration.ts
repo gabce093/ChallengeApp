@@ -45,6 +45,7 @@ const linking: LinkingOptions<RootStackParamList> = {
       ResultPage: 'ResultPage',
       GPSPage: 'GPSPage',
       CreateRunPage: 'CreateRunPage',
+      SendChallengePage: 'SendChallengePage',
       Modal: 'modal',
       NotFound: '*',
     },

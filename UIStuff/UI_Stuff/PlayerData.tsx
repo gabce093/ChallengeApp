@@ -50,7 +50,7 @@ export function setValues(value:string) {
     totalEXP = JSON.parse(value).expAmount;
     coins = JSON.parse(value).goldAmount;
     playerId = JSON.parse(value).id
-    console.log(coins)
+    
 }
 export function getTotalDistance() {
 

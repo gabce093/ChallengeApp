@@ -3,13 +3,13 @@ import styles2 from '../styles/ResultPage.style'
 import React, { useState, useEffect } from 'react';
 import { Image, ImageBackground, Pressable, TouchableOpacity} from "react-native";
 import { Text, View } from '../components/Themed';
-import {getPace, getTotalTime, getChallengeTime, getElapsedDistance, getDistanceGoal, checkCompleted, calculateXP} from '../ChallengeData';
+import {getPace, getTotalTime, getChallengeTime, getElapsedDistance, getDistanceGoal, checkCompleted, calculateXP, calculateCoins} from '../ChallengeData';
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 import ResultProgressBar from '../components/ResultProgressBar';
 import XpProgressBar from '../components/XpProgressBar';
 
 
-export default function ResultPage({navigation}: RootTabScreenProps<'MainPage'>) {
+export default function ResultPage({ navigation }: RootStackScreenProps<'SendChallengePage'>) {
     
    var string = "almost"
    if (checkCompleted()){
@@ -27,7 +27,7 @@ export default function ResultPage({navigation}: RootTabScreenProps<'MainPage'>)
               <Text style={styles2.title2}>{string}</Text>
               <Text style={styles2.title}>Complete!</Text>  
               <Text style={styles2.text}>Rewards:</Text>
-              <Text style={styles2.text}>{"+"+Math.round(calculateXP()) +"xp, +" + 50 + "coins"}</Text>
+              <Text style={styles2.text}>{"+"+Math.round(calculateXP()) +"xp, +" + calculateCoins() + "coins"}</Text>
               <XpProgressBar></XpProgressBar>
             </View>
             
@@ -58,7 +58,7 @@ export default function ResultPage({navigation}: RootTabScreenProps<'MainPage'>)
               </View>
               <ResultProgressBar goal={getDistanceGoal()} elapsedDistance={getElapsedDistance()}></ResultProgressBar>
               
-              <TouchableOpacity style={styles2.button} onPress={() => navigation.navigate('MainPage')}>
+              <TouchableOpacity style={styles2.button} onPress={() => navigation.navigate('SendChallengePage')}>
                 <Text style={styles2.buttonText}>Done</Text>
               </TouchableOpacity>
             </View>

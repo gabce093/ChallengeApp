@@ -31,6 +31,7 @@ import FriendPageScreen from '../screens/FriendPage';
 import CreateRunPage from '../screens/CreateRunPage';
 import GPSPage from '../screens/GPSPage';
 import ResultPage from '../screens/ResultPage';
+import SendChallengePage from '../screens/SendChallengePage';
 
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import { RootStackScreenProps } from '../types';
@@ -94,6 +95,7 @@ function RootNavigator() {
         <Stack.Screen name="CreateRunPage" component={CreateRunPage} />
         <Stack.Screen name="GPSPage" component={GPSPage} />
         <Stack.Screen name="ResultPage" component={ResultPage} />
+        <Stack.Screen name="SendChallengePage" component={SendChallengePage} />
       </Stack.Navigator>
     </ImageBackground>
   );

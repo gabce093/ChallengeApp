@@ -11,7 +11,7 @@ import { Text, TextProps } from './Themed';
 import { RootStackScreenProps } from '../types';
 import { getLevel, getLevelProgress, getCoins, getGems, getPlayer } from '../PlayerData';
 import React, { Component, useState, useEffect } from 'react';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 /**
  * This function contains the functionality of the topbar in the header.
  * It displayer player information and gives acces to the settings menu.
@@ -21,6 +21,15 @@ import React, { Component, useState, useEffect } from 'react';
  * @returns Itself as a component to be used by the navigation function in Index.
  */
 export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
+
+    const [progress, setProgress] = useState(getLevelProgress());
+    const [coins, setCoins] = useState(getCoins());
+    const [lvl, setLvl] = useState(getLevel());
+
+    useEffect(() => {
+        setCoins(getCoins);
+    }, []);
+    
   
     const colorScheme = useColorScheme();
     return (
@@ -34,7 +43,7 @@ export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
                     <Image style={styles.image}
                         source={require('../Graphics/TempProfilePic.png')} />
                     <ImageBackground source={require('../Graphics/ExpMask.png')} style={styles.lvlHolder} imageStyle={{ tintColor: "#333333" }} resizeMode="stretch">
-                        <Text style={styles.lvl}>{getLevel()}</Text>
+                        <Text style={styles.lvl}>{lvl}</Text>
                     </ImageBackground>
                 </View>
 
@@ -45,11 +54,11 @@ export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
                     <View style={styles.CurrencyAndEXPHolder}>
                         <View style={styles.CurrencyHolder}>
                             <Text style={styles.title}>
-                                Coins: {getCoins()}   Gems: {getGems()}
+                                Coins: {coins}   Gems: {getGems()}
                             </Text>
                         </View>
                         <View style={styles.EXPBarHolder}>
-                            <ProgressBar color="#FF5C00" progress={getLevelProgress()} style={{
+                            <ProgressBar color="#FF5C00" progress={progress} style={{
                                 height: "100%",
                                 backgroundColor: "#151515",
                             }} />

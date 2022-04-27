@@ -23,6 +23,7 @@ export type RootStackParamList = {
   CreateRunPage: undefined;
   GPSPage: undefined;
   ResultPage: undefined;
+  SendChallengePage: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

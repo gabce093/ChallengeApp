@@ -151,7 +151,6 @@ export default function LoginPage() {
                         />
                     </Pressable>
                     <Text style={SearchFriend.modalText}>Enter Username and password</Text>
-
                     {/* Input to write tha name of the friend */}
                     <TextInput style={SearchFriend.textWindow} onChangeText={(text) => { setUserName(text) }} placeholder='Username' />
                     <TextInput style={SearchFriend.textWindow} onChangeText={(text) => { setPassWord(text) }} placeholder='Password' />
@@ -159,21 +158,12 @@ export default function LoginPage() {
                     <Pressable
                         style={[SearchFriend.button, SearchFriend.buttonSubmit]}
                         onPress={(user) => //AuthFunction(resUser,resPass)
-                                AuthFunction(resUser, resPass)
-
-                                //navigation.navigate('MainPage')                              
+                                AuthFunction(resUser, resPass)                             
                         }
-
-                    ><Text style={{ color: 'white' }}>Enter</Text>
-                    
-                    </Pressable>
-                    
-                </View>
-                
-           {/* </View>*/}
-            
-        </Modal>
-        
+                    ><Text style={{ color: 'white' }}>Enter</Text>                    
+                    </Pressable>                   
+                </View> 
+        </Modal>        
         <Pressable
             style={[SearchFriend.button, SearchFriend.buttonOpen]}
             onPress={() => setModalVisible(true)}
@@ -185,11 +175,7 @@ export default function LoginPage() {
             onPress={() => logOut()}
         >
             <Text style={SearchFriend.textStyle}>Log out</Text>
-        </Pressable>
-       
-                    
-    
-      
+        </Pressable>  
     </View>
 
 }

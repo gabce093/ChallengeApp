@@ -16,7 +16,7 @@ import { background } from 'native-base/lib/typescript/theme/styled-system';
   * This function records distance, time and pace for the user when recording a challenge.
   * 
   * @author Victor
-  * @param props position, pace and watcher.
+  * @param props position, pace, navigation and watcher.
   * @returns The component that the user can record a challenge.
 */
 export default function Recorder(props: any){

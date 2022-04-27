@@ -14,7 +14,6 @@ import { updateValues } from '../PlayerData';
 export default function LoginPage() {
     
     useEffect(() => {
-        logOut();
         getData();  
       }, []);
 
@@ -84,7 +83,7 @@ export default function LoginPage() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    firstName: `${resUser}`,
+                    userName: `${resUser}`,
                     lastName: `${resPass}`
                 })
 

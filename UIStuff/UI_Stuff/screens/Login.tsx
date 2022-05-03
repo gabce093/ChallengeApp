@@ -103,10 +103,7 @@ export default function LoginPage() {
         if(logSuccess == true) {
            console.log("hehe")
            setModalVisible(false)
-           GetUserInfo(resUser)
-           
-       
-          
+           GetUserInfo(resUser) 
            //console.log(JSON.parse(retUserData)[0].firstName)
 
         }

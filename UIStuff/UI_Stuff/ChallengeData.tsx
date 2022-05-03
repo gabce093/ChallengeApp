@@ -160,7 +160,7 @@ export function createChallenge(userId: any){
         distance: getDistanceGoal(),
         resDistance: getElapsedDistance(),
         time: getChallengeTime(),
-        resTime: getTotalTime(),
+        //resTime: getTotalTime(),
       }).then(() => {
         console.log('ChallengeData created');
       });

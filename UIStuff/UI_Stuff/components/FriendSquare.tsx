@@ -5,7 +5,7 @@ import { useState } from 'react';
 import friendPageStyles from '../styles/FriendPage.style';
 //Components
 import ConfirmMessage from './ConfirmMessage';
-
+import { setChallenger, setChallengerId } from '../ChallengeData';
 /** 
 * @remarks This function returnsa a Square displaying a certain friend.
 * It it is used with a flatlist to render a list of friends.
@@ -53,7 +53,10 @@ const FriendSquare = ({ userObject, onLongPress }: { userObject: any, onLongPres
         isVisible={confirmVisible}
         onBackdropPress={() => setConfirmVisible(false)}
         onNo={() => setConfirmVisible(false)}
-        onYes={() => console.log("send challenge")}
+        onYes={() => {console.log("send challenge");
+                      setChallenger();
+                      setChallengerId(userObject.id)}
+      }
         question={"Are you sure you want to challenge " + userObject.userName + "?"} />
 
     </View>

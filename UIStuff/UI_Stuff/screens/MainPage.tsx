@@ -2,13 +2,14 @@ import styles from '../styles/Page.style';
 import SearchFriend from '../styles/SearchFriend.style.js';
 import { Image, ImageBackground, Pressable, View, Text, TextInput, Dimensions, TouchableOpacity} from "react-native";
 import Modal from "react-native-modal";
-import { setValues } from '../PlayerData';
+import { getLevelProgress, setValues } from '../PlayerData';
 import React, { useEffect, useState } from 'react';
 //import { FriendSearchWindow } from './FriendSearchWindow';
 import { ProgressBar } from 'react-native-paper';
 import {getUsername, getLevel, getCoins, getGems, getPlayer} from '../PlayerData';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
+import { useRoute } from '@react-navigation/native';
 
 /**
  * This function contains the functionality of the main page.
@@ -17,7 +18,7 @@ import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScre
  * @param navigation Uses navigation data keep track of what to diplay
  * @returns Itself as a component to be used by the navigation function in Index.
  */
-export default function MainPageScreen({ navigation }: RootStackScreenProps<'CreateRunPage'>) {
+export default function MainPageScreen({navigation}: RootStackScreenProps<'CreateRunPage'>) {
 
   const [logSuccess, setLogSuccess] = useState();
   const [modalVisible, setModalVisible] = useState(false);
@@ -30,7 +31,8 @@ export default function MainPageScreen({ navigation }: RootStackScreenProps<'Cre
   }, []);
 
   useEffect(() => {
-    setUserName(getPlayer());  
+    setUserName(getPlayer());
+     
   }, [resUser]);
 
 const getData = async () => {
@@ -79,7 +81,7 @@ const GetUserInfo = (resUser:string) => {
        console.log(user[0])
        storeData(user[0].userName);
        setUserName(user[0].userName);
-       setValues(JSON.stringify(user[0]));
+       setValues(JSON.stringify(user[0])); 
    })
    if (resUser == "") return "error";
   //getData()

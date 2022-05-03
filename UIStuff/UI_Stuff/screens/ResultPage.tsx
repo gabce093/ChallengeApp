@@ -3,13 +3,15 @@ import styles2 from '../styles/ResultPage.style'
 import React, { useState, useEffect } from 'react';
 import { Image, ImageBackground, Pressable, TouchableOpacity} from "react-native";
 import { Text, View } from '../components/Themed';
-import {getPace, getTotalTime, getChallengeTime, getElapsedDistance, getDistanceGoal, checkCompleted, calculateXP, calculateCoins} from '../ChallengeData';
+import {getPace, getTotalTime, getChallengeTime, getElapsedDistance, getDistanceGoal, 
+        checkCompleted, calculateXP, calculateCoins, getChallenger, getChallengerId, createChallenge} from '../ChallengeData';
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 import ResultProgressBar from '../components/ResultProgressBar';
 import XpProgressBar from '../components/XpProgressBar';
+import { getUsername, getPlayerId } from '../PlayerData';
 
 
-export default function ResultPage({ navigation }: RootStackScreenProps<'SendChallengePage'>) {
+export default function ResultPage({ navigation }: RootStackScreenProps<'Root'>) {
     
    var string = "almost"
    if (checkCompleted()){
@@ -18,6 +20,16 @@ export default function ResultPage({ navigation }: RootStackScreenProps<'SendCha
 
    var totalTime = getTotalTime();
    var challengeTime = getChallengeTime();
+
+   const handleButton = () => {
+     if (getChallenger()){
+      createChallenge(getPlayerId())
+      navigation.navigate('Root');
+     }
+     else {
+      navigation.navigate('SendChallengePage');
+     }
+   }
 
     return (
       <View style={styles.container}>
@@ -58,7 +70,7 @@ export default function ResultPage({ navigation }: RootStackScreenProps<'SendCha
               </View>
               <ResultProgressBar goal={getDistanceGoal()} elapsedDistance={getElapsedDistance()}></ResultProgressBar>
               
-              <TouchableOpacity style={styles2.button} onPress={() => navigation.navigate('SendChallengePage')}>
+              <TouchableOpacity style={styles2.button} onPress={() => handleButton}>
                 <Text style={styles2.buttonText}>Done</Text>
               </TouchableOpacity>
             </View>

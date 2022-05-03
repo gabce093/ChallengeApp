@@ -10,7 +10,7 @@ import { HeaderButtonProps } from '@react-navigation/native-stack/lib/typescript
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
+    interface RootParamList extends RootStackParamList { }
   }
 }
 
@@ -18,12 +18,13 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
-  
+
   // Sub-Pages
   CreateRunPage: undefined;
   GPSPage: undefined;
   ResultPage: undefined;
   SendChallengePage: undefined;
+  ProfilePage: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

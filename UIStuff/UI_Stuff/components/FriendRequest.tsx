@@ -4,7 +4,8 @@ import { View, Pressable, Text, TouchableOpacity, Image } from 'react-native';
 import inboxStyles from '../styles/Inbox.style';
 //Components
 import UserIcon from './UserIconLarge';
-
+//playerData
+import { calculateLevel } from '../PlayerData';
 /**
  * Creates Frinedrequest card where the user can dcline or accept friend-requests
  * @param item The array item to rendered in the list
@@ -51,7 +52,7 @@ const renderFriendRequest = ({ item, onAccept, onDecline, selectedId, acceptPres
     return (
         <TouchableOpacity style={inboxStyles.friendRequestContainer}>
             <View style={inboxStyles.imageAndNameHolder}>
-                <UserIcon level={item.expAmount} />
+                <UserIcon level={calculateLevel(item.expAmount)} />
                 <Text style={inboxStyles.messageFromText}>{item.userName}</Text>
             </View>
 

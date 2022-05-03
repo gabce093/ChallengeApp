@@ -4,16 +4,16 @@ import { View, Pressable, Text, TouchableOpacity, Image } from 'react-native';
 import inboxStyles from '../styles/Inbox.style';
 //Componentes
 import UserIcon from './UserIconLarge';
+//playerData
+import { calculateLevel } from '../PlayerData';
 
 /**
- * Creates Frinedrequest card where the user can dcline or accept friend-requests
- * @param item The array item to rendered in the list
- * @param onAccept Functions executed when the acceptnutton is pressed
- * @param onDecline Functions executed when the declinetnutton is pressed
+ * Creates Challenge-request card where the user can decline or accept a challenge-requests
+ * @param item The array item to be rendered in the list
+ * @param onAccept Functions executed when the acceptbutton is pressed
  * @param selectedId The id of the item to be updated with the texts "declined" or "updated"
  * @param acceptPressed Boolean that tells if the acceptbutton was pressed
- * @param acceptPressed Boolean that tells if the declinebutton was pressed
- * @returns Returns a Friendrequest card  with the ability of accepting and declining friendrequests
+ * @returns Returns a Challnengerequest card  with the ability of accepting and declining challengerequests
  * @category Inboxpage
  * @author Gabriel
  */
@@ -33,7 +33,7 @@ const renderChallengeRequest = ({ item, onAccept, selectedId, acceptPressed }:
     return (
         <TouchableOpacity style={inboxStyles.friendRequestContainer}>
             <View style={inboxStyles.imageAndNameHolder}>
-                <UserIcon level={item.expAmount} />
+                <UserIcon level={calculateLevel(item.expAmount)} />
                 <Text style={inboxStyles.messageFromText}>{item.userName}</Text>
             </View>
 

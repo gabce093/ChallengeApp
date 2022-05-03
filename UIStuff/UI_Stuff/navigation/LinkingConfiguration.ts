@@ -42,6 +42,7 @@ const linking: LinkingOptions<RootStackParamList> = {
           },
         },
       },
+      ProfilePage: 'ProfilePage',
       ResultPage: 'ResultPage',
       GPSPage: 'GPSPage',
       CreateRunPage: 'CreateRunPage',

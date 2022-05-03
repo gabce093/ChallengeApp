@@ -89,7 +89,13 @@ export default StyleSheet.create({
     flexDirection: "row",
     width: 280,
     backgroundColor: "#F5FCFF",
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingTop: 2,
+    paddingBottom: 20,
+    borderRadius: 8,
+    justifyContent: "flex-start",
+    marginTop: 5,
+    alignItems: "center",
   },
   headerText: {
     textAlign: "center",
@@ -100,6 +106,7 @@ export default StyleSheet.create({
   content: {
     padding: 20,
     backgroundColor: "#fff",
+    borderRadius: 9,
   },
   active: {
     backgroundColor: "rgba(255,255,255,1)",

@@ -33,7 +33,6 @@ export default function ShoppingPageScreen() {
        
     Axios.get(`http://213.188.152.167:5000/items/owneditems/${getPlayerId()}`).then((response) => {       
     setItemList(response.data);
-    console.log(response.data);
     });  
 
     
@@ -50,7 +49,6 @@ export default function ShoppingPageScreen() {
     setShoesImg(`http://213.188.152.167:5000/graphics/character/${response.data[0].boots}.png`)
 
 
-    console.log(response.data[0].hat);
     });  
   
   }
@@ -101,7 +99,6 @@ export default function ShoppingPageScreen() {
 {/*The render function that renders al the items inside shopMenu (flatList uses this)*/}
   const renderItem = ({ item }:{item:any}) => {
     
-   console.log(item.id)
 
 var itemOwn = false;
 

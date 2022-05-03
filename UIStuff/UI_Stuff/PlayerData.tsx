@@ -152,13 +152,11 @@ export var addCoin = (n:number) => {
 export var addGem = (n: number) => {
     gems += n;
     updateValues();
-    console.log(gems);
 };
 
 export var addEXP = (n: number) => {
     totalEXP += n;
     updateValues();
-    //console.log(totalEXP);
 };
 
 //Function that removes a given number of coins (used to buy items)

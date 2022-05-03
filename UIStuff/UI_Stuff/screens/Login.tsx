@@ -82,7 +82,6 @@ export default function LoginPage() {
        return data.json();
        })
        .then(user => {
-           console.log(user[0])
            storeData(user[0].userName)
            setValues(JSON.stringify(user[0]));
        })
@@ -111,7 +110,6 @@ export default function LoginPage() {
 
             })
             .then(response => response.json())
-            //.then(data => console.log(data))
             .then(data => { setLogSuccess(data) })
             
             logState(resUser)
@@ -120,7 +118,6 @@ export default function LoginPage() {
     }
     //Give feedback based on Authfunction
      const logState = (resUser:string) => {
-        console.log(logSuccess)
         
 
         if(logSuccess == true) {

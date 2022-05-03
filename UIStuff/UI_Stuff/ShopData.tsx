@@ -66,7 +66,7 @@ export const UpdateProfilePic = (pictureId:string) => {
 
  profilePic = pictureId;
 }
-//Fetch profile image
+//Set profile image
 export const GetProfilePic = () => {
 
 return profilePic;

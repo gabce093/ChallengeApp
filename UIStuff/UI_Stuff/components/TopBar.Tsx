@@ -11,6 +11,7 @@ import { Text, TextProps } from './Themed';
 import { RootStackScreenProps } from '../types';
 import { getLevel, getLevelProgress, getCoins, getGems, getPlayer } from '../PlayerData';
 import React, { Component, useState, useEffect } from 'react';
+import { GetProfilePic } from '../ShopData';
 
 /**
  * This function contains the functionality of the topbar in the header.
@@ -32,7 +33,7 @@ export default function TopBar({ navigation }: RootStackScreenProps<'Modal'>){
 
 
                     <Image style={styles.image}
-                        source={require('../Graphics/TempProfilePic.png')} />
+                        source={{uri:`http://213.188.152.167:5000/graphics/character/${GetProfilePic()}_profile.png`}} />
                     <ImageBackground source={require('../Graphics/ExpMask.png')} style={styles.lvlHolder} imageStyle={{ tintColor: "#333333" }} resizeMode="stretch">
                         <Text style={styles.lvl}>{getLevel()}</Text>
                     </ImageBackground>

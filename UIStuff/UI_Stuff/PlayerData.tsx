@@ -105,6 +105,8 @@ export const getLevelXp = () => {
  * This will be a number between  0.0 <= x < 1.0
  * 
  * @author Henrik Gustafsson
+ * @author Jonathan Carlsson
+ * 
  * @returns The progress towards the next level for the player.
  */
 export const getLevelProgress = () => {

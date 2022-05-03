@@ -7,21 +7,38 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setValues } from '../PlayerData';
 import Navigation from '../navigation/index.js';
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
-import { updateValues } from '../PlayerData';
+import { updateValues, getPlayerId } from '../PlayerData';
+import {UpdateProfilePic } from '../ShopData';
+import Axios from "axios";
 
+/**
+ *
+ * 
+ * @author Jonathan Carlsson
+ * @returns Itself as a component to be used by the navigation function in Index.
+ */
 
 
 export default function LoginPage() {
-    
+    const GetProfilePic = async () => {
+       
+        await Axios.get(`http://213.188.152.167:5000/equipped/${getPlayerId()}`).then((response) => {       
+            UpdateProfilePic(response.data[0].hat);
+        });  
+        
+
+    }
     useEffect(() => {
-        logOut();
-        getData();  
+        getData(); 
+        
       }, []);
 
+      //Fetch userdata from given username
     const getData = async () => {
     try {
     const value = await AsyncStorage.getItem('@user_Key')
 
+    //if username doesnt exist, require login from user
     if(value != null) {
         console.log(`User:${value}  already logged in. `)
         setModalVisible(false);
@@ -37,6 +54,8 @@ export default function LoginPage() {
  
   }
 }
+
+//Store username in key
     const storeData = async (value:any) => {
         try {
           await AsyncStorage.setItem('@user_Key', JSON.stringify(value))
@@ -44,6 +63,8 @@ export default function LoginPage() {
           // saving error
         }
       }
+
+      //Remove key (log out)
       const logOut = async () => {
         try {
           await AsyncStorage.setItem('@user_Key', "")
@@ -52,7 +73,7 @@ export default function LoginPage() {
         }
       }
     
-
+//Fetch userinfo from user input
     const GetUserInfo = (resUser:string) => {
      
             fetch(`http://213.188.152.167:5000/users/${resUser}`)
@@ -71,7 +92,7 @@ export default function LoginPage() {
         
     }
 
-
+//Check if credentials are correct
     function AuthFunction(resUser:string, resPass:string){
        fetch('http://213.188.152.167:5000/users/login',
 
@@ -84,7 +105,7 @@ export default function LoginPage() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    firstName: `${resUser}`,
+                    userName: `${resUser}`,
                     lastName: `${resPass}`
                 })
 
@@ -97,18 +118,16 @@ export default function LoginPage() {
           
 
     }
+    //Give feedback based on Authfunction
      const logState = (resUser:string) => {
         console.log(logSuccess)
         
 
         if(logSuccess == true) {
-           console.log("hehe")
            setModalVisible(false)
            GetUserInfo(resUser)
-           
-       
-          
-           //console.log(JSON.parse(retUserData)[0].firstName)
+           GetProfilePic();
+
 
         }
         else if (logSuccess == false){

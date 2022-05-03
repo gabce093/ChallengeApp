@@ -40,7 +40,7 @@ export default function LoginPage() {
     const storeData = async (username: any, id: string) => {
         try {
             await AsyncStorage.setItem('@user_Key', JSON.stringify(username))
-            await AsyncStorage.setItem('@userID_Key', JSON.stringify(id))
+            await AsyncStorage.setItem('@userID_Key', id)
         } catch (e) {
             // saving error
         }

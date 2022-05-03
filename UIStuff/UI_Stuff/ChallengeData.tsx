@@ -138,6 +138,7 @@ export function getChallengerId(){
 export function setChallenger(){
 
     challenger = true;
+    console.log("Challenger set")
 }
 
 export function setChallengerId(userId: any){
@@ -146,12 +147,15 @@ export function setChallengerId(userId: any){
 }
 
 export function createChallenge(userId: any){
+    
     Axios.post(`http://213.188.152.167:5000/challenges/create`, {
         fromId: getPlayerId(),
         toId: userId,
         distance: getDistanceGoal(),
       }).then(() => {
         console.log('Challenge created');
+      }).catch((err) => {
+          console.log(err);
       });
 
       Axios.post(`http://213.188.152.167:5000/challengeData/create`, {
@@ -163,5 +167,7 @@ export function createChallenge(userId: any){
         //resTime: getTotalTime(),
       }).then(() => {
         console.log('ChallengeData created');
-      });
+      }).catch((err) => {
+        console.log(err);
+    });
 }

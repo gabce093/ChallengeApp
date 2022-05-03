@@ -16,6 +16,7 @@ import ErrorBanner from '../components/errorBanner';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 //API request
 import { getFriends } from '../API/FriendPage/requestsFriendPage';
+import { RootStackScreenProps } from '../types';
 const GROUPS = [
   {
     groupId: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
@@ -42,7 +43,7 @@ const GROUPS = [
  * @returns The entire FriendPage for the app
  * @category Friendpage
  */
-export default function FriendPageScreen(page: any) {
+export default function FriendPageScreen({navigation}: RootStackScreenProps<'ProfilePage'>) {
 
   //Calls on load
   useEffect(() => {
@@ -113,7 +114,9 @@ export default function FriendPageScreen(page: any) {
         <FriendSquare
           userObject={item}
           onLongPress={() => [setSelectedId(item.relationId), setOptionFriendVisible(true)]}
-          onPress={() => page.navigation.navigate('ProfilePage', item)}
+          onPress={() => navigation.navigate('ProfilePage', item)}
+          navigation={navigation}
+        
         />
         {/* A modal with options for a specific friend. Triggered by a longpress on the friendsquare,
          see: ../Components/OptionModalFriend */}

@@ -7,6 +7,7 @@ import friendPageStyles from '../styles/FriendPage.style';
 import ConfirmMessage from './ConfirmMessage';
 import { setChallenger, setChallengerId } from '../ChallengeData';
 import { calculateLevel } from '../PlayerData';
+import { RootStackScreenProps } from '../types';
 
 /** 
 * @remarks This function returnsa a Square displaying a certain friend.
@@ -19,7 +20,7 @@ import { calculateLevel } from '../PlayerData';
 *@category Friendpage
 *@author Gabriel
 */
-const FriendSquare = ({ userObject, onLongPress, onPress }: { userObject: any, onLongPress?: () => void, onPress?: () => void }) => {
+const FriendSquare = ({ userObject, onLongPress, onPress, navigation }: { userObject: any, onLongPress?: () => void, onPress?: () => void, navigation: any }) => {
   //Pressable friend square that makes the modal pop up on a Long press
   const [confirmVisible, setConfirmVisible] = useState(false);
   return <TouchableOpacity style={friendPageStyles.friendHolder} onLongPress={onLongPress} onPress={onPress} >
@@ -58,7 +59,8 @@ const FriendSquare = ({ userObject, onLongPress, onPress }: { userObject: any, o
         onNo={() => setConfirmVisible(false)}
         onYes={() => {console.log("send challenge");
                       setChallenger();
-                      setChallengerId(userObject.id)}
+                      setChallengerId(userObject.id);
+                      navigation.navigate('CreateRunPage');}
       }
         question={"Are you sure you want to challenge " + userObject.userName + "?"} />
 

@@ -70,7 +70,15 @@ export default function ResultPage({ navigation }: RootStackScreenProps<'Root'>)
               </View>
               <ResultProgressBar goal={getDistanceGoal()} elapsedDistance={getElapsedDistance()}></ResultProgressBar>
               
-              <TouchableOpacity style={styles2.button} onPress={() => handleButton}>
+              <TouchableOpacity style={styles2.button} onPress={() => {if (getChallenger()){
+                                                                              createChallenge(getChallengerId())
+                                                                              
+                                                                              navigation.navigate('Root');
+                                                                            }
+                                                                            else {
+                                                                              navigation.navigate('SendChallengePage');
+                                                                            }}
+                                                                 }>
                 <Text style={styles2.buttonText}>Done</Text>
               </TouchableOpacity>
             </View>

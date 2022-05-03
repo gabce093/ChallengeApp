@@ -10,26 +10,27 @@ import friendPageStyles from '../styles/FriendPage.style'
 *@category Friendpage
 *@author Gabriel
 */
-const userIconLarge = ({ level }: { level: number }) => {
+const userIconSmall = ({ level }: { level: number }) => {
     return (
-        <View style={friendPageStyles.groupIconHolder}>
-            <View style={friendPageStyles.groupLvlBadge}>
+        <View style={friendPageStyles.friendIconHolder}>
+            <View style={friendPageStyles.lvlBadge}>
 
                 {/* Text dispalying the level */}
-                <Text style={friendPageStyles.GrouplvlText}>lvl {level}</Text>
+                <Text style={friendPageStyles.FriendlvlText}>lvl {level}</Text>
             </View>
 
             {/* user icon for the friend */}
-            <Image source={require('../assets/images/emptyPlayerIcon.png')} style={{
-                width: 107,
-                height: 107,
+            <Image style={{
+                width: 90,
+                height: 90,
                 borderRadius: 100,
-                borderWidth: 7,
-                borderColor: "#212121",
+                borderWidth: 4,
+                borderColor: "#766449"
             }}
+                source={require('../assets/images/emptyPlayerIcon.png')}
             />
         </View>
     );
 
 }
-export default userIconLarge;
+export default userIconSmall;

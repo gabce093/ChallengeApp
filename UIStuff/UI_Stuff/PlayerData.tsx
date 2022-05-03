@@ -43,9 +43,8 @@ export function updateValues() {
         .then(response => "")
 
 }
-export function setValues(value:string) {
+export function setValues(value: string) {
     // Updates local values on with the database ones
-
     playerName = JSON.parse(value).userName;
     totalEXP = JSON.parse(value).expAmount;
     coins = JSON.parse(value).goldAmount;
@@ -89,13 +88,24 @@ export const getLevel = () => {
     return lvl;
 }
 
+//calculate level for an incoming user. Used for calulating the level of for example: a friend
+export const calculateLevel = (exp: number) => {
+    var lvl = 0;
+    if (exp < 20000) {
+        // Linjär funktion före lvl 20:
+        lvl = Math.floor(exp / 1000);
+    } else {
+        lvl = 20 + Math.floor((exp - 20000) / 7500);
+    }
+    return lvl;
+}
+
+
 export const getLevelXp = () => {
-    
-    if(totalEXP < 20000)
-    {
+
+    if (totalEXP < 20000) {
         return 1000;
-    }else
-    {
+    } else {
         return 7500;
     }
 }
@@ -136,12 +146,12 @@ export const getGems = (): number => {
     return gems;
 }
 
-export const getTotalExp = ():number => {
+export const getTotalExp = (): number => {
 
     return totalEXP;
 }
 
-export var addCoin = (n:number) => {
+export var addCoin = (n: number) => {
     coins += n;
     updateValues();
     console.log(coins);

@@ -3,11 +3,11 @@ import { ImageBackground, FlatList, RefreshControl, View, Text } from 'react-nat
 import { useState, useEffect, useCallback } from 'react';
 //Styles
 import styles from '../styles/Page.style';
-import friendPageStyles from '../styles/FriendPage.style';
 import inboxStyles from '../styles/Inbox.style.js';
 //Components
 import FriendRequestCard from '../components/FriendRequest';
 import ChallengeRequestCard from '../components/ChallengeRequest';
+import ErrorBanner from '../components/errorBanner';
 //Additional libraries
 import AsyncStorage from '@react-native-async-storage/async-storage'
 //API requests
@@ -29,7 +29,6 @@ export default function ChallengePageScreen(props: any): JSX.Element {
 
   //FUNCTION: Updates the friend-request to accepted in the database
   const acceptAndRefresh = async (relationId: string) => {
-    console.log('bing')
     acceptRequest(relationId).then(() => {
       setAcceptPressed(true);
     });
@@ -53,22 +52,26 @@ export default function ChallengePageScreen(props: any): JSX.Element {
     });
   };
 
+  const [connectionError, setConnectionError] = useState(false);
   const [friendRequest, setFriendRequest] = useState([]);
   const [challengeRequest, setChallengeRequest] = useState([]);
   //FUNCTION:Runs on load to find friendrequests
   const asyncAction = async () => {
     try {
-      const currentUserId = await AsyncStorage.getItem('@user_Key')
+      const currentUserId = await AsyncStorage.getItem('@userID_Key')
       if (currentUserId !== null) {
         setUser(currentUserId);
         //Retrieves the users friend-request
         getFriendRequests(currentUserId).then((data) => {
           setFriendRequest(data)
-        });
+        }).catch((error) => [console.log(error + ' when retrieving friend requests in ChallengePage.tsx (asyncAction-function)')
+          , setConnectionError(true)]);
         //Retrieves the users challenge-request
         getChallengeRequests(currentUserId).then((data) => {
           setChallengeRequest(data)
-        });
+        }).catch((error) => [console.log(error + ' when retrieving challenge requests in ChallengePage.tsx (asyncAction-function)')
+          , setConnectionError(true)]
+        );
 
         setAcceptPressed(false)
         setDeclinePressed(false)
@@ -118,8 +121,9 @@ export default function ChallengePageScreen(props: any): JSX.Element {
 
   return (
     <View style={styles.container}>
-      <ImageBackground resizeMode="cover" style={friendPageStyles.backimg} source={require('../assets/images/forest.png')}>
-
+      <ImageBackground resizeMode="cover" style={[styles.forestBackground,
+      { justifyContent: 'flex-end', alignItems: 'center' }]} source={require('../assets/images/forest.png')}>
+        <Text style={styles.title}>Inbox</Text>
         <View style={inboxStyles.inboxContainer}>
           {/* List of friendrequests*/}
           <FlatList
@@ -132,7 +136,11 @@ export default function ChallengePageScreen(props: any): JSX.Element {
             renderItem={renderFriendRequest}
             extraData={selectedId}
             keyExtractor={(item, index) => item.id + index}
-            ListEmptyComponent={<Text>There is nothing in your inbox</Text>}
+            ListEmptyComponent={<ErrorBanner
+              title="Your inbox is currently empty"
+              inCase={connectionError}
+              extraTitle="Cant't connect!"
+            />}
             getItemLayout={(_, index) => (
               { length: 200, offset: 200 * index, index }
             )}

@@ -1,6 +1,5 @@
 //React imports
 import { Pressable, Image, Text, View } from 'react-native';
-import { useState } from 'react';
 //Style
 import SearchFriend from '../styles/SearchFriend.style.js';
 //Additional libraries

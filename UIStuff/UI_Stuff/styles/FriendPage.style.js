@@ -12,10 +12,9 @@ export default StyleSheet.create({
   //friend-part
   friendContainer: {
     backgroundColor: "rgba(196, 196, 196, 0.9)",
-    height: "80%",
+    height: "84%",
     width: "90%",
     borderRadius: 5,
-    marginBottom: "7%",
   },
 
   friendHolder: {
@@ -106,18 +105,20 @@ export default StyleSheet.create({
   },
 
   errorMessageHolder: {
+    alignContent: "center",
     backgroundColor: "rgba(97, 116, 143, 1)", // "#383838" "rgba(97, 116, 143, 1)"
     alignItems: "center",
     height: 50,
     justifyContent: "center",
-    marginTop: "35%",
+
+    marginTop: "40%",
   },
 
   //*****Group-part******//
 
   groupContainer: {
     backgroundColor: "rgba(196, 196, 196, 0.9)",
-    height: "25%",
+    height: "26%",
     width: "90%",
     borderRadius: 5,
     marginBottom: "2%",
@@ -135,7 +136,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   groupIconHolder: {
-    backgroundColor: "#383838",
+    backgroundColor: "rgba(0,0,0,0)",
     alignItems: "center",
     width: 120,
     height: 127,

@@ -29,6 +29,7 @@ import FriendPageScreen from '../screens/FriendPage';
 
 // Sub-Screens:
 import CreateRunPage from '../screens/CreateRunPage';
+import ProfilePage from '../screens/ProfilePage';
 import GPSPage from '../screens/GPSPage';
 import ResultPage from '../screens/ResultPage';
 
@@ -91,6 +92,7 @@ function RootNavigator() {
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen name="Modal" component={ModalScreen} />
         </Stack.Group>
+        <Stack.Screen name="ProfilePage" component={ProfilePage} />
         <Stack.Screen name="CreateRunPage" component={CreateRunPage} />
         <Stack.Screen name="GPSPage" component={GPSPage} />
         <Stack.Screen name="ResultPage" component={ResultPage} />

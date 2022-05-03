@@ -11,6 +11,7 @@ import GroupSquare from "../components/GroupSquare";
 import FriendSearchWindow from './FriendSearchWindow';
 import OptionModalFriend from '../components/OptionModalFriend';
 import OptionModalGroup from '../components/OptionModalGroup';
+import ErrorBanner from '../components/errorBanner';
 //Additional libraries
 import AsyncStorage from '@react-native-async-storage/async-storage';
 //API request
@@ -41,7 +42,7 @@ const GROUPS = [
  * @returns The entire FriendPage for the app
  * @category Friendpage
  */
-export default function FriendPageScreen() {
+export default function FriendPageScreen(page: any) {
 
   //Calls on load
   useEffect(() => {
@@ -54,7 +55,7 @@ export default function FriendPageScreen() {
   const [user, setUser] = useState("");
   const storeData = async (value: string) => {
     try {
-      await AsyncStorage.setItem('@user_Key', value)
+      await AsyncStorage.setItem('@userID_Key', value)
     } catch (e) {
       // saving error
     }
@@ -71,20 +72,21 @@ export default function FriendPageScreen() {
     wait(1000).then(() => setRefreshing(false));
   }, []);
 
-  //Function for retrieving the current user on load, needed for displaying the users friends. Used for refresh
+  //FUNCTION: for retrieving the current user on load, needed for displaying the users friends. Also used for refresh
+  const [connectionError, setConnectionError] = useState(false);
   const asyncAction = async () => {
     //Retrievs user form AsyncStorage
-    const value = await AsyncStorage.getItem('@user_Key');
+    const value = await AsyncStorage.getItem('@userID_Key');
     try {
       if (value !== null) {
         setUser(value)
         await getFriends(value)
           .then(data => {
             setFriends(data);
-            setFriendConnectionError(false)
+            setConnectionError(false)
           })
           .catch((error) => [console.log(error + ' when retrieving friends in FriendPage.tsx (asyncAction-function)')
-            , setFriendConnectionError(true)]
+            , setConnectionError(true)]
           )
       }
     } catch (e) {
@@ -92,21 +94,10 @@ export default function FriendPageScreen() {
     }
   }
 
-  //FUNCTION: Displays a message  in the friend container why it could be empty 
-  const [friendsConnectionError, setFriendConnectionError] = useState(false);
-  const errorMessage = () => {
-    if (friendsConnectionError) return (
-      <View style={friendPageStyles.errorMessageHolder}>
-        < Text style={friendPageStyles.errorMessageText}>Cant't connect!</Text>
-      </View>);
-    return (
-      <View style={friendPageStyles.errorMessageHolder}>
-        <Text style={friendPageStyles.errorMessageText}>You currently haven't added any friends</Text>
-      </View>);
-  }
-
   const [optionFriendVisible, setOptionFriendVisible] = useState(false);
   const [selectedIdFriend, setSelectedId] = useState('');
+
+  //Here start the functions that actually renders elements on screen
   /** 
   *Function that gets used in the FlatList to render a list of friends. Each item consists of 
   *the FriendSquare and the menu activated when longpressing it.
@@ -122,8 +113,10 @@ export default function FriendPageScreen() {
         <FriendSquare
           userObject={item}
           onLongPress={() => [setSelectedId(item.relationId), setOptionFriendVisible(true)]}
+          onPress={() => page.navigation.navigate('ProfilePage', item)}
         />
-        {/* A modal with options for a specific friend. Triggered by a longpress on the friendsquare */}
+        {/* A modal with options for a specific friend. Triggered by a longpress on the friendsquare,
+         see: ../Components/OptionModalFriend */}
         <OptionModalFriend
           selectedId={selectedIdFriend}
           isVisible={optionFriendVisible}
@@ -131,7 +124,7 @@ export default function FriendPageScreen() {
           onModalHide={() => getFriends(user)
             .then(data => { setFriends(data); })
             .catch((error) => [console.log(error + ' when deleting friend in FriendPage.tsx'),
-            setFriendConnectionError(true)])}
+            setConnectionError(true)])}
         />
       </>
     );
@@ -168,8 +161,8 @@ export default function FriendPageScreen() {
   return (
 
     <View style={styles.container}>
-      <ImageBackground resizeMode="cover" style={friendPageStyles.backimg} source={require('../assets/images/forest.png')}>
-
+      <ImageBackground resizeMode="cover" style={[styles.forestBackground,
+      { justifyContent: 'flex-end', alignItems: 'center' }]} source={require('../assets/images/forest.png')}>
         { /*Group box*/}
         <Text style={styles.title} > Groups</Text>
         <View style={friendPageStyles.groupContainer}>
@@ -199,9 +192,10 @@ export default function FriendPageScreen() {
         {/* Textinput used in development to change user */}
         <TextInput placeholder='Id of user...' onChangeText={(text) => setUser(text)} onSubmitEditing={() => storeData(user)} />
 
-        <View style={{ height: "50%", width: "100%", alignItems: "center" }}>
+        <View style={{ height: "52%", width: "100%", alignItems: "center" }}>
           <Text style={[styles.title, { alignSelf: "center" }]} > Friends</Text>
 
+          {/*Button for accessing the friendSearch  */}
           <View style={{
             alignItems: "center", justifyContent: "center", height: 70, width: 70
             , position: "absolute", zIndex: 2, alignSelf: "flex-end"
@@ -229,13 +223,15 @@ export default function FriendPageScreen() {
               numColumns={3}
               extraData={selectedIdFriend}
               keyExtractor={(item) => item.user_id_1}
-              ListEmptyComponent={errorMessage}
+              ListEmptyComponent={<ErrorBanner
+                title="You currently haven't added any friends"
+                inCase={connectionError}
+                extraTitle="Cant't connect!"
+              />}
               getItemLayout={(data, index) => (
                 { length: 200, offset: 100 * index, index }
               )}
-
             />
-
           </View>
         </View>
       </ImageBackground >

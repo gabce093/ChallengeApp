@@ -4,6 +4,8 @@ import { ScrollView, Text, View, TouchableOpacity, Button, Image, TextInput } fr
 //Styles
 import styles from '../styles/SearchFriend.style.js';
 import friendPageStyles from '../styles/FriendPage.style';
+//playerData
+import { calculateLevel } from '../PlayerData';
 //Additional libraries
 import Accordion from 'react-native-collapsible/Accordion';
 import * as Animatable from 'react-native-animatable';
@@ -43,11 +45,12 @@ const renderUserList = ({ user }: { user: string }) => {
           backgroundColor: '#383838',
           alignItems: 'center',
           marginTop: '2%',
+
         }}>
           <View style={[friendPageStyles.lvlBadge, { marginTop: '50%' }]}>
 
             {/* Text dispalying the level */}
-            <Text style={friendPageStyles.lvlText}>{item.expAmount}</Text>
+            <Text style={friendPageStyles.FriendlvlText}>{calculateLevel(parseInt(item.expAmount))}</Text>
           </View>
 
           {/* user icon for the friend */}
@@ -61,8 +64,8 @@ const renderUserList = ({ user }: { user: string }) => {
             source={require('../assets/images/emptyPlayerIcon.png')}
           />
         </View>
-        <View style={{ alignItems: 'flex-start', justifyContent: 'center', backgroundColor: '#383838' }}>
-          <Animatable.Text style={styles.headerText}>{item.userName} | Level {item.expAmount}</Animatable.Text>
+        <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#383838', flexGrow: 1 }}>
+          <Animatable.Text style={styles.headerText}>{item.userName} | Level {calculateLevel(parseInt(item.expAmount))}</Animatable.Text>
         </View>
       </Animatable.View>
     );

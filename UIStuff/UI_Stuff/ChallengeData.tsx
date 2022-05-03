@@ -124,3 +124,44 @@ export function getRank(){
     console.log(rank/size);
     return rank/size;
 }
+
+export function getChallenger(){
+
+    return challenger;
+}
+
+export function getChallengerId(){
+
+    return challenger_id;
+}
+
+export function setChallenger(){
+
+    challenger = true;
+}
+
+export function setChallengerId(userId: any){
+
+    challenger_id = userId;
+}
+
+export function createChallenge(userId: any){
+    Axios.post(`http://213.188.152.167:5000/challenges/create`, {
+        fromId: getPlayerId(),
+        toId: userId,
+        distance: getDistanceGoal(),
+      }).then(() => {
+        console.log('Challenge created');
+      });
+
+      Axios.post(`http://213.188.152.167:5000/challengeData/create`, {
+        fromId: getPlayerId(),
+        toId: userId,
+        distance: getDistanceGoal(),
+        resDistance: getElapsedDistance(),
+        time: getChallengeTime(),
+        resTime: getTotalTime(),
+      }).then(() => {
+        console.log('ChallengeData created');
+      });
+}

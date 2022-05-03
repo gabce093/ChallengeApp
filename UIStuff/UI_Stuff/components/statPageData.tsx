@@ -1,6 +1,7 @@
 // En template med dummy data för att testa statsidans grapher
+import { getTotalDistance } from "../PlayerData";
 
-//linechart data
+//linechart dummy data
 const data = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
     datasets: [{
@@ -13,12 +14,15 @@ const data = {
         120,
         50
       ],
-      color: (opacity = 1) => `rgba(144, 255, 90, ${opacity})` // optional
+      color: (opacity = 0.1) => `rgba(144, 255, 90, ${opacity})` // optional
     },
   ]
 }
+const totalDistance = getTotalDistance; //get function från playerData
+const avgPace = 3.5;
+const totalRunTime = 10;
 
-  // Contribution grah data
+  // Contribution grah dummy data
 
   const contributionData = [
     { date: '2016-01-02', count: 1 },
@@ -46,8 +50,8 @@ const data = {
   // Progress bar data minst 3 värden annars ser den dum ut
 
   const progressChartData = {
-    labels: ["Spring", "Steg", "Aktivitet"],
+    labels: ["Run distance", "Steps", "Time active"],
     data: [0.5, 0.6, 0.9]
   };
 
-  export { data, contributionData, pieChartData, progressChartData }
+  export { data, contributionData, pieChartData, progressChartData, totalDistance, totalRunTime }

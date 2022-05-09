@@ -5,6 +5,7 @@ import { useState } from 'react';
 import friendPageStyles from '../styles/FriendPage.style';
 //Components
 import ConfirmMessage from './ConfirmMessage';
+import UserIconSmall from './UserIconSmall';
 import { calculateLevel } from '../PlayerData';
 
 /** 
@@ -22,24 +23,7 @@ const FriendSquare = ({ userObject, onLongPress, onPress }: { userObject: any, o
   //Pressable friend square that makes the modal pop up on a Long press
   const [confirmVisible, setConfirmVisible] = useState(false);
   return <TouchableOpacity style={friendPageStyles.friendHolder} onLongPress={onLongPress} onPress={onPress} >
-    <View style={friendPageStyles.friendIconHolder}>
-      <View style={friendPageStyles.lvlBadge}>
-
-        {/* Text dispalying the level */}
-        <Text style={friendPageStyles.FriendlvlText}>lvl {calculateLevel(userObject.expAmount)}</Text>
-      </View>
-
-      {/* user icon for the friend */}
-      <Image style={{
-        width: 90,
-        height: 90,
-        borderRadius: 100,
-        borderWidth: 4,
-        borderColor: "#766449"
-      }}
-        source={require('../assets/images/emptyPlayerIcon.png')}
-      />
-    </View>
+    <UserIconSmall level={calculateLevel(userObject.expAmount)} />
 
     <View style={{ marginTop: 4, backgroundColor: 'transparent', alignItems: 'center' }}>
       {/* Show name of your friend */}

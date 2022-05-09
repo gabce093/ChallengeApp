@@ -13,10 +13,10 @@ import { updateValues } from '../PlayerData';
 
 export default function LoginPage() {
 
-    useEffect(() => {
-        logOut();
-        getData();
-    }, []);
+    // useEffect(() => {
+    //     logOut();
+    //     getData();
+    // }, []);
 
     const getData = async () => {
         try {
@@ -40,7 +40,7 @@ export default function LoginPage() {
     const storeData = async (username: any, id: string) => {
         try {
             await AsyncStorage.setItem('@user_Key', JSON.stringify(username))
-            await AsyncStorage.setItem('@userID_Key', JSON.stringify(id))
+            await AsyncStorage.setItem('@userID_Key', id)
         } catch (e) {
             // saving error
         }

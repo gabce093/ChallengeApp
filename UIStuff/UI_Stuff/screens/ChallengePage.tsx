@@ -7,12 +7,13 @@ import inboxStyles from '../styles/Inbox.style.js';
 //Components
 import FriendRequestCard from '../components/FriendRequest';
 import ChallengeRequestCard from '../components/ChallengeRequest';
+import ChallengeInfoCard from '../components/ChallengeInfoCard';
 import ErrorBanner from '../components/errorBanner';
 //Additional libraries
 import AsyncStorage from '@react-native-async-storage/async-storage'
 //API requests
 import { getFriendRequests, acceptRequest, declineRequest } from '../API/InboxPage/requestsInboxPage';
-import { getChallengeRequests } from '../API/Challenges/requestsChallenges';
+import { getChallengeRequests, removeChallenge } from '../API/Challenges/requestsChallenges';
 
 /**
  * This is the the apps inbox-page. It displays the recieved challenges and friend-requests. On it you can accept or decline
@@ -37,6 +38,20 @@ export default function ChallengePageScreen(props: any): JSX.Element {
     //searches again so thath it disappears
     getFriendRequests(user).then((data) => {
       setFriendRequest(data)
+    });
+  };
+
+  const [affirm, setAffirm] = useState(false);
+  //FUNCTION: 
+  const affirmAndRemove = async (challengeId: string) => {
+    removeChallenge(challengeId).then(() => {
+      setAffirm(true);
+    });
+    //Waits 1 second to show that it was accepted
+    await wait(1000)
+    //searches again so thath it disappears
+    getChallengeRequests(user).then((data) => {
+      setChallengeRequest(data)
     });
   };
 
@@ -75,7 +90,6 @@ export default function ChallengePageScreen(props: any): JSX.Element {
 
         setAcceptPressed(false)
         setDeclinePressed(false)
-
       }
     } catch (e) {
       setIsError(true);
@@ -92,20 +106,33 @@ export default function ChallengePageScreen(props: any): JSX.Element {
 
   //FUNCTION: Used in the flatlist to render the friend-and challenge requests
   const renderFriendRequest = ({ item }: { item: any }) => {
-    if (item.distance != null) {
-      return <ChallengeRequestCard
-        item={item}
-        onAccept={() => [console.log('Challenge accepted!'), props.navigation.navigate('GPSPage')]}
+
+    //Removes status pendingCard with status one from the users who completed it
+    if (item.toId == user && item.status == 1) return <></>;
+
+    if (item.distance == null) { // then it is a friend-request
+      return <FriendRequestCard item={item}
+        onAccept={() => [setSelectedId(item.relationId), acceptAndRefresh(item.relationId)]}
+        onDecline={() => [setSelectedId(item.relationId), declineAndRefresh(item.relationId)]}
         selectedId={selectedId}
         acceptPressed={acceptPressed}
+        declinePressed={declinePressed} />
+    }
+    if (item.fromId == user) {
+
+      return <ChallengeInfoCard item={item}
+        onPress={() => [setSelectedId(item.challengeId), affirmAndRemove(item.challengeId), console.log(item.challengeId)]}
+        selectedId={selectedId}
+        pressed={affirm}
       />
     }
-    return <FriendRequestCard item={item}
-      onAccept={() => [setSelectedId(item.relationId), acceptAndRefresh(item.relationId)]}
-      onDecline={() => [setSelectedId(item.relationId), declineAndRefresh(item.relationId)]}
+
+    return <ChallengeRequestCard
+      item={item}
+      onAccept={() => [console.log('Challenge accepted!'), props.navigation.navigate('GPSPage')]}
       selectedId={selectedId}
       acceptPressed={acceptPressed}
-      declinePressed={declinePressed} />
+    />
   }
 
   //Code to refresh the page
@@ -132,10 +159,10 @@ export default function ChallengePageScreen(props: any): JSX.Element {
               onRefresh={onRefresh}
             />}
             nestedScrollEnabled
-            data={friendRequest.concat(challengeRequest)}
+            data={challengeRequest.concat(friendRequest)}
             renderItem={renderFriendRequest}
             extraData={selectedId}
-            keyExtractor={(item, index) => item.id + index}
+            keyExtractor={(item, index) => `${index}`}
             ListEmptyComponent={<ErrorBanner
               title="Your inbox is currently empty"
               inCase={connectionError}

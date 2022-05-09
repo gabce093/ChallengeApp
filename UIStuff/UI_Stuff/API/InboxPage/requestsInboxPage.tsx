@@ -13,11 +13,11 @@ const APIaddress = conn.API.adress + conn.API.port;
  * @returns An array of friendrequests belonging to the given user
  * @category API Requests
  */
-export const getFriendRequests = (userId: string) => {
+export const getFriendRequests = async (userId: string) => {
     console.log("Logged in as: " + userId)
     const request = APIaddress + '/friends/request/' + userId;
 
-    const dataPromise = Axios.get(request).then((response) => response.data)
+    const dataPromise = await Axios.get(request).then((response) => response.data)
     return dataPromise;
 };
 

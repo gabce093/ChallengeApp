@@ -1,10 +1,18 @@
 /* Kräver react-native-chart-kit och react-native-svg*/
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Dimensions, ScrollView, StatusBar, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ScrollView, FlatList, ImageBackground } from 'react-native';
 import statStyles from '../styles/statPage.style';
-import { data, contributionData, pieChartData, progressChartData, totalDistance } from '../components/statPageData'
+import { data, contributionData, pieChartData, progressChartData, totalDistance, completedRuns } from '../components/statPageData'
 import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, StackedBarChart } from "react-native-chart-kit";
 import styles from '../styles/Page.style';
+import  GroupSquare  from "../components/GroupSquare";
+
+//Formatting previous runs
+const Item = ({ title }) => (
+  <View style={statStyles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </View>
+);
 
 export default function StatPageScreen() {
 
@@ -30,6 +38,12 @@ export default function StatPageScreen() {
     marginVertical: 5,
     borderRadius: 7,
   }
+
+  //Render previous runs
+  const renderRun = ({ item }) => (
+    <Item title={item.title} />
+  );
+
   //Dagens datum ska användas i contribution graph broken för tillfället
   // const [date, setDate] = useState(null);
   // useEffect(() => {
@@ -47,9 +61,6 @@ export default function StatPageScreen() {
           <Text style={statStyles.infoDist}>{totalDistance}km</Text>
           <Text style={statStyles.descriptionText}>Total distance</Text>
         </View>
-        {/* <Text>Hejsan</Text>
-        <Text>Hejsan</Text>
-        <Text>Hejsan</Text> */}
       </View>
       <ScrollView>
         {/* <Text style={styles.headertext}>Linjediagram</Text> */}
@@ -112,10 +123,13 @@ export default function StatPageScreen() {
           radius={height/10} //default 32
           strokeWidth={height/10} //optional default 16
         />
+        <FlatList
+        data={completedRuns}
+        renderItem={renderRun}
+        keyExtractor={item => item.id}
+        numColumns={2}
+      />
       </ScrollView>
-
-      {/* </ImageBackground> */}
-      {/* </ImageBackground> */}
     </View>
   );
 }

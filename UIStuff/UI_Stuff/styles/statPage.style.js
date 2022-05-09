@@ -79,5 +79,14 @@ export default StyleSheet.create({
       borderRadius: 5,
       backgroundColor: '#FF5C00',
     },
+
+    item: {
+      backgroundColor: '#f9c2ff',
+      padding: '1%',
+      marginVertical: '1%',
+      marginHorizontal: '1%',
+      width: '50%',
+      borderRadius: 5,
+    },
    
   });

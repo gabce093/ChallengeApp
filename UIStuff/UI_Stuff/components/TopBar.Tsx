@@ -22,6 +22,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
  */
 export default function TopBar({ navigation, route }: RootStackScreenProps<'Modal'>){
 
+    const [lvl, setLvl] = useState(0);
+    const [lvlProgress, setLvlProgress] = useState(0);
+    const [coins, setCoins] = useState(0);
+    
     
     
   

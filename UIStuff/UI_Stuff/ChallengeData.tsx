@@ -116,7 +116,7 @@ export function getRank(){
     Axios.get(`http://213.188.152.167:5000/challengeData/${getPlayerId()}/5`).then((response) => {       
         
         size = response.data.size();
-        for (let i = 0; i < size; i++) {
+        for (var i = 0; i < size; i++) {
             rank = rank + getMinPerK(response.data[i].time, response.data[i].distance);
         }
         

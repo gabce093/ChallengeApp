@@ -21,6 +21,13 @@ import LoginPage from './Login';
  */
 export default function MainPageScreen({navigation}: RootStackScreenProps<'CreateRunPage'>) {
 
+  const [refresh, setRefresh] = useState(0);
+
+  useEffect(() => {
+    
+    
+  }, [refresh])
+
   
 
   return (
@@ -52,7 +59,7 @@ export default function MainPageScreen({navigation}: RootStackScreenProps<'Creat
               </Pressable>         
               <View style={{ backgroundColor: 'rgba(0,0,0,0)' }}> 
     </View>
-         <LoginPage></LoginPage>
+         <LoginPage ></LoginPage>
         </View>
         </ImageBackground>
     </View>

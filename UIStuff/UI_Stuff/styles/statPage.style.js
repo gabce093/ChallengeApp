@@ -7,12 +7,9 @@ import { StyleSheet } from 'react-native';
  */
 
 
-{/*StyleSheet for the base of the pages*/}
+
 export default StyleSheet.create({
     
-    // progresText: {
-    //     backGroundColor: 'rgb(55, 55, 54)',
-    // },
     infoDist: {
         color: 'white',
         fontWeight: 'bold',

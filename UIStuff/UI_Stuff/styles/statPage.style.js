@@ -4,25 +4,6 @@ import { StyleSheet } from 'react-native';
 {/*StyleSheet for the base of the pages*/}
 export default StyleSheet.create({
     
-    //Shop page style
-
-    //Container that holds every item on the character
-    characterContainer:{
-      justifyContent: 'center',
-      position:'relative',
-      alignItems: 'center',
-      backgroundColor: 'rgba(52, 52, 52, 0)',
-      top: '-18%',
-    },
-
-    bgTrack: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        top: "10%",
-        
-      },
     // progresText: {
     //     backGroundColor: 'rgb(55, 55, 54)',
     // },
@@ -45,47 +26,28 @@ export default StyleSheet.create({
 
     titleText:{
       alignContent: 'center', 
-      fontSize: 45, 
+      fontSize: '200%', 
       fontWeight: 'bold',
-      marginBottom: 10,
-      marginTop:30,
-    },
-
-    // Holds the shop information
-    shopMenu:{
-      height: 200,
-      width: 350,
-      backgroundColor: 'rgba(52, 52, 52, 0)',
-      justifyContent: 'center',
-      alignItems:'center',
-    
-    },
-    
-    //Every button in the shop
-    shopButton:{
-      backgroundColor: '#939393',
-      margin: 10,
-      textAlign:'center',
-      borderRadius: 5,
-    },
-
-    prevImg:{
-      height: 90,
-      width: 90,
-      alignSelf: 'center',
+      marginBottom: '1%',
+      marginTop: '1%',
+      color: 'rgba(255, 255, 255, 1)',
     },
 
     itemText:{
       borderRadius: 5,
-      backgroundColor: '#FF5C00',
+      fontSize: '100%', 
+      fontWeight: 'bold',
+      marginBottom: '1%',
+      marginTop: '1%',
+      color: 'rgba(255, 255, 255, 1)',
     },
 
     item: {
-      backgroundColor: '#f9c2ff',
+      backgroundColor: 'rgba(134, 131, 131, 0.9)',
       padding: '1%',
       marginVertical: '1%',
       marginHorizontal: '1%',
-      width: '50%',
+      width: '48.5%',
       borderRadius: 5,
     },
    

@@ -7,13 +7,6 @@ import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, Stacke
 import styles from '../styles/Page.style';
 import  GroupSquare  from "../components/GroupSquare";
 
-//Formatting previous runs
-const Item = ({ title }) => (
-  <View style={statStyles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
-
 export default function StatPageScreen() {
 
   const width = Dimensions.get('window').width-16
@@ -26,7 +19,7 @@ export default function StatPageScreen() {
     backgroundGradientFrom: "#868383",
     backgroundGradientTo: "#868383",
     backgroundGradientFromOpacity: 0.9, //1 sätter 100%
-    backgroundGradientToOpacity: 1,
+    backgroundGradientToOpacity: 0.9,
     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`, //Graph color
     labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, //texten axlarna
     strokeWidth: 3, // defaultar till 3
@@ -38,11 +31,6 @@ export default function StatPageScreen() {
     marginVertical: 5,
     borderRadius: 7,
   }
-
-  //Render previous runs
-  const renderRun = ({ item }) => (
-    <Item title={item.title} />
-  );
 
   //Dagens datum ska användas i contribution graph broken för tillfället
   // const [date, setDate] = useState(null);
@@ -113,7 +101,7 @@ export default function StatPageScreen() {
           absolute
         /> */}
         {/* <Text style={styles.headertext}>Progress ringar</Text> */}
-        <ProgressChart
+        {/* <ProgressChart
           data={progressChartData}
           width={width}
           height={height}
@@ -122,12 +110,18 @@ export default function StatPageScreen() {
           hideLegend={false} //optional default false
           radius={height/10} //default 32
           strokeWidth={height/10} //optional default 16
-        />
+        /> */}
         <FlatList
         data={completedRuns}
-        renderItem={renderRun}
+        // renderItem={renderRun}
         keyExtractor={item => item.id}
         numColumns={2}
+        renderItem={({item}) =>
+        <View style={statStyles.item}>
+          <Text style={statStyles.titleText}>{item.title}</Text>
+          <Text style={statStyles.itemText}>{item.content}</Text>
+        </View>
+        }
       />
       </ScrollView>
     </View>

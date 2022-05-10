@@ -4,14 +4,34 @@ import React, { useState, useEffect } from 'react';
 import { Image, ImageBackground, Pressable, TouchableOpacity} from "react-native";
 import { Text, View } from '../components/Themed';
 import {getPace, getTotalTime, getChallengeTime, getElapsedDistance, getDistanceGoal, 
-        checkCompleted, calculateXP, calculateCoins, getChallenger, getChallengerId, createChallenge} from '../ChallengeData';
+        checkCompleted, calculateXP, calculateCoins, getChallenger, getChallengerId, createChallenge, getMinPerK} from '../ChallengeData';
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 import ResultProgressBar from '../components/ResultProgressBar';
 import XpProgressBar from '../components/XpProgressBar';
-import { getUsername, getPlayerId } from '../PlayerData';
+import { getUsername, getPlayerId, addCoin, addEXP } from '../PlayerData';
+import Axios from "axios";
 
 
 export default function ResultPage({ navigation }: RootStackScreenProps<'Root'>) {
+
+  const [rank, setRank] = useState(0);
+  const [data, setData] = useState([]);
+  const [coin, setCoin]  = useState(0);
+  useEffect(() => {
+      
+      Axios.get(`http://213.188.152.167:5000/challengeData/${getPlayerId()}/5`).then((response) => {
+             if (response.data.length > 0) {
+                  for (var i = 0; i < data.length; i++) {
+                  setRank(prev => prev + getMinPerK(response.data[i].time, response.data[i].distance));
+                  }
+              } else {
+                  console.log("was here")
+                  setRank(6);
+              }
+            setCoin(calculateCoins(rank))  
+          })
+      
+  }, [rank])
     
    var string = "almost"
    if (checkCompleted()){
@@ -20,6 +40,7 @@ export default function ResultPage({ navigation }: RootStackScreenProps<'Root'>)
 
    var totalTime = getTotalTime();
    var challengeTime = getChallengeTime();
+   var exp = calculateXP();
 
    const handleButton = () => {
      if (getChallenger()){
@@ -39,7 +60,7 @@ export default function ResultPage({ navigation }: RootStackScreenProps<'Root'>)
               <Text style={styles2.title2}>{string}</Text>
               <Text style={styles2.title}>Complete!</Text>  
               <Text style={styles2.text}>Rewards:</Text>
-              <Text style={styles2.text}>{"+"+Math.round(calculateXP()) +"xp, +" + calculateCoins() + "coins"}</Text>
+              <Text style={styles2.text}>{"+"+Math.round(exp) +"xp, +" + Math.round(coin) + "coins"}</Text>
               <XpProgressBar></XpProgressBar>
             </View>
             
@@ -72,10 +93,13 @@ export default function ResultPage({ navigation }: RootStackScreenProps<'Root'>)
               
               <TouchableOpacity style={styles2.button} onPress={() => {if (getChallenger()){
                                                                               createChallenge(getChallengerId())
-                                                                              
+                                                                              addEXP(exp);
+                                                                              addCoin(coin);
                                                                               navigation.navigate('Root');
                                                                             }
                                                                             else {
+                                                                              addEXP(exp);
+                                                                              addCoin(coin);
                                                                               navigation.navigate('SendChallengePage');
                                                                             }}
                                                                  }>

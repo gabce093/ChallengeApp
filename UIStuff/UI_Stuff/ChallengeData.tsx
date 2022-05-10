@@ -103,27 +103,16 @@ export function getMinPerK(time: any, distance: any){
 }
 
 
-export function calculateCoins(){
+export function calculateCoins(rank: any){
     //Average min/k of users last 5 runs.
-    var earned_coins = (getRank()/getMinPerK(challenge_time, distance_goal)) * 300;
+    console.log("rank: " + rank)
+    var earned_coins = (rank/getMinPerK(challenge_time, distance_goal)) * 300;
     
     return earned_coins;
 }
 
-export function getRank(){
-    var rank = 0;
-    var size = 0;
-    Axios.get(`http://213.188.152.167:5000/challengeData/${getPlayerId()}/5`).then((response) => {       
-        
-        size = response.data.size();
-        for (var i = 0; i < size; i++) {
-            rank = rank + getMinPerK(response.data[i].time, response.data[i].distance);
-        }
-        
-    }); 
-    console.log(rank/size);
-    return rank/size;
-}
+
+
 
 export function getChallenger(){
 

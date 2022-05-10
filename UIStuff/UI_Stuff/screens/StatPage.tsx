@@ -18,7 +18,7 @@ export default function StatPageScreen() {
   const height = Dimensions.get('window').height/3
   const topMargin = Dimensions.get('window').height/5;
 
-  //Properties för graferna
+  //Properties for the charts
   const chartConfig = {
     backgroundColor: "fff",
     backgroundGradientFrom: "#868383",
@@ -31,7 +31,7 @@ export default function StatPageScreen() {
     barPercentage: 1,
     useShadowColorFromDataset: false, // optional
   };
-  //Stylen på chartDiv wrappern
+  //Chart style
   const style = {
     marginVertical: 5,
     borderRadius: 5,
@@ -56,18 +56,13 @@ export default function StatPageScreen() {
               </View>
 
               <View>
-                <Text style={statStyles.itemText}>null Min</Text>
+                <Text style={statStyles.itemText}>null</Text>
                 <Text style={statStyles.descriptionText}>Avrage runtime</Text>
               </View>
 
               <View>
-                <Text style={statStyles.itemText}>null Kms</Text>
+                <Text style={statStyles.itemText}>null</Text>
                 <Text style={statStyles.descriptionText}>Avrage length</Text>
-              </View>
-              
-              <View>
-                <Text style={statStyles.itemText}>null Kms</Text>
-                <Text style={statStyles.descriptionText}>Total kms</Text>
               </View>
 
               <View>

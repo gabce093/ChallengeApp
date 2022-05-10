@@ -11,7 +11,7 @@ import styles from '../styles/Page.style';
 import  GroupSquare  from "../components/GroupSquare";
 
 //Formatting previous runs
-const Item = ({ title }) => (
+const Item = ({ title }: any) => (
   <View style={statStyles.item}>
     <Text style={styles.title}>{title}</Text>
   </View>
@@ -49,7 +49,7 @@ export default function StatPageScreen() {
   }
 
   //Render previous runs
-  const renderRun = ({ item }) => (
+  const renderRun = ({ item }: any) => (
     <Item title={item.title} />
   );
 
@@ -73,7 +73,7 @@ export default function StatPageScreen() {
       </View>
       <ScrollView>
         {/* <Text style={styles.headertext}>Linjediagram</Text> */}
-        <h1></h1>
+        {/*<h1></h1>*/}
         <LineChart
           data={data}
           width={width}

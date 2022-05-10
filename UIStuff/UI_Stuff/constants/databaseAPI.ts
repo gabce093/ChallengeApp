@@ -14,8 +14,8 @@ export default {
   port: ':3001',
  */
 API:{ 
-    adress: 'http://192.168.1.93',
-    port: ':3001',
+    adress: 'http://213.188.152.167',
+    port: ':5000',
     },
 
 }

@@ -4,6 +4,8 @@ import { ScrollView, Text, View, TouchableOpacity, Button, Image, TextInput } fr
 //Styles
 import styles from '../styles/SearchFriend.style.js';
 import friendPageStyles from '../styles/FriendPage.style';
+//Components
+import UserIconSmall from "../components/UserIconSmall";
 //playerData
 import { calculateLevel } from '../PlayerData';
 //Additional libraries
@@ -45,25 +47,10 @@ const renderUserList = ({ user }: { user: string }) => {
           backgroundColor: '#383838',
           alignItems: 'center',
           marginTop: '2%',
-
         }}>
-          <View style={[friendPageStyles.lvlBadge, { marginTop: '50%' }]}>
-
-            {/* Text dispalying the level */}
-            <Text style={friendPageStyles.FriendlvlText}>{calculateLevel(parseInt(item.expAmount))}</Text>
-          </View>
-
-          {/* user icon for the friend */}
-          <Image style={{
-            width: 90,
-            height: 90,
-            borderRadius: 100,
-            borderWidth: 4,
-            borderColor: "#766449"
-          }}
-            source={require('../assets/images/emptyPlayerIcon.png')}
-          />
+          <UserIconSmall level={calculateLevel(parseInt(item.expAmount))} />
         </View>
+
         <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#383838', flexGrow: 1 }}>
           <Animatable.Text style={styles.headerText}>{item.userName} | Level {calculateLevel(parseInt(item.expAmount))}</Animatable.Text>
         </View>

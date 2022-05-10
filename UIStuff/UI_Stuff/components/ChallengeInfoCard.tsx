@@ -8,28 +8,31 @@ import UserIcon from './UserIconLarge';
 import { calculateLevel } from '../PlayerData';
 
 /**
- * Creates Challenge-request card where the user can decline or accept a challenge-requests
+ * Creates Challenge-info card the renders different things depending of the status of the challenge
+ * 
  * @param item The array item to be rendered in the list
- * @param onAccept Functions executed when the acceptbutton is pressed
- * @param selectedId The id of the item to be updated with the texts "declined" or "updated"
- * @param acceptPressed Boolean that tells if the acceptbutton was pressed
- * @returns Returns a Challnengerequest card  with the ability of accepting and declining challengerequests
+ * @returns Returns a Challnenge-info card  
  * @category Inboxpage
  * @author Gabriel
  */
-const renderChallengeRequest = ({ item, onAccept, selectedId, acceptPressed }:
-    { item: any, onAccept: () => void, selectedId: string, acceptPressed: boolean }) => {
-    var status;
-    if (acceptPressed && item.relationId == selectedId) {
-        status = <Text style={{ color: 'white' }}>Accepted!</Text>
+const InfoChallengeCard = ({ item, onPress, selectedId, pressed }:
+    {
+        item: any, onPress?: () => void,
+        selectedId?: string, pressed?: boolean
+    }) => {
+    var button;
+    var text;
+    if (item.status == 1) {
+        button =
+            <Pressable onPress={onPress} style={inboxStyles.acceptChallengeButton}>
+                <Text style={inboxStyles.acceptChallengeButtonText}> Ok </Text>
+            </Pressable>;
+        text = item.userName + " completed your Challenge";
     }
-    else {
-        status = <>
-            <Pressable style={inboxStyles.acceptChallengeButton} onPress={onAccept}>
-                <Text style={inboxStyles.acceptChallengeButtonText}>Accept!</Text>
-            </Pressable>
-        </>
+    else if (item.status == 2) {
+        text = "Challenge in progress";
     }
+
     return (
         <TouchableOpacity style={inboxStyles.friendRequestContainer}>
             <View style={inboxStyles.imageAndNameHolder}>
@@ -38,9 +41,8 @@ const renderChallengeRequest = ({ item, onAccept, selectedId, acceptPressed }:
             </View>
 
             <View style={inboxStyles.textAndButtonsHolder}>
-
                 <View style={{ backgroundColor: '#383838', flex: 1 / 3, }}>
-                    <Text style={inboxStyles.ChallengeText}>Challenge!</Text>
+                    <Text style={[inboxStyles.ChallengeText, { fontSize: 27 }]}>{text}</Text>
                 </View>
                 <View style={inboxStyles.challengeInfoHolder}>
                     <View style={inboxStyles.infoBubbles}>
@@ -50,14 +52,11 @@ const renderChallengeRequest = ({ item, onAccept, selectedId, acceptPressed }:
                         <Text style={inboxStyles.challengeInfoText}> -min</Text>
                     </View>
                 </View>
-                <View style={inboxStyles.statusButtonHolder} >
-                    {status}
-                </View>
-
+                {button}
             </View>
         </TouchableOpacity >
 
     );
 };
 
-export default renderChallengeRequest;
+export default InfoChallengeCard;

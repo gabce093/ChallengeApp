@@ -19,3 +19,18 @@ export const getChallengeRequests = (userId: string) => {
     const dataPromise = Axios.get(request).then((response) => response.data)
     return dataPromise;
 };
+
+export const removeChallenge = (challengeId: string) => {
+
+    const request = APIaddress + '/challenges/remove/' + challengeId;
+
+    const dataPromise = Axios.delete(request).then((response) => response.data)
+    return dataPromise;
+};
+
+export const updateChallenge = async (challengeId: string, status: string) => {
+    const request = APIaddress + '/challenges/update/';
+    Axios.put(request, { challId: challengeId, status: status }).then(() => {
+        console.log('Ok')
+    });
+}

@@ -1,31 +1,15 @@
-// import { flexbox } from 'native-base/lib/typescript/theme/styled-system';
 import { StyleSheet } from 'react-native';
+// var screenWidth = Dimensions.get('window').width;
 
-{/*StyleSheet for the base of the pages*/}
+/**
+ * This function contains the style of the stat page.
+ * @author Fredrik Håkansson
+ */
+
+
+
 export default StyleSheet.create({
     
-    //Shop page style
-
-    //Container that holds every item on the character
-    characterContainer:{
-      justifyContent: 'center',
-      position:'relative',
-      alignItems: 'center',
-      backgroundColor: 'rgba(52, 52, 52, 0)',
-      top: '-18%',
-    },
-
-    bgTrack: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        top: "10%",
-        
-      },
-    // progresText: {
-    //     backGroundColor: 'rgb(55, 55, 54)',
-    // },
     infoDist: {
         color: 'white',
         fontWeight: 'bold',
@@ -43,50 +27,80 @@ export default StyleSheet.create({
         marginLeft: '5%',
      },
 
-    titleText:{
+     challengeTitleText:{
       alignContent: 'center', 
-      fontSize: 45, 
+      fontSize: '200%', 
       fontWeight: 'bold',
-      marginBottom: 10,
-      marginTop:30,
+      marginBottom: '1%',
+      marginTop: '1%',
+      color: 'rgba(255, 255, 255, 1)',
     },
 
-    // Holds the shop information
-    shopMenu:{
-      height: 200,
-      width: 350,
-      backgroundColor: 'rgba(52, 52, 52, 0)',
-      justifyContent: 'center',
-      alignItems:'center',
     
-    },
-    
-    //Every button in the shop
-    shopButton:{
-      backgroundColor: '#939393',
-      margin: 10,
-      textAlign:'center',
-      borderRadius: 5,
-    },
-
-    prevImg:{
-      height: 90,
-      width: 90,
-      alignSelf: 'center',
-    },
-
-    itemText:{
-      borderRadius: 5,
-      backgroundColor: '#FF5C00',
-    },
-
-    item: {
-      backgroundColor: '#f9c2ff',
+    challengeItem: {
+      backgroundColor: 'rgba(134, 131, 131, 0.9)',
       padding: '1%',
       marginVertical: '1%',
-      marginHorizontal: '1%',
-      width: '50%',
+      marginHorizontal: '0%',
+      width: '49%',
       borderRadius: 5,
+      marginRight: '2%',
     },
+
+    ChallengeRow:{
+      flex: 1,     
+      // backgroundColor: 'rgba(134, 131, 131, 0.0)', 
+      padding: "2%",
+      margin: "0%",
+      borderRadius: 5,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "left",
+  },
+    
+    itemText:{
+      borderRadius: 5,
+      fontSize: '100%', 
+      fontWeight: 'bold',
+      marginBottom: '1%',
+      marginTop: '1%',
+      color: 'rgba(255, 255, 255, 1)',
+    },
+
+    title:{
+      flex: 1,
+      flexDirection: "row",
+      fontSize: 5,
+      fontWeight: 'bold',
+      justifyContent: "center",
+      alignItems: "center",
+
+  },
+
+  statHolder:{
+      flex: 8,
+      alignItems: "flex-start",
+      backgroundColor: "transparent", 
+      width: "100%",
+      color: 'white',
+  },
+  row:{
+      flex: 1,     
+      backgroundColor: 'rgba(134, 131, 131, 0.9)', 
+      padding: "3%",
+      margin: "0%",
+      marginVertical: '1%',
+      borderRadius: 5,
+      flexDirection: "row",
+      justifyContent: "space-evenly",
+      alignItems: "center",
+  },
+  statText:{
+      width: "50%",
+      fontSize: 5,
+      fontWeight: 'bold',
+      color: 'white',
+  },
+
    
   });

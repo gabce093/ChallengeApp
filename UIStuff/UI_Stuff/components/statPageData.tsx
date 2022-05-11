@@ -1,5 +1,8 @@
-// En template med dummy data för att testa statsidans grapher
 import { getTotalDistance } from "../PlayerData";
+/**
+ * This page contains dummy data for representation of how data from a sever would be formatted for the statPage
+ * @author Fredrik Håkansson
+ */
 
 //linechart dummy data
 const data = {
@@ -58,15 +61,66 @@ const totalRunTime = 10;
   const completedRuns = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'First Item',
+      title: '3k Challenge',
+      date: '2022-04-29',
+      pace: '4,40',
+      time: '00:14:04',
+      cadence: '176',
+      winLoss: 'W',
     },
     {
       id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Second Item',
+      title: '3k Challenge',
+      date: '2022-04-29',
+      pace: '4,40',
+      time: '00:14:04',
+      cadence: '176',
+      winLoss: 'W',
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
+      title: '3k Challenge',
+      date: '2022-04-29',
+      pace: '4,40',
+      time: '00:14:04',
+      cadence: '176',
+      winLoss: 'L',
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: '3k Challenge',
+      date: '2022-04-29',
+      pace: '4,40',
+      time: '00:14:04',
+      cadence: '176',
+      winLoss: 'W',
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: '3k Challenge',
+      date: '2022-04-29',
+      pace: '4,40',
+      time: '00:14:04',
+      cadence: '176',
+      winLoss: 'W',
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: '3k Challenge',
+      date: '2022-04-29',
+      pace: '4,40',
+      time: '00:14:04',
+      cadence: '176',
+      winLoss: 'L',
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: '3k Challenge',
+      date: '2022-04-29',
+      pace: '4,40',
+      time: '00:14:04',
+      cadence: '176',
+      winLoss: 'L',
     },
   ];
 

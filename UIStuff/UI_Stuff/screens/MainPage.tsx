@@ -19,10 +19,10 @@ import LoginPage from './Login';
  * @param navigation Uses navigation data keep track of what to diplay
  * @returns Itself as a component to be used by the navigation function in Index.
  */
-export default function MainPageScreen({navigation}: RootStackScreenProps<'CreateRunPage'>) {
+export default function MainPageScreen({navigation}: RootStackScreenProps<'CreateRunPage'>, ) {
 
   const [refresh, setRefresh] = useState(0);
-
+  
   useEffect(() => {
     
     

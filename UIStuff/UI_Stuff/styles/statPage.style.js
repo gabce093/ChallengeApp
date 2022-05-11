@@ -29,7 +29,7 @@ export default StyleSheet.create({
 
      challengeTitleText:{
       alignContent: 'center', 
-      fontSize: '200%', 
+      fontSize: 20, 
       fontWeight: 'bold',
       marginBottom: '1%',
       marginTop: '1%',
@@ -55,12 +55,12 @@ export default StyleSheet.create({
       borderRadius: 5,
       flexDirection: "row",
       justifyContent: "space-between",
-      alignItems: "left",
+      alignItems: "flex-start",
   },
     
     itemText:{
       borderRadius: 5,
-      fontSize: '100%', 
+      fontSize: 10, 
       fontWeight: 'bold',
       marginBottom: '1%',
       marginTop: '1%',

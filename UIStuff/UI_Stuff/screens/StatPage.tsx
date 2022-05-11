@@ -99,7 +99,7 @@ export default function StatPageScreen() {
           </View>
           <View style={statStyles.ChallengeRow}>
             <View>
-              <Text style={statStyles.itemText}>{item.time} min</Text>
+              <Text style={statStyles.itemText}>{item.time}</Text>
               <Text style={statStyles.descriptionText}>Time</Text>
             </View>
             <View>

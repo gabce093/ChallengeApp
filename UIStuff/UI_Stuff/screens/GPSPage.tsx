@@ -17,7 +17,7 @@ import { LocationSubscription } from 'expo-location';
   * @returns The page that the user can record a challenge.
 */
 export default function GPSPage({ navigation }: RootStackScreenProps<'ResultPage'>) {
-  StatusBar.setHidden(false);
+  
 
     const [position, setPosition] = useState([0,0]);
     const [pace, setPace] = useState(0.0);

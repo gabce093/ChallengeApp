@@ -95,7 +95,7 @@ export default function StatPageScreen() {
           <Text style={statStyles.descriptionText}>{item.date}</Text>
           <View style={statStyles.ChallengeRow}>
             <Text style={statStyles.challengeTitleText}>{item.title}</Text>
-            <Text style={statStyles.descriptionText}>{item.winLoss}</Text>
+            {/* <Text style={statStyles.descriptionText}>{item.winLoss}</Text> */}
           </View>
           <View style={statStyles.ChallengeRow}>
             <View>

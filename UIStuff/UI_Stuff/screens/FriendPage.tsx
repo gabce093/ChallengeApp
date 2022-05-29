@@ -43,7 +43,7 @@ const GROUPS = [
  * @returns The entire FriendPage for the app
  * @category Friendpage
  */
-export default function FriendPageScreen({navigation}: RootStackScreenProps<'ProfilePage'>) {
+export default function FriendPageScreen({ navigation }: RootStackScreenProps<'ProfilePage'>) {
 
   //Calls on load
   useEffect(() => {
@@ -116,7 +116,7 @@ export default function FriendPageScreen({navigation}: RootStackScreenProps<'Pro
           onLongPress={() => [setSelectedId(item.relationId), setOptionFriendVisible(true)]}
           onPress={() => navigation.navigate('ProfilePage', item)}
           navigation={navigation}
-        
+
         />
         {/* A modal with options for a specific friend. Triggered by a longpress on the friendsquare,
          see: ../Components/OptionModalFriend */}
@@ -128,6 +128,8 @@ export default function FriendPageScreen({navigation}: RootStackScreenProps<'Pro
             .then(data => { setFriends(data); })
             .catch((error) => [console.log(error + ' when deleting friend in FriendPage.tsx'),
             setConnectionError(true)])}
+          navigation={navigation}
+          item={item}
         />
       </>
     );
@@ -165,26 +167,31 @@ export default function FriendPageScreen({navigation}: RootStackScreenProps<'Pro
 
     <View style={styles.container}>
       <ImageBackground resizeMode="cover" style={[styles.forestBackground,
-      { justifyContent: 'flex-end', alignItems: 'center' }]} source={require('../assets/images/forest.png')}>
-        { /*Group box*/}
-        <Text style={styles.title} > Groups</Text>
-        <View style={friendPageStyles.groupContainer}>
-          {/* List of all the friends */}
-          <FlatList
-            nestedScrollEnabled
-            data={GROUPS}
-            renderItem={renderGroupSquare}
-            horizontal={false}
-            columnWrapperStyle={{ height: 220, }}
-            numColumns={2}
-            keyExtractor={(item) => item.groupId}
-            extraData={selectedIdGroup}
-            ListEmptyComponent={<Text>You currently haven't created a group</Text>}
-            getItemLayout={(data, index) => (
-              { length: 200, offset: 100 * index, index }
-            )}
+      { alignItems: 'center' }]} source={require('../assets/images/forest.png')}>
 
-          />
+
+        { /*Group box*/}
+        <View style={{ height: "100%", width: "100%", alignItems: "center", justifyContent: "flex-start", marginTop: "20%" }}>
+          <Text style={[styles.title]} > Groups</Text>
+
+          <View style={[friendPageStyles.groupContainer]}>
+            {/* List of all the friends */}
+            <FlatList
+              nestedScrollEnabled
+              data={GROUPS}
+              renderItem={renderGroupSquare}
+              horizontal={false}
+              columnWrapperStyle={{ height: 220, }}
+              numColumns={2}
+              keyExtractor={(item) => item.groupId}
+              extraData={selectedIdGroup}
+              ListEmptyComponent={<Text>You currently haven't created a group</Text>}
+              getItemLayout={(data, index) => (
+                { length: 200, offset: 100 * index, index }
+              )}
+
+            />
+          </View>
         </View>
 
         {/* Modal for searching for and adding friends */}
@@ -195,48 +202,50 @@ export default function FriendPageScreen({navigation}: RootStackScreenProps<'Pro
         {/* Textinput used in development to change user */}
         <TextInput placeholder='Id of user...' onChangeText={(text) => setUser(text)} onSubmitEditing={() => storeData(user)} />
 
-        <View style={{ height: "52%", width: "100%", alignItems: "center" }}>
-          <Text style={[styles.title, { alignSelf: "center" }]} > Friends</Text>
+        <ImageBackground source={require('../Graphics/banan.png')} style={[styles.banan,]} resizeMode="stretch">
+          <View style={{ height: "80%", width: "100%", alignItems: "center", justifyContent: "flex-start", marginTop: "12%" }}>
+            <Text style={[styles.title, { alignSelf: "center" }]} > Friends</Text>
 
-          {/*Button for accessing the friendSearch  */}
-          <View style={{
-            alignItems: "center", justifyContent: "center", height: 70, width: 70
-            , position: "absolute", zIndex: 2, alignSelf: "flex-end"
-          }}>
-            {/*Button that activates the modal for searching for users*/}
-            <Pressable style={SearchFriend.buttonOpen}
-              onPress={() => setUserSearchVisible(true)}>
-              {/* <Text style={{ color: "white", fontWeight: "bold", fontSize: 20 }}>Add a Friend!</Text> */}
-              <Image style={{ height: 27, width: 27, marginLeft: 3 }} source={require('../assets/images/add-user.png')} />
-            </Pressable>
+            {/*Button for accessing the friendSearch  */}
+            <View style={{
+              alignItems: "center", justifyContent: "center", height: 70, width: 70
+              , position: "absolute", zIndex: 2, alignSelf: "flex-end"
+            }}>
+              {/*Button that activates the modal for searching for users*/}
+              <Pressable style={SearchFriend.buttonOpen}
+                onPress={() => setUserSearchVisible(true)}>
+                {/* <Text style={{ color: "white", fontWeight: "bold", fontSize: 20 }}>Add a Friend!</Text> */}
+                <Image style={{ height: 27, width: 27, marginLeft: 3 }} source={require('../assets/images/add-user.png')} />
+              </Pressable>
 
+            </View>
+
+            <View style={friendPageStyles.friendContainer}>
+              <FlatList
+                refreshControl={<RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={onRefresh}
+                />}
+                nestedScrollEnabled
+                data={friends}
+                renderItem={renderFriendSquare}
+                horizontal={false}
+                columnWrapperStyle={{ height: 190, }}
+                numColumns={3}
+                extraData={selectedIdFriend}
+                keyExtractor={(item) => item.id}
+                ListEmptyComponent={<ErrorBanner
+                  title="You currently haven't added any friends"
+                  inCase={connectionError}
+                  extraTitle="Cant't connect!"
+                />}
+                getItemLayout={(data, index) => (
+                  { length: 200, offset: 100 * index, index }
+                )}
+              />
+            </View>
           </View>
-
-          <View style={friendPageStyles.friendContainer}>
-            <FlatList
-              refreshControl={<RefreshControl
-                refreshing={refreshing}
-                onRefresh={onRefresh}
-              />}
-              nestedScrollEnabled
-              data={friends}
-              renderItem={renderFriendSquare}
-              horizontal={false}
-              columnWrapperStyle={{ height: 190, }}
-              numColumns={3}
-              extraData={selectedIdFriend}
-              keyExtractor={(item) => item.user_id_1}
-              ListEmptyComponent={<ErrorBanner
-                title="You currently haven't added any friends"
-                inCase={connectionError}
-                extraTitle="Cant't connect!"
-              />}
-              getItemLayout={(data, index) => (
-                { length: 200, offset: 100 * index, index }
-              )}
-            />
-          </View>
-        </View>
+        </ImageBackground>
       </ImageBackground >
     </View >
 

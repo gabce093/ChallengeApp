@@ -106,8 +106,13 @@ export default StyleSheet.create({
   },
   content: {
     padding: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#484848",
     borderRadius: 9,
+  },
+  contentText: {
+    alignSelf: "center",
+    fontSize: 14,
+    color: "white",
   },
   active: {
     backgroundColor: "rgba(255,255,255,1)",

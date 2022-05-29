@@ -139,16 +139,12 @@ var itemOwn = false;
   };
 
 
-   return (
-     <View style={styles.container}>
-       <ImageBackground source={require('../Graphics/forest.png')} style={styles.forestBackground} resizeMode="cover">
-       <ImageBackground source={require('../Graphics/banan.png')} style={styles.banan} resizeMode="stretch">
-       
-       
-       {/*<Image source={require('../Graphics/forest.png')} style={styles.absolute} resizeMode="cover"></Image>*/}
-       
-       
-       <View style = {shopStyles.characterContainer}>
+  return (
+    <View style={styles.container}>
+      <ImageBackground source={require('../Graphics/forest.png')} style={styles.forestBackground} resizeMode="cover">
+      <ImageBackground source={require('../Graphics/banan.png')} style={[styles.banan, { alignItems: "center" }]} resizeMode="stretch">
+        
+      <View style = {shopStyles.characterContainer}>    
 
          {/*Original character is always rendered */}
          <ImageBackground
@@ -191,6 +187,7 @@ var itemOwn = false;
           
               {/* List of all the friends */}
               <FlatList 
+                showsVerticalScrollIndicator={false}
                 nestedScrollEnabled
                 data={itemList}
                 renderItem={renderItem}

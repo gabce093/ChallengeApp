@@ -20,7 +20,7 @@ export const getChallengeRequests = (userId: string) => {
     return dataPromise;
 };
 
-export const removeChallenge = (challengeId: string) => {
+export const removeChallenge = async (challengeId: string) => {
 
     const request = APIaddress + '/challenges/remove/' + challengeId;
 

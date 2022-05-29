@@ -14,9 +14,9 @@ import styles from '../styles/Page.style';
 
 export default function StatPageScreen() {
 
-  const width = Dimensions.get('window').width*0.9
-  const height = Dimensions.get('window').height/3
-  const topMargin = Dimensions.get('window').height/5;
+  const width = Dimensions.get('window').width * 0.9
+  const height = Dimensions.get('window').height / 3
+  const topMargin = Dimensions.get('window').height / 5;
 
   //Properties for the charts
   const chartConfig = {
@@ -50,25 +50,25 @@ export default function StatPageScreen() {
       <ScrollView>
         <View style={statStyles.row}>
 
-              <View>
-                <Text style={statStyles.itemText}>null</Text>
-                <Text style={statStyles.descriptionText}>Battles Won</Text>
-              </View>
+          <View>
+            <Text style={statStyles.itemText}>null</Text>
+            <Text style={statStyles.descriptionText}>Battles Won</Text>
+          </View>
 
-              <View>
-                <Text style={statStyles.itemText}>null</Text>
-                <Text style={statStyles.descriptionText}>Avrage runtime</Text>
-              </View>
+          <View>
+            <Text style={statStyles.itemText}>null</Text>
+            <Text style={statStyles.descriptionText}>Average runtime</Text>
+          </View>
 
-              <View>
-                <Text style={statStyles.itemText}>null</Text>
-                <Text style={statStyles.descriptionText}>Avrage length</Text>
-              </View>
+          <View>
+            <Text style={statStyles.itemText}>null</Text>
+            <Text style={statStyles.descriptionText}>Average length</Text>
+          </View>
 
-              <View>
-                <Text style={statStyles.itemText}>null</Text>
-                <Text style={statStyles.descriptionText}>Total Steps</Text>
-              </View>
+          <View>
+            <Text style={statStyles.itemText}>null</Text>
+            <Text style={statStyles.descriptionText}>Total Steps</Text>
+          </View>
 
         </View>
 
@@ -86,35 +86,35 @@ export default function StatPageScreen() {
 
         {/* Renders data from previous challenges */}
         <FlatList
-        data={completedRuns}
-        keyExtractor={item => item.id}
-        numColumns={2}
-        renderItem={({item}) =>
-        <View style={statStyles.challengeItem}>
+          data={completedRuns}
+          keyExtractor={item => item.id}
+          numColumns={2}
+          renderItem={({ item }) =>
+            <View style={statStyles.challengeItem}>
 
-          <Text style={statStyles.descriptionText}>{item.date}</Text>
-          <View style={statStyles.ChallengeRow}>
-            <Text style={statStyles.challengeTitleText}>{item.title}</Text>
-            {/* <Text style={statStyles.descriptionText}>{item.winLoss}</Text> */}
-          </View>
-          <View style={statStyles.ChallengeRow}>
-            <View>
-              <Text style={statStyles.itemText}>{item.time}</Text>
-              <Text style={statStyles.descriptionText}>Time</Text>
-            </View>
-            <View>
-              <Text style={statStyles.itemText}>{item.pace}</Text>
-              <Text style={statStyles.descriptionText}>Avg. Pace</Text>
-            </View>
-            <View>
-              <Text style={statStyles.itemText}>{item.cadence}</Text>
-              <Text style={statStyles.descriptionText}>Cadence</Text>
-            </View>
-          </View>
+              <Text style={statStyles.descriptionText}>{item.date}</Text>
+              <View style={statStyles.ChallengeRow}>
+                <Text style={statStyles.challengeTitleText}>{item.title}</Text>
+                {/* <Text style={statStyles.descriptionText}>{item.winLoss}</Text> */}
+              </View>
+              <View style={statStyles.ChallengeRow}>
+                <View>
+                  <Text style={statStyles.itemText}>{item.time}</Text>
+                  <Text style={statStyles.descriptionText}>Time</Text>
+                </View>
+                <View>
+                  <Text style={statStyles.itemText}>{item.pace}</Text>
+                  <Text style={statStyles.descriptionText}>Avg. Pace</Text>
+                </View>
+                <View>
+                  <Text style={statStyles.itemText}>{item.cadence}</Text>
+                  <Text style={statStyles.descriptionText}>Cadence</Text>
+                </View>
+              </View>
 
-        </View>
-        }
-      />
+            </View>
+          }
+        />
       </ScrollView>
     </View>
   );

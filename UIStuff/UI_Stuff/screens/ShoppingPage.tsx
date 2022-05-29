@@ -202,7 +202,7 @@ export default function ShoppingPageScreen() {
   return (
     <View style={styles.container}>
       <ImageBackground source={require('../Graphics/forest.png')} style={styles.forestBackground} resizeMode="cover">
-        <ImageBackground source={require('../Graphics/banan.png')} style={styles.banan} resizeMode="stretch">
+        <ImageBackground source={require('../Graphics/banan.png')} style={[styles.banan, { alignItems: "center" }]} resizeMode="stretch">
 
 
           {/*<Image source={require('../Graphics/forest.png')} style={styles.absolute} resizeMode="cover"></Image>*/}
@@ -245,12 +245,14 @@ export default function ShoppingPageScreen() {
 
           </View>
 
-          <Text style={shopStyles.titleText}>The Shop</Text>
 
+          <Text style={shopStyles.titleText}>The Shop</Text>
           <View style={shopStyles.shopMenu}>
 
             {/* List of all the friends */}
             <FlatList
+              showsVerticalScrollIndicator={false}
+              style={{ alignContent: "center" }}
               nestedScrollEnabled={true}
               data={itemList}
               renderItem={renderItem}

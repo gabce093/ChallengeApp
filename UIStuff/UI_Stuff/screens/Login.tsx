@@ -14,7 +14,7 @@ import { updateValues } from '../PlayerData';
 export default function LoginPage() {
 
     useEffect(() => {
-        
+        // logOut();
         getData();
     }, []);
 
@@ -99,11 +99,11 @@ export default function LoginPage() {
     const logState = (resUser: string) => {
         console.log(logSuccess)
 
-        if(logSuccess == true) {
-           console.log("hehe")
-           setModalVisible(false)
-           GetUserInfo(resUser) 
-           //console.log(JSON.parse(retUserData)[0].firstName)
+        if (logSuccess == true) {
+            console.log("hehe")
+            setModalVisible(false)
+            GetUserInfo(resUser)
+            //console.log(JSON.parse(retUserData)[0].firstName)
 
         }
         else if (logSuccess == false) {

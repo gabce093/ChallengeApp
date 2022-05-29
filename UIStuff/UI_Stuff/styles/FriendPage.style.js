@@ -12,7 +12,7 @@ export default StyleSheet.create({
   //friend-part
   friendContainer: {
     backgroundColor: "rgba(196, 196, 196, 0.9)",
-    height: "84%",
+    height: "90%",
     width: "90%",
     borderRadius: 5,
   },
@@ -118,7 +118,7 @@ export default StyleSheet.create({
 
   groupContainer: {
     backgroundColor: "rgba(196, 196, 196, 0.9)",
-    height: "26%",
+    height: "32%",
     width: "90%",
     borderRadius: 5,
     marginBottom: "2%",
@@ -173,7 +173,7 @@ export default StyleSheet.create({
   },
   groupChallengeButton: {
     backgroundColor: "#ff5c00",
-    width: 180,
+    width: 160,
     height: "35%",
     borderRadius: 6,
     elevation: 2,

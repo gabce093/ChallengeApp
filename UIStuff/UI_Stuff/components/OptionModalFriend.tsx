@@ -18,8 +18,8 @@ import { removeFriend } from "../API/FriendPage/requestsFriendPage"
  * @category Friendpage
  * @author Gabriel
  */
-const OptionModalFriend = ({ selectedId, onModalHide, isVisible, onBackdropPress }:
-    { selectedId: string, onModalHide: () => void, isVisible: boolean, onBackdropPress: () => void }) => {
+const OptionModalFriend = ({ selectedId, onModalHide, isVisible, onBackdropPress, item, navigation }:
+    { selectedId: string, onModalHide: () => void, isVisible: boolean, onBackdropPress: () => void, item: any, navigation: any }) => {
     //changes the color of the button in the modal-menu
     const colorOnPress = ({ pressed }: { pressed: boolean }) => [
         {
@@ -44,7 +44,7 @@ const OptionModalFriend = ({ selectedId, onModalHide, isVisible, onBackdropPress
                 style={({ pressed }) => [colorOnPress({ pressed }), friendPageStyles.modalMenuButton]}>
                 <Text style={friendPageStyles.modalMenuText}>Remove from Friends</Text>
             </Pressable>
-            <Pressable style={({ pressed }) => [colorOnPress({ pressed }), friendPageStyles.modalMenuButton]}>
+            <Pressable onPress={() => navigation.navigate("ProfilePage", item)} style={({ pressed }) => [colorOnPress({ pressed }), friendPageStyles.modalMenuButton]}>
                 <Text style={friendPageStyles.modalMenuText}>View Profile</Text>
             </Pressable>
             <Pressable onPress={onBackdropPress} style={({ pressed }) => [colorOnPress({ pressed }), friendPageStyles.modalMenuButton]}>

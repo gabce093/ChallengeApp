@@ -63,11 +63,11 @@ const renderUserList = ({ user }: { user: string }) => {
 
   const renderContent = (item: any, _: number, isActive: boolean) => {
     if (item.status == 1)
-      var status = <Text>You are already friends</Text>
+      var status = <Text style={styles.contentText} >You are already friends</Text>
     else if (item.status == 2)
-      var status = <Text>Request pending...</Text>
+      var status = <Text style={styles.contentText}>Request pending...</Text>
     else if (item.id == selectId) {
-      var status = <Text>Request Sent!</Text>;
+      var status = <Text style={styles.contentText}>Request Sent!</Text>;
     }
     else {
       var status =

@@ -130,6 +130,9 @@ export default function ChallengePageScreen(props: any): JSX.Element {
     return <ChallengeRequestCard
       item={item}
       onAccept={() => [console.log('Challenge accepted!'), props.navigation.navigate('GPSPage')]}
+      onDeny={() => [removeChallenge(item.challengeId), getChallengeRequests(user).then((data) => {
+        setChallengeRequest(data)
+      }).catch((error) => console.log(error + ' when retrieving challenge requests in ChallengePage.tsx (asyncAction-function)'))]}
       selectedId={selectedId}
       acceptPressed={acceptPressed}
     />

@@ -185,7 +185,7 @@ var itemOwn = false;
 
        </View>
 
-        <Text style={shopStyles.titleText}>The Shop</Text>
+        <Text style={shopStyles.titleText}>Shop</Text>
       
         <View style ={shopStyles.shopMenu}>
           <ScrollView style= {{paddingBottom: '2%'}} showsVerticalScrollIndicator={false}>

@@ -56,9 +56,10 @@ export default function LoginPage() {
 }
 
 //Store username in key
-    const storeData = async (value:any) => {
+    const storeData = async (value:any,id:string) => {
         try {
           await AsyncStorage.setItem('@user_Key', JSON.stringify(value))
+          await AsyncStorage.setItem('@userID_Key', id)
         } catch (e) {
           // saving error
         }
@@ -82,7 +83,7 @@ export default function LoginPage() {
        return data.json();
        })
        .then(user => {
-           storeData(user[0].userName)
+           storeData(user[0].userName,user[0].id)
            setValues(JSON.stringify(user[0]));
        })
        if (resUser == "") return "error";
@@ -191,18 +192,8 @@ export default function LoginPage() {
             
         </Modal>
         
-        <Pressable
-            style={[SearchFriend.button, SearchFriend.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-        >
-            <Text style={SearchFriend.textStyle}>Log in</Text>
-        </Pressable>
-        <Pressable
-            style={[SearchFriend.button, SearchFriend.buttonOpen]}
-            onPress={() => logOut()}
-        >
-            <Text style={SearchFriend.textStyle}>Log out</Text>
-        </Pressable>
+    
+       
        
                     
     

@@ -26,7 +26,7 @@ export default function CreateRunPage({ navigation }: RootStackScreenProps<'GPSP
         <Text style={styles2.bigText}>Select challenge:</Text>
         <TouchableHighlight 
           style={styles2.button}
-          onPress={() => createChallenge(100)}>
+          onPress={() => createChallenge(3000)}>
             <Text style={styles2.text}>3km</Text>
         </TouchableHighlight>
         <TouchableHighlight 

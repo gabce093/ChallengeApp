@@ -188,7 +188,7 @@ var itemOwn = false;
         <Text style={shopStyles.titleText}>Shop</Text>
       
         <View style ={shopStyles.shopMenu}>
-          <ScrollView style= {{paddingBottom: '2%'}} showsVerticalScrollIndicator={false}>
+          
               {/* List of all the friends */}
               <FlatList 
                 nestedScrollEnabled
@@ -198,7 +198,7 @@ var itemOwn = false;
                 keyExtractor={(item) => item.itemId}
                 extraData={selectedId}
               />
-          </ScrollView>        
+              
 
         </View>
         

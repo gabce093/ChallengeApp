@@ -72,7 +72,7 @@ export default function TopBar(page: any) {
                     <View style={styles.CurrencyAndEXPHolder}>
                         <View style={styles.CurrencyHolder}>
                             <Text style={styles.title}>
-                                Coins: {getCoins()}   Gems: {getGems()}
+                                Coins: {Math.floor(getCoins())}   Gems: {getGems()}
                             </Text>
                         </View>
                         <View style={styles.EXPBarHolder}>

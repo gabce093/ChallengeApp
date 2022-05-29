@@ -55,6 +55,14 @@ export default StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    topContainer2: {
+      
+      flex: 1,
+      top: "-33%",
+      backgroundColor: 'transparent',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     bottomContainer: {
       flex: 1,
       backgroundColor: 'transparent',
@@ -123,7 +131,7 @@ export default StyleSheet.create({
     username: {
       fontSize: 0.09*screenWidth,
       justifyContent: 'center',
-      top: "-90%",
+      top: "60%",
       backgroundColor: "rgba(0,0,0,0.3)",
       alignItems: 'center',
       fontWeight: 'bold',

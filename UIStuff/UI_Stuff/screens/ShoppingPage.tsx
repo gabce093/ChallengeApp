@@ -192,7 +192,7 @@ var itemOwn = false;
                 data={itemList}
                 renderItem={renderItem}
                 numColumns = {3}
-                keyExtractor={(item) => item.itemId}
+                keyExtractor={(item, index) => index.toString()}
                 extraData={selectedId}
               />
               

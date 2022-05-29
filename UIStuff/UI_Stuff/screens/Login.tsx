@@ -10,6 +10,13 @@ import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScre
 import { updateValues, getPlayerId } from '../PlayerData';
 import {UpdateProfilePic } from '../ShopData';
 import Axios from "axios";
+import { LogBox } from 'react-native';
+ 
+// Ignore log notification by message
+LogBox.ignoreLogs(['Warning: ...']);
+ 
+//Ignore all log notifications
+LogBox.ignoreAllLogs();
 
 /**
  *

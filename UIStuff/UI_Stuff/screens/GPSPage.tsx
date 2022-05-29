@@ -7,6 +7,13 @@ import Recorder from '../components/Recorder';
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 import { HeadingSubscriber } from 'expo-location/build/LocationSubscribers';
 import { LocationSubscription } from 'expo-location';
+import { LogBox } from 'react-native';
+ 
+// Ignore log notification by message
+LogBox.ignoreLogs(['Warning: ...']);
+ 
+//Ignore all log notifications
+LogBox.ignoreAllLogs();
 
 /** 
   * This function checks geolocationpermission from the user, if granted it starts logging geodata every 10 meters

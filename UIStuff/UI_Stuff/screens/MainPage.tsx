@@ -75,7 +75,7 @@ GetEquippedItems();
     <View style={styles.screen}>
       
         <ImageBackground source={require('../Graphics/banan.png')} style={styles.banan} resizeMode="stretch">
-      <View style={styles.topContainer}>
+      <View style={styles.topContainer2}>
  
       <ImageBackground
            source={require('../Graphics/character/Base_Character.png')}
@@ -106,7 +106,7 @@ GetEquippedItems();
            style={shopStyles.character} resizeMode="cover">
          </ImageBackground>
 
-        
+         
         <Text style={styles.username}>{getPlayer()}</Text>
   
 

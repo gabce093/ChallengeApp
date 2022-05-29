@@ -11,6 +11,8 @@ import { Text, TextProps } from './Themed';
 import { RootStackScreenProps } from '../types';
 import { getLevel, getLevelProgress, getCoins, getGems, getPlayer } from '../PlayerData';
 import React, { Component, useState, useEffect } from 'react';
+import { GetProfilePic } from '../ShopData';
+import Axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 /**
  * This function contains the functionality of the topbar in the header.
@@ -20,15 +22,33 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
  * @param navigation Uses navigation data to remain on every desired page
  * @returns Itself as a component to be used by the navigation function in Index.
  */
-export default function TopBar({ navigation, route }: RootStackScreenProps<'Modal'>){
+export default function TopBar(page: any) {
+    const [pfpImg, setPfp] = useState('empty');
 
-    const [lvl, setLvl] = useState(0);
-    const [lvlProgress, setLvlProgress] = useState(0);
-    const [coins, setCoins] = useState(0);
-    
-    
-    
-  
+    const GetProfilePic = async () => {
+        const value = await AsyncStorage.getItem('@userID_Key');
+        console.log("hehe" + value)
+
+        Axios
+            .get(`http://213.188.152.167:5000/equipped/${value}`)
+            .then((res) => {
+                setPfp(() => `${res.data[0].hat}`)
+                return res.data;
+            })
+            .catch((error) => {
+
+                console.log("Sth wrong happened");
+            });
+    }
+
+    useEffect(() => {
+
+        GetProfilePic();
+
+    }, []);
+
+   
+
     const colorScheme = useColorScheme();
     return (
         <SafeAreaView style={headerStyle.wholeHeader}>
@@ -39,7 +59,7 @@ export default function TopBar({ navigation, route }: RootStackScreenProps<'Moda
 
 
                     <Image style={styles.image}
-                        source={require('../Graphics/TempProfilePic.png')} />
+                        source={{ uri: `http://213.188.152.167:5000/graphics/character/${pfpImg}_profile.png` }} />
                     <ImageBackground source={require('../Graphics/ExpMask.png')} style={styles.lvlHolder} imageStyle={{ tintColor: "#333333" }} resizeMode="stretch">
                         <Text style={styles.lvl}>{getLevel()}</Text>
                     </ImageBackground>
@@ -67,7 +87,7 @@ export default function TopBar({ navigation, route }: RootStackScreenProps<'Moda
                 {/* Setting on the edge of the screen*/}
                 <View style={styles.SettingsHolder}>
                     <Pressable
-                        onPress={() => navigation.replace('Root')}
+                        onPress={() => page.navigation.replace('Root')}
                         hitSlop={{ bottom: 200, top: 200 }}
                         style={({ pressed }) => ({
                             opacity: pressed ? 0.5 : 1,

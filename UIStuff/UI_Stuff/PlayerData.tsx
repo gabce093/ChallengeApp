@@ -116,6 +116,8 @@ export const getLevelXp = () => {
  * This will be a number between  0.0 <= x < 1.0
  * 
  * @author Henrik Gustafsson
+ * @author Jonathan Carlsson
+ * 
  * @returns The progress towards the next level for the player.
  */
 export const getLevelProgress = () => {
@@ -161,13 +163,11 @@ export var addCoin = (n:number) => {
 export var addGem = (n: number) => {
     gems += n;
     updateValues();
-    console.log(gems);
 };
 
 export var addEXP = (n: number) => {
     totalEXP += n;
     updateValues();
-    //console.log(totalEXP);
 };
 
 //Function that removes a given number of coins (used to buy items)

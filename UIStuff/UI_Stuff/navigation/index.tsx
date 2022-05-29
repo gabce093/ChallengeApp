@@ -85,7 +85,7 @@ function RootNavigator() {
             //headerMode: "screen",
             headerBackTitleVisible: false,
             headerTransparent: true,
-            header: () => <TopBar  {...navigation} />
+            header: () => <TopBar page = {navigation}/> 
 
           })} />
 

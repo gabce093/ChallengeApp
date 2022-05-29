@@ -7,24 +7,43 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setValues } from '../PlayerData';
 import Navigation from '../navigation/index.js';
 import { RootTabScreenProps, RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
-import { updateValues } from '../PlayerData';
+import { updateValues, getPlayerId } from '../PlayerData';
+import {UpdateProfilePic } from '../ShopData';
+import Axios from "axios";
 
+/**
+ *
+ * 
+ * @author Jonathan Carlsson
+ * @returns Itself as a component to be used by the navigation function in Index.
+ */
 
 
 export default function LoginPage() {
-
-    useEffect(() => {
+    const GetProfilePic = async () => {
+       
+        await Axios.get(`http://213.188.152.167:5000/equipped/${getPlayerId()}`).then((response) => {       
+            UpdateProfilePic(response.data[0].hat);
+        });  
         
-        getData();
-    }, []);
 
+    }
+    useEffect(() => {
+        getData(); 
+        
+      }, []);
+
+      //Fetch userdata from given username
     const getData = async () => {
         try {
             const value = await AsyncStorage.getItem('@user_Key')
 
-            if (value != null) {
-                console.log(`User:${value}  already logged in. `)
-                setModalVisible(false);
+    //if username doesnt exist, require login from user
+    if(value != null) {
+        console.log(`User:${value}  already logged in. `)
+        setModalVisible(false);
+        
+       if(value) GetUserInfo(JSON.parse(value))
 
                 if (value) GetUserInfo(JSON.parse(value))
 
@@ -37,42 +56,48 @@ export default function LoginPage() {
 
         }
     }
-    const storeData = async (username: any, id: string) => {
+   
+ 
+//Store username in key
+    const storeData = async (value:any,id:string) => {
         try {
-            await AsyncStorage.setItem('@user_Key', JSON.stringify(username))
-            await AsyncStorage.setItem('@userID_Key', id)
+          await AsyncStorage.setItem('@user_Key', JSON.stringify(value))
+          await AsyncStorage.setItem('@userID_Key', id)
         } catch (e) {
             // saving error
         }
-    }
-    const logOut = async () => {
+      }
+
+      //Remove key (log out)
+      const logOut = async () => {
         try {
             await AsyncStorage.setItem('@user_Key', "")
         } catch (e) {
             // saving error
         }
+      }
+    
+//Fetch userinfo from user input
+    const GetUserInfo = (resUser:string) => {
+     
+            fetch(`http://213.188.152.167:5000/users/${resUser}`)
+       .then(data => {
+           
+       return data.json();
+       })
+       .then(user => {
+           storeData(user[0].userName,user[0].id)
+           setValues(JSON.stringify(user[0]));
+       })
+       if (resUser == "") return "error";
+      //getData()
+      
+        
     }
 
-
-    const GetUserInfo = (resUser: string) => {
-
-        fetch(`http://213.188.152.167:5000/users/${resUser}`)
-            .then(data => {
-
-                return data.json();
-            })
-            .then(user => {
-                console.log(user[0])
-                storeData(user[0].userName, user[0].id)
-                setValues(JSON.stringify(user[0]));
-            })
-        if (resUser == "") return "error";
-        //getData()
-    }
-
-
-    function AuthFunction(resUser: string, resPass: string) {
-        fetch('http://213.188.152.167:5000/users/login',
+//Check if credentials are correct
+    function AuthFunction(resUser:string, resPass:string){
+       fetch('http://213.188.152.167:5000/users/login',
 
             {
                 method: 'POST',
@@ -89,21 +114,21 @@ export default function LoginPage() {
 
             })
             .then(response => response.json())
-            //.then(data => console.log(data))
             .then(data => { setLogSuccess(data) })
 
         logState(resUser)
 
 
     }
-    const logState = (resUser: string) => {
-        console.log(logSuccess)
+    //Give feedback based on Authfunction
+     const logState = (resUser:string) => {
+        
 
         if(logSuccess == true) {
-           console.log("hehe")
            setModalVisible(false)
-           GetUserInfo(resUser) 
-           //console.log(JSON.parse(retUserData)[0].firstName)
+           GetUserInfo(resUser)
+           GetProfilePic();
+
 
         }
         else if (logSuccess == false) {
@@ -169,23 +194,13 @@ export default function LoginPage() {
             {/* </View>*/}
 
         </Modal>
-
-        <Pressable
-            style={[SearchFriend.button, SearchFriend.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-        >
-            <Text style={SearchFriend.textStyle}>Log in</Text>
-        </Pressable>
-        <Pressable
-            style={[SearchFriend.button, SearchFriend.buttonOpen]}
-            onPress={() => logOut()}
-        >
-            <Text style={SearchFriend.textStyle}>Log out</Text>
-        </Pressable>
-
-
-
-
+        
+    
+       
+       
+                    
+    
+      
     </View>
 
 }

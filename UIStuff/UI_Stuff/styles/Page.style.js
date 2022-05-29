@@ -123,7 +123,7 @@ export default StyleSheet.create({
     username: {
       fontSize: 0.09*screenWidth,
       justifyContent: 'center',
-      top: "-30%",
+      top: "-90%",
       backgroundColor: "rgba(0,0,0,0.3)",
       alignItems: 'center',
       fontWeight: 'bold',

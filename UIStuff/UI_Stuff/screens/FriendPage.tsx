@@ -20,17 +20,17 @@ import { RootStackScreenProps } from '../types';
 const GROUPS = [
   {
     groupId: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "Rullstol",
+    title: "Grupp 1",
     level: 43,
   },
   {
     groupId: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Kandidat",
+    title: "Grupp 2",
     level: 25,
   },
   {
     groupId: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Backstreet boys",
+    title: "Grupp 3",
     level: 78,
   },
 ]

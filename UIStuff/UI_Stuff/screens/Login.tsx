@@ -20,6 +20,7 @@ import Axios from "axios";
 
 
 export default function LoginPage() {
+    
     const GetProfilePic = async () => {
        
         await Axios.get(`http://213.188.152.167:5000/equipped/${getPlayerId()}`).then((response) => {       
@@ -29,6 +30,7 @@ export default function LoginPage() {
 
     }
     useEffect(() => {
+        logOut();
         getData(); 
         
       }, []);
@@ -175,7 +177,7 @@ export default function LoginPage() {
 
                 {/* Input to write tha name of the friend */}
                 <TextInput style={SearchFriend.textWindow} onChangeText={(text) => { setUserName(text) }} placeholder='Username' />
-                <TextInput style={SearchFriend.textWindow} onChangeText={(text) => { setPassWord(text) }} placeholder='Password' />
+                <TextInput secureTextEntry={true} style={SearchFriend.textWindow} onChangeText={(text) => { setPassWord(text) }} placeholder='Password' />
                 {/* Pressable to submit your search */}
                 <Pressable
                     style={[SearchFriend.button, SearchFriend.buttonSubmit]}

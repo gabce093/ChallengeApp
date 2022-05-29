@@ -146,7 +146,7 @@ var itemOwn = false;
        
        
        {/*<Image source={require('../Graphics/forest.png')} style={styles.absolute} resizeMode="cover"></Image>*/}
-       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+       
        
        <View style = {shopStyles.characterContainer}>
 

@@ -65,6 +65,7 @@ export default StyleSheet.create({
     elevation: 5,
   },
   textWindow: {
+    paddingLeft: 5,
     backgroundColor: "white",
     borderRadius: 5,
     borderColor: "#383838",

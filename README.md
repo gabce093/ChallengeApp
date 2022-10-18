@@ -1,4 +1,5 @@
-App to chalenge your friends to go out running
+#ChallengeApp
+App to challenge your friends to go out running.
 
 
 
